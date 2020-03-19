@@ -1,10 +1,22 @@
 #!/bin/sh
 
+# SDK
 docker build --build-arg version=3.0 -t surveily/developer.dotnet:3.0-sdk -f src/surveily.developer.dotnet.sdk.dockerfile .
+docker push                             surveily/developer.dotnet:3.0-sdk
+
 docker build --build-arg version=3.1 -t surveily/developer.dotnet:3.1-sdk -f src/surveily.developer.dotnet.sdk.dockerfile .
+docker push                             surveily/developer.dotnet:3.1-sdk
 
+# Runtime for Workers
 docker build --build-arg version=3.0 -t surveily/developer.dotnet:3.0-runtime-svc -f src/surveily.developer.dotnet.runtime.svc.dockerfile .
-docker build --build-arg version=3.1 -t surveily/developer.dotnet:3.1-runtime-svc -f src/surveily.developer.dotnet.runtime.svc.dockerfile .
+docker push                             surveily/developer.dotnet:3.0-runtime-svc
 
+docker build --build-arg version=3.1 -t surveily/developer.dotnet:3.1-runtime-svc -f src/surveily.developer.dotnet.runtime.svc.dockerfile .
+docker push                             surveily/developer.dotnet:3.0-runtime-svc
+
+# Runtime for ASP.NET
 docker build --build-arg version=3.0 -t surveily/developer.dotnet:3.0-runtime-web -f src/surveily.developer.dotnet.runtime.web.dockerfile .
+docker push                             surveily/developer.dotnet:3.0-runtime-web
+
 docker build --build-arg version=3.1 -t surveily/developer.dotnet:3.1-runtime-web -f src/surveily.developer.dotnet.runtime.web.dockerfile .
+docker push                             surveily/developer.dotnet:3.0-runtime-web
