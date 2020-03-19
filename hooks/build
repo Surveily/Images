@@ -1,2 +1,4 @@
 #!/bin/sh
-docker build --build-arg version=$VERSION -t $IMAGE_NAME -f $DOCKERFILE_PATH .
+
+docker build --build-arg version=3.0 -t surveily/developer.dotnet:3.0-sdk -f src/surveily.developer.dotnet.sdk.dockerfile .
+docker build --build-arg version=3.1 -t surveily/developer.dotnet:3.1-sdk -f src/surveily.developer.dotnet.sdk.dockerfile .
