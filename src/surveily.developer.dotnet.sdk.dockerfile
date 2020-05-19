@@ -17,7 +17,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Update
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     apt-get update && apt-get upgrade -y && \
-    apt-get install -y keyboard-configuration && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     # Install Dependencies
