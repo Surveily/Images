@@ -4,7 +4,7 @@ ARG version=3.1
 ARG system=bionic
 FROM mcr.microsoft.com/dotnet/core/runtime:${version}-${system}
 
-# Set Timezone
+# Settings
 ENV TZ=Etc/UTC
 ENV DEBIAN_FRONTEND=noninteractive
 

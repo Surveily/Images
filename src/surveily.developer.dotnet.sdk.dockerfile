@@ -5,9 +5,10 @@ ARG system=bionic
 ARG powershell=18.04
 FROM mcr.microsoft.com/dotnet/core/sdk:${version}-${system}
 
-# Set Timezone
+# Settings
 ENV TZ=Etc/UTC
 ENV DEBIAN_FRONTEND=noninteractive
+ENV POWERSHELL=${powershell}
 
 # Update
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
@@ -25,7 +26,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Install Chromium
     apt-get install -y chromium-browser libpng-dev && \
     # Install Powershell
-    wget -q https://packages.microsoft.com/config/ubuntu/${powershell}/packages-microsoft-prod.deb && \
+    wget -q https://packages.microsoft.com/config/ubuntu/$POWERSHELL/packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb && \
     apt-get update && \
     add-apt-repository universe && \
