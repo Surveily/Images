@@ -32,12 +32,12 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     apt-get install -y ./google-chrome-stable_current_amd64.deb && \
     rm google-chrome-stable_current_amd64.deb && \
     # Install Powershell
-    wget -q https://packages.microsoft.com/config/ubuntu/$powershell/packages-microsoft-prod.deb && \
-    dpkg -i packages-microsoft-prod.deb && \
-    apt-get update && \
-    add-apt-repository universe && \
-    apt-get install -y powershell && \
-    rm packages-microsoft-prod.deb && \
+    # wget -q https://packages.microsoft.com/config/ubuntu/$powershell/packages-microsoft-prod.deb && \
+    # dpkg -i packages-microsoft-prod.deb && \
+    # apt-get update && \
+    # add-apt-repository universe && \
+    # apt-get install -y powershell && \
+    # rm packages-microsoft-prod.deb && \
     # Clean up
     apt-get autoremove -y && \
     apt-get clean -y && \
