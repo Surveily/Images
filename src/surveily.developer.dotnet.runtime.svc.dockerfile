@@ -2,7 +2,8 @@
 
 ARG version=3.1
 ARG system=bionic
-FROM mcr.microsoft.com/dotnet/core/runtime:${version}-${system}
+ARG image=core/runtime
+FROM mcr.microsoft.com/dotnet/${image}:${version}-${system}
 
 # Settings
 ENV TZ=Etc/UTC

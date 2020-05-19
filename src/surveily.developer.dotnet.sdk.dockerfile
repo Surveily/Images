@@ -3,7 +3,8 @@
 ARG version=3.1
 ARG system=bionic
 ARG powershell=18.04
-FROM mcr.microsoft.com/dotnet/core/sdk:${version}-${system}
+ARG image=core/sdk
+FROM mcr.microsoft.com/dotnet/${image}:${version}-${system}
 
 ARG system
 ARG version
