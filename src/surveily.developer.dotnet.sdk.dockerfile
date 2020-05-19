@@ -21,14 +21,16 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     # Install Dependencies
-    apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* gcc make autoconf libtool pkg-config nasm software-properties-common && \
+    apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common && \
     # Install Node
     curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get install -y nodejs && \
     # Install Yarn
     curl -o- -L https://yarnpkg.com/install.sh | bash && \
     # Install Chromium
-    apt-get install -y chromium-browser libpng-dev && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb && \
     # Install Powershell
     wget -q https://packages.microsoft.com/config/ubuntu/$powershell/packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb && \
