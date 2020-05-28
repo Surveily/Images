@@ -8,6 +8,7 @@ FROM mcr.microsoft.com/dotnet/${image}:${version}-${system}
 # Settings
 ENV TZ=Etc/UTC
 ENV DEBIAN_FRONTEND=noninteractive
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Update
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \

@@ -8,6 +8,7 @@ ARG download
 # Settings
 ENV TZ=Etc/UTC
 ENV DEBIAN_FRONTEND=noninteractive
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Update
 RUN apt-get update && apt-get upgrade -y && \
