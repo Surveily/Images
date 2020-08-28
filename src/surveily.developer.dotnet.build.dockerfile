@@ -72,6 +72,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Run SSH
     mkdir ~/.ssh && \
     chmod 700 ~/.ssh && \
+    ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts && \
     ssh-keyscan -t rsa vs-ssh.visualstudio.com >> ~/.ssh/known_hosts && \
     # Clean up
     apt-get autoremove -y && \
