@@ -46,5 +46,5 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
 ENV PATH /root/.yarn/bin:$PATH
 
 # using a non-root user is a best practice for security related execution.
-RUN useradd --uid $(shuf -i 2000-65000 -n 1) app
+RUN useradd -m --uid $(shuf -i 2000-65000 -n 1) app
 USER app
