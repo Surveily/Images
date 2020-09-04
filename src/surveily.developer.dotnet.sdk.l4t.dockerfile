@@ -7,6 +7,7 @@ ARG download
 
 # Settings
 ENV TZ=Etc/UTC
+ENV PATH /root/.yarn/bin:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
@@ -45,5 +46,3 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
-
-ENV PATH /root/.yarn/bin:$PATH
