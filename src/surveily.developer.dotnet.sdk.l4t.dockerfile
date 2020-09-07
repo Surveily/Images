@@ -42,7 +42,3 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
         # add-apt-repository universe && \
         # apt-get install -y powershell && \
         # rm packages-microsoft-prod.deb && \
-    # Clean up
-    apt-get autoremove -y && \
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/*
