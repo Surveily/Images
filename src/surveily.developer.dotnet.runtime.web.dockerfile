@@ -18,6 +18,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Install Dependencies
     apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi && \
     # Clean up
+    ldconfig && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*

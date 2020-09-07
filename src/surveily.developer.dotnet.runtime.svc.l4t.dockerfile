@@ -22,3 +22,9 @@ RUN wget -O dotnet.tar.gz $download && \
     rm dotnet.tar.gz && \
     ln -s /dotnet/dotnet /usr/bin/dotnet && \
     dotnet --info
+
+# Clean up
+RUN ldconfig && \
+    apt-get autoremove -y && \
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/*
