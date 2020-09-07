@@ -24,7 +24,6 @@ RUN wget -O dotnet.tar.gz $download && \
     dotnet --info
 
 # Clean up
-RUN ldconfig && \
-    apt-get autoremove -y && \
+RUN apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*

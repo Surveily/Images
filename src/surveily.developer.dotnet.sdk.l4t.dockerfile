@@ -43,7 +43,6 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
         # apt-get install -y powershell && \
         # rm packages-microsoft-prod.deb && \
     # Clean up
-    ldconfig && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
