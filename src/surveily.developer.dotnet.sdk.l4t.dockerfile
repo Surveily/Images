@@ -30,7 +30,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get install -y nodejs && \
     # Install Yarn
-    curl -o- -L https://yarnpkg.com/install.sh | bash && \
+    curl -o- -L https://yarnpkg.com/install.sh | bash
     # Install Chromium
         # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
         # apt-get install -y ./google-chrome-stable_current_amd64.deb && \
