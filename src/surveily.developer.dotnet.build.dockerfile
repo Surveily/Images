@@ -3,7 +3,7 @@
 ARG version=3.1
 ARG vsts=2.173.0
 ARG powershell=18.04
-ARG helm=v2.16.10-linux-amd64
+ARG helm=v3.3.1-linux-amd64
 FROM surveily/developer.dotnet:${version}-sdk
 
 ARG helm
