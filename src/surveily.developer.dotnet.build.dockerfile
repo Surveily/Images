@@ -56,7 +56,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update && apt-get install -y kubectl && \
     # Install Helm
-    wget https://storage.googleapis.com/kubernetes-helm/helm-$helm.tar.gz -O helm.tar.gz && \
+    wget https://get.helm.sh/helm-$helm.tar.gz -O helm.tar.gz && \
     tar -zxvf helm.tar.gz && \
     mv linux-amd64/helm /usr/local/bin/helm && \
     rm -rf helm && \
