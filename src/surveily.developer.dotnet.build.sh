@@ -1,4 +1,5 @@
-#! /usr/bin/env bash
+#!/bin/bash
+
 set -e
 
 if [ ! -f "/etc/varunit/system-init" ]; then
