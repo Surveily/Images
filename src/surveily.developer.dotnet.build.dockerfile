@@ -60,7 +60,6 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     tar -zxvf helm.tar.gz && \
     mv linux-amd64/helm /usr/local/bin/helm && \
     rm -rf helm && \
-    helm init --client-only && \
     # Install Appium
     npm install -g appium --unsafe-perm=true --allow-root && \
     APPIUM=1 && \
