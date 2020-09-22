@@ -22,7 +22,11 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     # Install Dependencies
-    apt-get install -y vim build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common && \
+    apt-get install -y apt-transport-https gnupg2 vim build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common && \
+    # Install Kubectl
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
+    apt-get update && apt-get install -y kubectl &&\
     # Install Node
     curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get install -y nodejs && \
