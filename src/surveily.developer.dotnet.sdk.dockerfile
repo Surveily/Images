@@ -27,6 +27,10 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update && apt-get install -y kubectl && \
+    # Install Helm
+    curl https://baltocdn.com/helm/signing.asc | apt-key add -  && \
+    echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list  && \
+    apt-get update && apt-get install -y helm  && \
     # Install Node
     curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get install -y nodejs && \
