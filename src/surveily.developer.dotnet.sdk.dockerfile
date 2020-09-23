@@ -16,30 +16,27 @@ ENV PATH /root/.yarn/bin:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-# Update
+# Installation
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
-    apt-get update && apt-get upgrade -y && \
+    curl https://baltocdn.com/helm/signing.asc | apt-key add - && \
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list && \
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    # Upgrade
+    apt-get update && apt-get upgrade -y && \
     # Install Dependencies
     apt-get install -y apt-transport-https gnupg2 vim build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common && \
     # Install Kubectl
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
-    apt-get update && apt-get install -y kubectl && \
+    apt-get install -y kubectl && \
     # Install Helm
-    # curl -s https://baltocdn.com/helm/signing.asc | apt-key add -  && \
-    # echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list  && \
-    # apt-get update && apt-get install -y helm  && \
+    apt-get install -y helm && \
     # Install Node
     curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get install -y nodejs && \
     # Install Yarn
     curl -o- -L https://yarnpkg.com/install.sh | bash && \
-    # Install Chromium
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
-    rm google-chrome-stable_current_amd64.deb && \
     # Install Powershell
     #   wget -q https://packages.microsoft.com/config/ubuntu/$powershell/packages-microsoft-prod.deb && \
     #   dpkg -i packages-microsoft-prod.deb && \
