@@ -46,5 +46,6 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     rm -rf /var/lib/apt/lists/*
 
 COPY src/surveily.developer.dotnet.build.sh /root/entrypoint.sh
+RUN chmod +x /root/entrypoint.sh
 WORKDIR /root
 ENTRYPOINT /root/entrypoint.sh
