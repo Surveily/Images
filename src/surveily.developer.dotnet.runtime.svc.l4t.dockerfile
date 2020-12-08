@@ -1,7 +1,7 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
-ARG download=https://download.visualstudio.microsoft.com/download/pr/da94a32f-8fa7-4df8-b54c-f3442dc2a17a/0badd31a0487b0318a3234baf023aa3c/dotnet-runtime-3.1.4-linux-arm64.tar.gz
-FROM nvcr.io/nvidia/deepstream-l4t:5.0-dp-20.04-base
+ARG download=https://download.visualstudio.microsoft.com/download/pr/4b114207-eaa2-40fe-8524-bd3c56b2fd9a/1d74fdea8701948c0150c39645455b2f/dotnet-runtime-5.0.0-linux-arm64.tar.gz 
+FROM nvcr.io/nvidia/deepstream-l4t:5.0.1-20.09-base
 
 ARG download
 

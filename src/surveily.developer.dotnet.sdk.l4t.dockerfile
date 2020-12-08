@@ -1,7 +1,7 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
-ARG download
-FROM nvcr.io/nvidia/l4t-base:r32.4.2
+ARG download=https://download.visualstudio.microsoft.com/download/pr/27840e8b-d61c-472d-8e11-c16784d40091/ae9780ccda4499405cf6f0924f6f036a/dotnet-sdk-5.0.100-linux-arm64.tar.gz 
+FROM nvcr.io/nvidia/l4t-base:r32.4.4
 
 ARG download
 

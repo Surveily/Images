@@ -1,7 +1,7 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
-ARG download=https://download.visualstudio.microsoft.com/download/pr/0f94ccdf-a791-4978-a0e1-0309911f60a4/d734c7f79e6b180b7b91f3d7e78d24d8/aspnetcore-runtime-3.1.4-linux-arm64.tar.gz
-FROM nvcr.io/nvidia/deepstream-l4t:5.0-dp-20.04-base
+ARG download=https://download.visualstudio.microsoft.com/download/pr/ac555882-afa3-4f5b-842b-c4cec2ae0e90/84cdd6d47a9f79b6722f0e0a9b258888/aspnetcore-runtime-5.0.0-linux-arm64.tar.gz 
+FROM nvcr.io/nvidia/deepstream-l4t:5.0.1-20.09-base
 
 ARG download
 
