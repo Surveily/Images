@@ -11,6 +11,13 @@ ENV PATH /root/.yarn/bin:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
+# Update
+RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
+    apt-get update && apt-get upgrade -y && \ 
+    apt-get install -y apt-transport-https ca-certificates && \
+    # Apply Timezone
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Install .NET
 WORKDIR /dotnet
 RUN wget -O dotnet.tar.gz $download && \
@@ -19,13 +26,8 @@ RUN wget -O dotnet.tar.gz $download && \
     ln -s /dotnet/dotnet /usr/bin/dotnet && \
     dotnet --info
 
-# Update
-RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
-    apt-get update && apt-get upgrade -y && \
-    # Apply Timezone
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
-    # Install Dependencies
-    apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common curl && \
+# Install Dependencies
+RUN apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common curl && \
     # Install Node
     curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get install -y nodejs && \
