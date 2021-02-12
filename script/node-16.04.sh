@@ -27,3 +27,6 @@ apt-get -y install cuda-drivers
 
 # Install Nvidia-Docker
 apt-get install -y nvidia-docker2
+
+# Nvidia Persistance
+nvidia-persistenced
