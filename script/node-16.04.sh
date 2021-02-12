@@ -2,13 +2,17 @@
 
 set -e
 
+# Register OpenVPN
+curl -s https://swupdate.openvpn.net/repos/repo-public.gpg | apt-key add -
+echo "deb http://build.openvpn.net/debian/openvpn/stable xenial main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
+
 # Register Nvidia
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
    && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | apt-key add - \
    && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | tee /etc/apt/sources.list.d/nvidia-docker.list
 
 # Upgrade dependencies
-apt-get update && apt-get upgrade -y && apt-get install -y gnupg-curl
+apt-get update && apt-get upgrade -y && apt-get install -y gnupg-curl openvpn
 
 # Install Docker
 curl https://get.docker.com | sh && systemctl --now enable docker
