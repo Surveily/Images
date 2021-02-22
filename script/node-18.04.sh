@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/node-18.04.sh | sudo sh
+
 set -e
 
 if [[ $UID != 0 ]]; then
