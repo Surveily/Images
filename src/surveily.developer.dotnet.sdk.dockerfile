@@ -1,13 +1,10 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
 ARG version=3.1
-ARG system=bionic
 ARG powershell=18.04
 ARG image=core/sdk
-FROM mcr.microsoft.com/dotnet/${image}:${version}-${system}
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet:${version}
 
-ARG system
-ARG version
 ARG powershell
 
 # Settings
