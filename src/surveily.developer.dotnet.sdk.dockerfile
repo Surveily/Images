@@ -1,9 +1,10 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
-ARG version=3.1
+ARG system=focal
+ARG version=5.0
 ARG powershell=18.04
 ARG image=core/sdk
-FROM mcr.microsoft.com/vscode/devcontainers/dotnet:${version}
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet:${version}-${system}
 
 ARG powershell
 
