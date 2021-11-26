@@ -14,7 +14,9 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 # Update
 RUN apt-get update && apt-get upgrade -y && \
     # Apply Timezone
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    # Update CA
+    update-ca-certificates -f
 
 # Install .NET
 WORKDIR /dotnet
