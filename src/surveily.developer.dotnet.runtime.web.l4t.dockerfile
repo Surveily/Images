@@ -13,6 +13,7 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Update
 RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y apt-transport-https ca-certificates && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     # Update CA
