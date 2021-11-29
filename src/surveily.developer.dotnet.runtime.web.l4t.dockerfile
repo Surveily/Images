@@ -1,8 +1,8 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
 ARG download=https://download.visualstudio.microsoft.com/download/pr/ac555882-afa3-4f5b-842b-c4cec2ae0e90/84cdd6d47a9f79b6722f0e0a9b258888/aspnetcore-runtime-5.0.0-linux-arm64.tar.gz 
-#FROM nvcr.io/nvidia/deepstream-l4t:6.0-base
-FROM nvcr.io/nvidia/l4t-base:r32.6.1
+FROM nvcr.io/nvidia/deepstream-l4t:6.0-base
+#FROM nvcr.io/nvidia/l4t-base:r32.6.1
 
 ARG download
 
