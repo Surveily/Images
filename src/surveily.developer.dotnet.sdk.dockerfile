@@ -48,6 +48,8 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     #   add-apt-repository universe && \
     #   apt-get install -y powershell && \
     #   rm packages-microsoft-prod.deb && \
+    # Install Frontend Test
+    apt-get install -y chromium-browser libpng-dev && \
     # Clean up
     ldconfig && \
     apt-get autoremove -y && \
