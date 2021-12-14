@@ -49,7 +49,10 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     #   apt-get install -y powershell && \
     #   rm packages-microsoft-prod.deb && \
     # Install Frontend Test
-    apt-get install -y chromium-browser libpng-dev && \
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
+    apt-get update && \
+    apt-get -y install google-chrome-stable && \
     # Clean up
     ldconfig && \
     apt-get autoremove -y && \
