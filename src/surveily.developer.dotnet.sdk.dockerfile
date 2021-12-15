@@ -37,7 +37,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Install Helm
     apt-get install -y helm && \
     # Install Node
-    curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y nodejs && \
     # Install Yarn
     curl -o- -L https://yarnpkg.com/install.sh | bash && \
