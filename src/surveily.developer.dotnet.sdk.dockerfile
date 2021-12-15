@@ -10,9 +10,9 @@ ARG powershell
 
 # Settings
 ENV TZ=Etc/UTC
-ENV PATH /root/.yarn/bin:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+ENV PATH=/root/.yarn/bin:/home/vscode/.dotnet/tools:$PATH
 
 # Installation
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
