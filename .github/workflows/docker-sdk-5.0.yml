@@ -79,7 +79,7 @@ jobs:
           file: src/surveily.developer.dotnet.sdk.dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ${{ env.ARG_DOTNET }}
+            ${{ env.ARG_DOTNET }}-sdk
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             image=${{ env.ARG_IMAGE }}
