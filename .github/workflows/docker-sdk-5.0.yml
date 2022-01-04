@@ -1,4 +1,4 @@
-name: Docker
+name: Build and Publish Base Images
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -6,18 +6,19 @@ name: Docker
 # documentation.
 
 on:
-  schedule:
-    - cron: '29 1 * * *'
-  push:
-    branches: [ master ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ master ]
+  workflow_call:
+    inputs:
+      dotnet:
+        required: true
+        type: string
+      image:
+        required: true
+        type: string
+    secrets:
+      registry:
+        required: true
 
 env:
-  ARG_DOTNET: "5.0"
-  ARG_IMAGE: core/sdk
   REGISTRY: docker.io
   LOGIN: turowicz  
   # github.repository as <account>/<repo>
@@ -35,6 +36,10 @@ jobs:
       id-token: write
 
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+  
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -59,7 +64,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ env.LOGIN }}
-          password: ${{ secrets.REGISTRY_DOCKER }}
+          password: ${{ secrets.registry }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
@@ -79,11 +84,12 @@ jobs:
           file: src/surveily.developer.dotnet.sdk.dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ env.ARG_DOTNET }}-sdk
+            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk
+            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk-${{ steps.date.outputs.date }}.${{ env.GITHUB_RUN_NUMBER }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            image=${{ env.ARG_IMAGE }}
-            version=${{ env.ARG_DOTNET }}
+            image=${{ inputs.image }}
+            version=${{ inputs.dotnet }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
