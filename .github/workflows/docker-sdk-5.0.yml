@@ -79,11 +79,11 @@ jobs:
           file: src/surveily.developer.dotnet.sdk.dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ${{ ARG_DOTNET }}
+            ${{ env.ARG_DOTNET }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            image=${{ ARG_IMAGE }}
-            version=${{ ARG_DOTNET }}
+            image=${{ env.ARG_IMAGE }}
+            version=${{ env.ARG_DOTNET }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
