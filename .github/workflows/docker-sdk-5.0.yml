@@ -11,19 +11,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps: 
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - uses: ./.github/actions/docker-sdk.yml
-        with:
-          dotnet: "5.0"
-          image: core/sdk
+  call-build:
+    uses: ./.github/workflows/docker-sdk.yml
+    with:
+      dotnet: "5.0"
+      image: core/sdk
