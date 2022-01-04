@@ -84,6 +84,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             image=sdk
+            system=focal
             version=${{ inputs.dotnet }}
 
       # Sign the resulting Docker image digest except on PRs.
@@ -109,10 +110,11 @@ jobs:
           file: src/surveily.developer.dotnet.runtime.web.dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk
-            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk-${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-runtime-web
+            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-runtime-web-${{ steps.date.outputs.date }}.${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
+            system=focal
             image=aspnet
             version=${{ inputs.dotnet }}
 
@@ -136,13 +138,14 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          file: src/surveily.developer.dotnet.runtime.web.dockerfile
+          file: src/surveily.developer.dotnet.runtime.svc.dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk
-            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk-${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-runtime-svc
+            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-runtime-svc-${{ steps.date.outputs.date }}.${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
+            system=focal
             image=runtime
             version=${{ inputs.dotnet }}
 
