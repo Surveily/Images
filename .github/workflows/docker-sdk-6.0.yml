@@ -15,7 +15,7 @@ jobs:
   call-build:
     uses: Surveily/Images/.github/workflows/docker-sdk.yml@master
     with:
-      dotnet: "5.0"
+      dotnet: "6.0"
       image: sdk
     secrets:
       registry: $${{ secrets.REGISTRY_DOCKER }}
