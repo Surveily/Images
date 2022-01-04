@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Build and Publish Dotnet 6.0 SDK Image
+name: Build and Publish Dotnet 6.0 Images
 
 # Controls when the workflow will run
 on:
@@ -13,9 +13,8 @@ on:
 
 jobs:
   call-build:
-    uses: Surveily/Images/.github/workflows/docker-sdk.yml@master
+    uses: Surveily/Images/.github/workflows/dotnet.yml@master
     with:
       dotnet: "6.0"
-      image: sdk
     secrets:
       registry: ${{ secrets.REGISTRY_DOCKER }}
