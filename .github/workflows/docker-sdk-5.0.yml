@@ -18,4 +18,4 @@ jobs:
       dotnet: "5.0"
       image: sdk
     secrets:
-      registry: $${{ secrets.REGISTRY_DOCKER }}
+      registry: ${{ secrets.REGISTRY_DOCKER }}
