@@ -20,6 +20,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - uses: ./.github/workflows/docker-sdk.yml@master
         with:
           dotnet: "5.0"
