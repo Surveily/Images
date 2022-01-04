@@ -16,7 +16,7 @@ on:
     branches: [ master ]
 
 env:
-  ARG_DOTNET: 5.0
+  ARG_DOTNET: "5.0"
   ARG_IMAGE: core/sdk
   REGISTRY: docker.io
   LOGIN: turowicz  
