@@ -23,4 +23,4 @@ jobs:
       - uses: ./.github/workflows/docker-sdk.yml
         with:
           dotnet: "5.0"
-          image: core/sdk          
+          image: core/sdk
