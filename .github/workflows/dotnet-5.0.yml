@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  call-build:
+  dotnet:
     uses: Surveily/Images/.github/workflows/dotnet.yml@master
     with:
       dotnet: "5.0"
