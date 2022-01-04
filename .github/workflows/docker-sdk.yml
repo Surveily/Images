@@ -84,7 +84,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk
-            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk-${{ steps.date.outputs.date }}.${{ env.GITHUB_RUN_NUMBER }}
+            ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-sdk-${{ steps.date.outputs.date }}.${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             image=${{ inputs.image }}
