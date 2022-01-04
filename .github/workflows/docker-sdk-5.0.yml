@@ -16,7 +16,8 @@ on:
     branches: [ master ]
 
 env:
-  # Use docker.io for Docker Hub if empty
+  ARG_DOTNET: 5.0
+  ARG_IMAGE: core/sdk
   REGISTRY: docker.io
   LOGIN: turowicz  
   # github.repository as <account>/<repo>
@@ -77,8 +78,12 @@ jobs:
           context: .
           file: src/surveily.developer.dotnet.sdk.dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ ARG_DOTNET }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            image=${{ ARG_IMAGE }}
+            version=${{ ARG_DOTNET }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
