@@ -21,7 +21,7 @@ env:
   IMAGE_NAME: surveily/developer.dotnet
 
 jobs:
-  setup:
+  build-sdk:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,23 +29,11 @@ jobs:
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
-
     steps:
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
-  
-  build-sdk:
-    needs: setup
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
-      id-token: write
 
-    steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -56,7 +44,6 @@ jobs:
         uses: sigstore/cosign-installer@1e95c1de343b5b0c23352d6417ee3e48d5bcd422
         with:
           cosign-release: 'v1.4.0'
-
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Setup Docker buildx
@@ -111,7 +98,6 @@ jobs:
         run: cosign sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push-sdk.outputs.digest }}
   
   build-aspnet:
-    needs: setup
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -119,8 +105,11 @@ jobs:
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
 
-    steps:  
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -131,7 +120,6 @@ jobs:
         uses: sigstore/cosign-installer@1e95c1de343b5b0c23352d6417ee3e48d5bcd422
         with:
           cosign-release: 'v1.4.0'
-
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Setup Docker buildx
@@ -186,7 +174,6 @@ jobs:
         run: cosign sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push-aspnet.outputs.digest }}
   
   build-svc:
-    needs: setup
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -194,8 +181,11 @@ jobs:
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
 
-    steps:  
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -206,7 +196,6 @@ jobs:
         uses: sigstore/cosign-installer@1e95c1de343b5b0c23352d6417ee3e48d5bcd422
         with:
           cosign-release: 'v1.4.0'
-
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Setup Docker buildx
