@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build and Publish Dotnet 5.0 x86 Images
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  dotnet:
+    uses: Surveily/Images/.github/workflows/dotnet.base.l4t.yml@master
+    with:
+      dotnet: "5.0"
+      download-sdk: "https://download.visualstudio.microsoft.com/download/pr/91015c72-ce5a-4840-9e87-5bfa4bb80224/b39692ac418d790ff7a2e092eb07de98/dotnet-sdk-5.0.403-linux-arm64.tar.gz"
+      download-svc: "https://download.visualstudio.microsoft.com/download/pr/7c342ad2-2dae-471b-ae46-c0c820321c1f/a480ad8ca0bc826a48c9b1e56efd972b/dotnet-runtime-5.0.12-linux-arm64.tar.gz "
+      download-web: "https://download.visualstudio.microsoft.com/download/pr/bfc8ae06-2830-4082-a09e-63b3c7134096/880a4712d4ba3491c88aa566553c4e8a/aspnetcore-runtime-5.0.12-linux-arm64.tar.gz "
+    secrets:
+      registry: ${{ secrets.REGISTRY_DOCKER }}
