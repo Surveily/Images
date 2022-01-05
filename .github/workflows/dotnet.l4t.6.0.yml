@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build and Publish Dotnet 6.0 L4T Images
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  dotnet:
+    uses: Surveily/Images/.github/workflows/dotnet.base.l4t.yml@master
+    with:
+      dotnet: "6.0"
+      download-sdk: "https://download.visualstudio.microsoft.com/download/pr/d43345e2-f0d7-4866-b56e-419071f30ebe/68debcece0276e9b25a65ec5798cf07b/dotnet-sdk-6.0.101-linux-arm64.tar.gz"
+      download-svc: "https://download.visualstudio.microsoft.com/download/pr/002742a9-8107-4434-a208-863f07e09397/75884224d828a34b7c5f070df5213553/dotnet-runtime-6.0.1-linux-arm64.tar.gz"
+      download-web: "https://download.visualstudio.microsoft.com/download/pr/01f8a4af-9d6c-40ff-b834-a1d73105a9d5/aba0525a8b8cb745ac70ecd671acf0e0/aspnetcore-runtime-6.0.1-linux-arm64.tar.gz"
+    secrets:
+      registry: ${{ secrets.REGISTRY_DOCKER }}
