@@ -94,12 +94,13 @@ jobs:
 
       - name: Build and push .NET ${{ inputs.dotnet }} SDK image
         uses: pguyot/arm-runner-action@v1
+        base_image: raspbian_lite:2020-02-13
         id: build-sdk
         with:
           commands: |
-              /usr/bin/docker build --build-arg version=${{ inputs.dotnet }} --build-arg download=${{ inputs.download-sdk }} --tag ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-l4t-sdk --tag ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-l4t-sdk-${{ steps.date.outputs.date }}.${{ github.run_number }} --file src/surveily.developer.dotnet.sdk.dockerfile .
-              /usr/bin/docker push ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-l4t-sdk
-              /usr/bin/docker push ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-l4t-sdk-${{ steps.date.outputs.date }}.${{ github.run_number }}
+              docker build --build-arg version=${{ inputs.dotnet }} --build-arg download=${{ inputs.download-sdk }} --tag ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-l4t-sdk --tag ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-l4t-sdk-${{ steps.date.outputs.date }}.${{ github.run_number }} --file src/surveily.developer.dotnet.sdk.dockerfile .
+              docker push ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-l4t-sdk
+              docker push ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-l4t-sdk-${{ steps.date.outputs.date }}.${{ github.run_number }}
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
