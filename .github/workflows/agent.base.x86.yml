@@ -18,7 +18,7 @@ env:
   REGISTRY: docker.io
   LOGIN: turowicz  
   # github.repository as <account>/<repo>
-  IMAGE_NAME: surveily/develop.agent
+  IMAGE_NAME: surveily/developer.agent
 
 jobs:
   build:
