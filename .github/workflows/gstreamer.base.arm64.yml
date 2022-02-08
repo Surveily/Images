@@ -1,4 +1,4 @@
-name: Build and Publish GStreamer x86 Image
+name: Build and Publish GStreamer arm64 Image
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -74,6 +74,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
+          platforms: linux/amd64,linux/arm64
           file: src/surveily.tools.gstreamer.dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
