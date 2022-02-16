@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/node-18.04.sh | sudo sh
+# Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/node-20.04.sh | sudo sh
 
 set -e
 
@@ -22,10 +22,10 @@ apt-get update && apt-get upgrade -y && apt-get install -y wireguard
 curl https://get.docker.com | sh && systemctl --now enable docker
 
 # Install Cuda
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
-mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub
+add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/ /"
 apt-get update
 apt-get -y install --no-install-recommends cuda-drivers-470
 
