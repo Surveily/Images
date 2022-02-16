@@ -26,3 +26,5 @@ wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/ingress
 mv config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd
 mv config.yaml /etc/rancher/k3s
 mv ingress-nginx.yaml /var/lib/rancher/k3s/server/manifests
+
+# Make sure to `vim /etc/rancher/k3s/config.yaml` and `systemctl start k3s` after this script!
