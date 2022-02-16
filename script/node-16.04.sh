@@ -33,6 +33,7 @@ apt-get -y install --no-install-recommends cuda-drivers-470
 
 # Install Nvidia-Docker
 apt-get install -y nvidia-docker2
+systemctl restart docker
 
 # Nvidia Persistance
 nvidia-persistenced --user $USER
