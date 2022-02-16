@@ -2,6 +2,9 @@
 
 # Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/k3s.sh | sudo sh
 
+TXT_YELLOW=`tput setaf 3`
+TXT_NORMAL=`tput sgr0`
+
 set -e
 
 if [[ $UID != 0 ]]; then
@@ -28,3 +31,4 @@ mv config.yaml /etc/rancher/k3s
 mv ingress-nginx.yaml /var/lib/rancher/k3s/server/manifests
 
 # Make sure to `vim /etc/rancher/k3s/config.yaml` and `systemctl start k3s` after this script!
+printf "Make sure to: ${TXT_YELLOW}'vim /etc/rancher/k3s/config.yaml'${TXT_NORMAL}\nand start k3s with: ${TXT_YELLOW}'systemctl start k3s'${TXT_NORMAL} after this script!${TXT_NORMAL}\n"
