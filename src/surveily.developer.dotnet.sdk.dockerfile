@@ -22,7 +22,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     apt-get update && apt-get upgrade -y && \
     # Install Dependencies
     apt-get install -y ssh apt-transport-https ca-certificates gnupg2 gnupg-agent vim build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common default-jre-headless && \
-    # Add Sources    
+    # Add Sources
     curl https://baltocdn.com/helm/signing.asc | apt-key add - && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list && \
@@ -49,10 +49,9 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     #   apt-get install -y powershell && \
     #   rm packages-microsoft-prod.deb && \
     # Install Frontend Test
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-    apt-get update && \
-    apt-get -y install google-chrome-stable && \
+    wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_96.0.4664.110-1_amd64.deb && \
+    apt-get install -y /tmp/chrome.deb && \
+    rm /tmp/chrome.deb && \
     # Clean up
     ldconfig && \
     apt-get autoremove -y && \
