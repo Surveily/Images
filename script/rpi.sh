@@ -6,7 +6,7 @@ set -e
 
 # Install Updates
 
-apt-get update && apt-get upgrade -y && apt-get install -y vim wireguard wireguard-tools resolvconf
+apt-get update && apt-get upgrade -y && apt-get install -y vim wireguard wireguard-tools #resolvconf
 
 # Install LCD
 
