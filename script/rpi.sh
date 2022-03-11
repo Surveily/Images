@@ -4,8 +4,14 @@
 
 set -e
 
+# Install Updates
+
+apt-get update && apt-get upgrade -y && apt-get install wireguard wireguard-tools resolvconf
+
+# Install LCD
+
 git clone https://github.com/waveshare/LCD-show.git
 cd LCD-show/
 
 chmod +x LCD4-show
- ./LCD4-show 
+ ./LCD4-show
