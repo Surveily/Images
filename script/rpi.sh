@@ -16,4 +16,4 @@ git clone https://github.com/waveshare/LCD-show.git
 cd LCD-show/
 
 chmod +x LCD32-show
- ./LCD32-show
+./LCD32-show
