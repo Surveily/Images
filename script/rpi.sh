@@ -13,5 +13,5 @@ apt-get update && apt-get upgrade -y && apt-get install -y vim wireguard wiregua
 git clone https://github.com/waveshare/LCD-show.git
 cd LCD-show/
 
-chmod +x LCD4-show
- ./LCD4-show
+chmod +x LCD32-show
+ ./LCD32-show
