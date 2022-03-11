@@ -4,12 +4,13 @@
 
 set -e
 
-# Install Updates
+# Enable SSH
+systemctl enable ssh
 
+# Install Updates
 apt-get update && apt-get upgrade -y && apt-get install -y vim wireguard wireguard-tools #resolvconf
 
 # Install LCD
-
 git clone https://github.com/waveshare/LCD-show.git
 cd LCD-show/
 
