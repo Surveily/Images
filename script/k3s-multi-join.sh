@@ -2,6 +2,8 @@
 
 # Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-multi-join.sh | sudo sh <ip>
 
+echo $1
+
 TXT_YELLOW=`tput setaf 3`
 TXT_NORMAL=`tput sgr0`
 
