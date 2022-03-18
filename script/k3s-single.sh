@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-single.sh | sudo sh
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-single.sh | sudo sh
 
 TXT_YELLOW=`tput setaf 3`
 TXT_NORMAL=`tput sgr0`

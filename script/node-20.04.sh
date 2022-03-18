@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/node-20.04.sh | sudo sh
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/node-20.04.sh | sudo sh
 
 set -e
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/nfs.sh | sudo sh
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/nfs.sh | sudo sh
 
 set -e
 

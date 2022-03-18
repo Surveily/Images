@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-multi-join.sh | sudo sh -s -- <ip>
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-multi-join.sh | sudo sh -s -- <ip>
 
 echo $1
 
