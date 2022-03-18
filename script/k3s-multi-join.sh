@@ -20,7 +20,7 @@ swapoff -a
 sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab
 
 # Install K3S
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.21.7+k3s1" K3S_TOKEN="surveily" sh -s server --server https://$1:6443
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" INSTALL_K3S_VERSION="v1.21.7+k3s1" K3S_TOKEN="surveily" sh -s server --server https://$1:6443
 systemctl stop k3s
 
 # Configure K3S
