@@ -16,3 +16,6 @@ wget https://raw.githubusercontent.com/Surveily/Images/master/script/wg0/wiregua
 
 mv wireguard_reresolve-dns.service /etc/systemd/system/wireguard_reresolve-dns.service
 mv wireguard_reresolve-dns.timer /etc/systemd/system/wireguard_reresolve-dns.timer
+
+systemctl enable wireguard_reresolve-dns.timer
+systemctl start wireguard_reresolve-dns.timer
