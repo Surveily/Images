@@ -28,6 +28,7 @@ apt-get -y install nvidia-driver-470
 # Install Nvidia-Docker
 apt-get install -y nvidia-docker2
 systemctl restart docker
+docker network create development
 
 # Add user to Docker
 usermod -aG docker $USER
