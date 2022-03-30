@@ -31,7 +31,9 @@ systemctl restart docker
 docker network create development
 
 # Add user to Docker
+groupadd docker
 usermod -aG docker $USER
+newgrp docker
 
 # Install Brave
 curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
