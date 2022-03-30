@@ -17,7 +17,7 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
 #   && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | tee /etc/apt/sources.list.d/nvidia-docker.list
 
 # Upgrade dependencies
-apt-get update && apt-get upgrade -y && apt-get install -y wireguard resolvconf vim net-tools
+apt-get update && apt-get upgrade -y && apt-get install -y wireguard resolvconf vim net-tools apt-transport-https
 
 # Install Docker
 curl https://get.docker.com | sh && systemctl --now enable docker
@@ -31,5 +31,10 @@ systemctl restart docker
 
 # Add user to Docker
 usermod -aG docker $USER
+
+# Install Brave
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+apt-get update && apt-get install -y brave-browser
 
 echo "Please Reboot the computer."
