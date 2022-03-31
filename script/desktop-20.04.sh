@@ -35,7 +35,6 @@ systemctl restart docker
 docker network create development
 
 # Add user to Docker
-groupadd docker
 usermod -aG docker $USER
 #newgrp docker
 
