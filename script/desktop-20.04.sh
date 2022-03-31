@@ -20,6 +20,7 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
 apt-get update && apt-get upgrade -y && apt-get install -y wireguard resolvconf vim net-tools apt-transport-https openssh-server
 
 # Install Keys
+mkdir -p ~/.ssh
 wget -qO ~/.ssh/authorized_keys https://github.com/turowicz.keys
 
 # Install Docker
