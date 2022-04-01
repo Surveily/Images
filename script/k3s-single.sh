@@ -7,7 +7,7 @@ TXT_NORMAL=`tput sgr0`
 
 set -e
 
-if [[ $UID != 0 ]]; then
+if [ `whoami` != root ]; then
     echo "Please run this script with sudo:"
     echo "sudo $0 $*"
     exit 1
