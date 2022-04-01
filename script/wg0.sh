@@ -2,6 +2,14 @@
 
 # Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/wg0.sh | sudo sh
 
+set -e
+
+if [ `whoami` != root ]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
 # Setup wg0
 
 systemctl enable wg-quick@wg0.service
