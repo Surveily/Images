@@ -4,6 +4,12 @@
 
 set -e
 
+if [ `whoami` != root ]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
 # Enable SSH
 systemctl enable ssh
 systemctl start ssh
