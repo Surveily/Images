@@ -16,7 +16,7 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
    && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | tee /etc/apt/sources.list.d/nvidia-docker.list
 
 # Upgrade dependencies
-apt-get update && apt-get upgrade -y && apt-get install -y wireguard resolvconf nvme-cli
+apt-get update && apt-get upgrade -y && apt-get install -y wireguard resolvconf nvme-cli nfs-common
 
 # Install Docker
 curl https://get.docker.com | sh && systemctl --now enable docker
