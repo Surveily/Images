@@ -30,3 +30,9 @@ RUN apt-get install -y libxml++2.6-dev libusb-1.0-0-dev libnotify-dev libaudit-d
 RUN ./configure --enable-usb --enable-packet-socket --enable-viewer --enable-gst-plugin --enable-zlib-pc --enable-fast-heartbeat --enable-cpp-test
 RUN make
 RUN make install
+
+# Clean up
+RUN ldconfig && \
+    apt-get autoremove -y && \
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/*
