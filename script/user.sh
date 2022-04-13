@@ -12,7 +12,7 @@ fi
 
 # Add User
 useradd -s /bin/bash -d /home/shared/ -m shared
-passwd shared
+#passwd shared
 mkdir /home/shared/.ssh
 cp /home/surveily/.ssh/authorized_keys /home/shared/.ssh
 
