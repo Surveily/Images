@@ -1,7 +1,7 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
 ARG version=3.1
-ARG system=impish
+ARG system=focal
 ARG image=core/runtime
 FROM mcr.microsoft.com/dotnet/${image}:${version}-${system}
 

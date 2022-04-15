@@ -2,7 +2,7 @@
 # Docker Mod: `xhost +"local:docker@"`
 # Docker Run: `docker run -it --privileged --rm --net host -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/dbus-MIcovvTWvG:/tmp/dbus-MIcovvTWvG aravis`
 
-FROM ubuntu:impish
+FROM ubuntu:focal
 
 WORKDIR /
 
