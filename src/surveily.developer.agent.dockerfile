@@ -1,5 +1,5 @@
 # Based on https://github.com/emberstack/docker-azure-pipelines-agent/blob/main/src/docker/Dockerfile
-FROM ubuntu:21.10
+FROM ubuntu:impish
 
 # To make it easier for build and release pipelines to run apt-get,
 # configure apt to not require confirmation (assume the -y argument by default)

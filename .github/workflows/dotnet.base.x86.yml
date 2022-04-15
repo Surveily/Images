@@ -82,7 +82,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             image=sdk
-            system=focal
+            system=impish
             version=${{ inputs.dotnet }}
 
       # Sign the resulting Docker image digest except on PRs.
@@ -158,8 +158,8 @@ jobs:
             ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-runtime-web-${{ steps.date.outputs.date }}.${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            system=focal
             image=aspnet
+            system=impish
             version=${{ inputs.dotnet }}
 
       # Sign the resulting Docker image digest except on PRs.
@@ -235,8 +235,8 @@ jobs:
             ${{ env.IMAGE_NAME }}:${{ inputs.dotnet }}-runtime-svc-${{ steps.date.outputs.date }}.${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            system=focal
             image=runtime
+            system=impish
             version=${{ inputs.dotnet }}
 
       # Sign the resulting Docker image digest except on PRs.

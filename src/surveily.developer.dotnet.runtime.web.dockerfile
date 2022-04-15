@@ -1,7 +1,7 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
 ARG version=3.1
-ARG system=bionic
+ARG system=impish
 ARG image=core/aspnet
 FROM mcr.microsoft.com/dotnet/${image}:${version}-${system}
 

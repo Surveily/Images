@@ -1,6 +1,6 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
-ARG system=focal
+ARG system=impish
 ARG version=5.0
 ARG powershell=18.04
 ARG image=core/sdk
