@@ -40,7 +40,7 @@ RUN ninja
 RUN ninja install
 
 # Copy GST Plugin
-RUN cp gst/libgstaravis.0.8.so /usr/lib/x86_64-linux-gnu/gstreamer-1.0/
+#RUN cp gst/libgstaravis.0.8.so /usr/lib/x86_64-linux-gnu/gstreamer-1.0/
 
 # Clean up
 RUN ldconfig && \

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aravis-box
+  namespace: s-pilot
+spec:
+  hostNetwork: true
+  imagePullSecrets:
+    - name: s-pilot-registry
+    - name: s-pilot-registry-hq
+  containers:
+  - name: aravisboxbox
+    image: registry.surveily.com/tools.aravis:latest
+    imagePullPolicy: IfNotPresent
+    securityContext:
+      privileged: true
+    args:
+    - sleep
+    - "1000000"
