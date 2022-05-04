@@ -8,6 +8,7 @@ HOURS=1000
 PASSWORD=$1
 
 declare -a frequent=(
+    "build"
     "surveily.init"
     "surveily.backend.graph"
     "surveily.cognition.service"
