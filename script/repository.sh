@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/repository.sh | sh -s -- <password>
+# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/repository.sh && chmod +x repository.sh && ./repository.sh <password>
 
 set -e
 
