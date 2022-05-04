@@ -4,7 +4,7 @@
 
 set -e
 
-HOURS=1000
+HOURS=168
 PASSWORD=$1
 
 declare -a frequent=(
