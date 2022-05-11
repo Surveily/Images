@@ -32,6 +32,7 @@ WORKDIR /aravis-0.8.21
 # Install Aravis Dependencies
 RUN apt-get update && apt-get install -y libxml2-dev libglib2.0-dev cmake libusb-1.0-0-dev gobject-introspection libgtk-3-dev gtk-doc-tools  xsltproc libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1.0-dev libgirepository1.0-dev gettext
 
+RUN sed 's/2000000/3600000000/g' gst/gstaravis.c > gst/gstaravis.c.new && rm gst/gstaravis.c && mv gst/gstaravis.c.new gst/gstaravis.c
 RUN meson build
 
 WORKDIR /aravis-0.8.21/build
