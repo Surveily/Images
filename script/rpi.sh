@@ -14,6 +14,10 @@ fi
 systemctl enable ssh
 systemctl start ssh
 
+# Install Keys
+mkdir -p ~/.ssh
+wget -qO ~/.ssh/authorized_keys https://github.com/turowicz.keys
+
 # Install Updates
 apt-get update
 apt-get upgrade -y

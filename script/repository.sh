@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/repository.sh | sh -s -- <password>
+# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/repository.sh && chmod +x repository.sh && ./repository.sh <password>
 
 set -e
 
-HOURS=1000
+HOURS=168
 PASSWORD=$1
 
 declare -a frequent=(
+    "build"
     "surveily.init"
     "surveily.backend.graph"
     "surveily.cognition.service"
