@@ -1,6 +1,6 @@
 # Article: https://gist.github.com/nitheeshkl/5cbf1a0777801a7e9b8e12f8252d465e
 # Docker Mod: `xhost +"local:docker@"`
-# Docker Run: `docker run -it --privileged --rm --net host -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/dbus-MIcovvTWvG:/tmp/dbus-MIcovvTWvG aravis`
+# Docker Run: `docker run -it --privileged --rm --net host -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/dbus-MIcovvTWvG:/tmp/dbus-MIcovvTWvG surveily/tools.aravis`
 
 FROM ubuntu:focal
 
