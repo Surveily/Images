@@ -21,6 +21,7 @@ RUN apt-get update -q \
 
 RUN python3 -m pip install --quiet --upgrade \
     pip \
+    pytest-cov \
     opencv-python \
     kfp==1.8.12 \
     discord.py==1.7.3 \
