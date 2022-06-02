@@ -49,7 +49,4 @@ apt-get update && apt-get install -y brave-browser
 add-apt-repository ppa:cappelikan/ppa
 apt-get update && apt-get install -y mainline
 
-# Test GPU
-docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
-
 echo "Please Reboot the computer."
