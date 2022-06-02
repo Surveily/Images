@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/repository.sh && chmod +x repository.sh && ./repository.sh <password>
+# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/registry.sh && chmod +x registry.sh && ./registry.sh <password>
 
 set -e
 
