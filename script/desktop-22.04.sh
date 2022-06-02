@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/desktop-20.04.sh | sudo sh -s -- $USER
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/desktop-22.04.sh | sudo sh -s -- $USER
 
 set -e
 
