@@ -45,8 +45,11 @@ curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 apt-get update && apt-get install -y brave-browser
 
-# Remove Default Apps
+# Configure Snap
 snap remove firefox
+snap install code --classic
+snap install kubectl --classic
+snap install helm --classic
 
 # Install Mainline
 add-apt-repository ppa:cappelikan/ppa
