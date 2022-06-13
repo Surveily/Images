@@ -51,6 +51,9 @@ snap install code --classic
 snap install kubectl --classic
 snap install helm --classic
 
+# Configure VS Code
+code --install-extension ms-vscode-remote.remote-containers
+
 # Install Mainline
 add-apt-repository ppa:cappelikan/ppa
 apt-get update && apt-get install -y mainline
