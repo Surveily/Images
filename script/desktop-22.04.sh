@@ -45,6 +45,9 @@ curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 apt-get update && apt-get install -y brave-browser
 
+# Remove Default Apps
+snap remove firefox
+
 # Install Mainline
 add-apt-repository ppa:cappelikan/ppa
 apt-get update && apt-get install -y mainline
