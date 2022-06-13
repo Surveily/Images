@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/desktop-22.04.sh | sudo sh -s -- $USER
+# Run: sudo apt install curl && curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/desktop-22.04.sh | sudo sh -s -- $USER
 
 set -e
 
