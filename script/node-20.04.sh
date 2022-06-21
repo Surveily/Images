@@ -33,3 +33,9 @@ apt-get -y install --no-install-recommends cuda-drivers-470
 # Install Nvidia-Docker
 apt-get install -y nvidia-docker2
 systemctl restart docker
+
+# Install QEMU
+apt-get install -y qemu binfmt-support qemu-user-static
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes -c yes
+cat /proc/sys/fs/binfmt_misc/status
+cat /proc/sys/fs/binfmt_misc/qemu-aarch64
