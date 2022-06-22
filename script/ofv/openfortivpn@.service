@@ -1,0 +1,21 @@
+[Unit]
+Description=OpenFortiVPN for %I
+After=network-online.target
+Documentation=man:openfortivpn(1)
+
+# Available from v230 onward. Ref: https://unix.stackexchange.com/a/464098
+#StartLimitIntervalSec=500
+#StartLimitBurst=5
+
+[Service]
+Type=simple
+PrivateTmp=true
+ExecStart=/usr/bin/openfortivpn -c /etc/openfortivpn/%I.conf
+OOMScoreAdjust=-100
+
+# Auto restart when it gets disconnected.
+Restart=always
+RestartSec=500ms
+
+[Install]
+WantedBy=multi-user.target
