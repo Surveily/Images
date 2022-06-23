@@ -21,7 +21,10 @@ wget -qO ~/.ssh/authorized_keys https://github.com/turowicz.keys
 # Install Updates
 apt-get update
 apt-get upgrade -y
-apt-get install -y vim wireguard wireguard-tools #resolvconf
+apt-get install -y vim wireguard wireguard-tools xrdp #resolvconf
+
+# Configure XRDP
+adduser xrdp ssl-cert
 
 # Install LCD
 git clone https://github.com/waveshare/LCD-show.git
