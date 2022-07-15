@@ -10,6 +10,9 @@ if [ `whoami` != root ]; then
     exit 1
 fi
 
+# Local name
+echo "127.0.0.1 local.surveily.com" >> /etc/hosts
+
 # Register Nvidia
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
       && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
