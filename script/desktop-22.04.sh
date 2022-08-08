@@ -54,11 +54,11 @@ snap install code --classic
 snap install kubectl --classic
 snap install helm --classic
 
-# Configure VS Code
-su -c 'code --install-extension ms-vscode-remote.remote-containers' $1
-
 # Install Mainline
 add-apt-repository ppa:cappelikan/ppa
 apt-get update && apt-get install -y mainline
+
+# Configure VS Code
+su -c 'code --install-extension ms-vscode-remote.remote-containers' $1
 
 echo "Please Reboot the computer."
