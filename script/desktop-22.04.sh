@@ -59,7 +59,6 @@ add-apt-repository ppa:cappelikan/ppa
 apt-get update && apt-get install -y mainline
 
 # Configure VS Code
-echo 'code --install-extension ms-vscode-remote.remote-containers' > /etc/profile.d/ms-vscode-remote.remote-containers.sh
-chmod +x /etc/profile.d/ms-vscode-remote.remote-containers.sh
+echo 'code --install-extension ms-vscode-remote.remote-containers' >> /home/$1/.profile
 
 echo "Please Reboot the computer."
