@@ -22,7 +22,9 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
             sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
 # Upgrade dependencies
-apt-get update && apt-get upgrade -y && apt-get install -y wireguard resolvconf vim net-tools apt-transport-https openssh-server git iperf
+apt-get update
+apt-get upgrade -y
+apt-get install -y wireguard resolvconf vim net-tools apt-transport-https openssh-server git iperf mpv
 
 # Install Keys
 mkdir -p ~/.ssh
@@ -53,6 +55,7 @@ snap remove firefox
 snap install code --classic
 snap install kubectl --classic
 snap install helm --classic
+snap install vlc
 
 # Install Discord
 set +e
