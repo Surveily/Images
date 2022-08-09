@@ -54,6 +54,16 @@ snap install code --classic
 snap install kubectl --classic
 snap install helm --classic
 
+# Install Discord
+wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb"
+dpkg -i discord.deb
+rm discord.deb
+
+# Install Lens
+wget -O lens.deb "https://api.k8slens.dev/binaries/Lens-6.0.0-latest.20220728.2.amd64.deb"
+dpkg -i lens.deb
+rm lens.deb
+
 # Install Mainline
 add-apt-repository ppa:cappelikan/ppa
 apt-get update && apt-get install -y mainline
