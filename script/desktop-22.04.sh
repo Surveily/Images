@@ -55,9 +55,12 @@ snap install kubectl --classic
 snap install helm --classic
 
 # Install Discord
+set +e
 wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb"
 dpkg -i discord.deb
 rm discord.deb
+apt install --fix-broken
+set -e
 
 # Install Lens
 wget -O lens.deb "https://api.k8slens.dev/binaries/Lens-6.0.0-latest.20220728.2.amd64.deb"
