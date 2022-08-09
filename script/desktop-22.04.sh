@@ -81,4 +81,7 @@ echo 'code --install-extension ms-vscode-remote.remote-containers' >> /home/$1/.
 systemctl enable wg-quick@wg0.service
 systemctl daemon-reload
 
+# Configure .NET
+echo fs.inotify.max_user_instances=524288 | tee -a /etc/sysctl.conf && sysctl -p
+
 echo "Please Reboot the computer."
