@@ -49,7 +49,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     #   apt-get install -y powershell && \
     #   rm packages-microsoft-prod.deb && \
     # Install Frontend Test
-    wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_96.0.4664.110-1_amd64.deb && \
+    wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     apt-get install -y /tmp/chrome.deb && \
     rm /tmp/chrome.deb && \
     # Clean up
