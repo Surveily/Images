@@ -66,7 +66,7 @@ apt install --fix-broken
 set -e
 
 # Install Lens
-wget -O lens.deb "https://api.k8slens.dev/binaries/Lens-6.0.0-latest.20220728.2.amd64.deb"
+wget -O lens.deb "https://api.k8slens.dev/binaries/latest.amd64.deb"
 dpkg -i lens.deb
 rm lens.deb
 
