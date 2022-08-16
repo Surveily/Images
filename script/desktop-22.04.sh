@@ -77,6 +77,9 @@ apt-get update && apt-get install -y mainline
 # Configure VS Code
 echo 'code --install-extension ms-vscode-remote.remote-containers' >> /home/$1/.profile
 
+# Configure xhost
+echo 'xhost +"local:docker@"' >> /home/$1/.profile
+
 # Configure wg0
 systemctl enable wg-quick@wg0.service
 systemctl daemon-reload
