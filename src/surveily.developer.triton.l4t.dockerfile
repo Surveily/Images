@@ -4,19 +4,13 @@ ARG jetpack=5.0.2
 ARG triton=2.24.0
 FROM nvcr.io/nvidia/l4t-tensorrt:r8.4.1-runtime
 
+ARG tag
 ARG triton
 ARG jetpack
 
 # Settings
 ENV TZ=Etc/UTC
 ENV DEBIAN_FRONTEND=noninteractive
-
-# Add Triton Server
-WORKDIR /opt/tritonserver
-
-RUN wget https://github.com/triton-inference-server/server/releases/download/v${triton}/tritonserver${triton}-jetpack${jetpack}.tgz -O triton.tgz && \
-    tar -xzvf triton.tgz && \
-    rm triton.tgz
 
 # Update
 RUN apt-get update && apt-get upgrade -y && \
@@ -46,6 +40,13 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
+
+# Add Triton Server
+WORKDIR /opt/tritonserver
+
+RUN wget https://github.com/triton-inference-server/server/releases/download/v${triton}/tritonserver${triton}-jetpack${jetpack}.tgz -O triton.tgz && \
+    tar -xzvf triton.tgz && \
+    rm triton.tgz
 
 # Setup Trtis
 WORKDIR /opt/tritonserver/bin
