@@ -2,7 +2,7 @@
 ARG tag=r35.1.0
 ARG jetpack=5.0.2
 ARG triton=2.24.0
-FROM nvcr.io/nvidia/l4t-base:${tag}
+FROM nvcr.io/nvidia/l4t-tensorrt:r8.4.1-runtime
 
 # Settings
 ENV TZ=Etc/UTC
