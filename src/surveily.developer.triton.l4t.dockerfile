@@ -1,7 +1,7 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
-ARG tag=r32.6.1
-ARG jetpack=4.6
-ARG triton=2.16.0
+ARG tag=r35.1.0
+ARG jetpack=5.0.2
+ARG triton=2.24.0
 FROM nvcr.io/nvidia/l4t-base:${tag}
 
 # Settings

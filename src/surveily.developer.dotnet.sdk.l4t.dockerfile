@@ -1,8 +1,7 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
 ARG download=https://download.visualstudio.microsoft.com/download/pr/27840e8b-d61c-472d-8e11-c16784d40091/ae9780ccda4499405cf6f0924f6f036a/dotnet-sdk-5.0.100-linux-arm64.tar.gz 
-# FROM nvcr.io/nvidia/deepstream-l4t:6.0-base
-FROM nvcr.io/nvidia/l4t-base:r32.6.1
+FROM nvcr.io/nvidia/l4t-base:r35.1.0
 
 ARG download
 
