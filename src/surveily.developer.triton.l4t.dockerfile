@@ -20,6 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 # Install Dependencies
 RUN apt-get update && \
     apt-get install -y \
+    wget \
     software-properties-common \
     autoconf \
     automake \
