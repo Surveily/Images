@@ -4,7 +4,6 @@ ARG jetpack=5.0.2
 ARG triton=2.24.0
 FROM nvcr.io/nvidia/l4t-tensorrt:r8.4.1-runtime
 
-ARG tag
 ARG triton
 ARG jetpack
 
