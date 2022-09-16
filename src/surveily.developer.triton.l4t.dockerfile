@@ -4,6 +4,9 @@ ARG jetpack=5.0.2
 ARG triton=2.24.0
 FROM nvcr.io/nvidia/l4t-tensorrt:r8.4.1-runtime
 
+ARG triton
+ARG jetpack
+
 # Settings
 ENV TZ=Etc/UTC
 ENV DEBIAN_FRONTEND=noninteractive
@@ -36,9 +39,6 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
-
-ARG triton
-ARG jetpack
 
 # Add Triton Server
 WORKDIR /opt/tritonserver
