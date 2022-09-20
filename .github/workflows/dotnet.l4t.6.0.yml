@@ -16,8 +16,8 @@ jobs:
     uses: Surveily/Images/.github/workflows/dotnet.base.l4t.yml@master
     with:
       dotnet: "6.0"
-      download-sdk: "https://download.visualstudio.microsoft.com/download/pr/d43345e2-f0d7-4866-b56e-419071f30ebe/68debcece0276e9b25a65ec5798cf07b/dotnet-sdk-6.0.101-linux-arm64.tar.gz"
-      download-svc: "https://download.visualstudio.microsoft.com/download/pr/002742a9-8107-4434-a208-863f07e09397/75884224d828a34b7c5f070df5213553/dotnet-runtime-6.0.1-linux-arm64.tar.gz"
-      download-web: "https://download.visualstudio.microsoft.com/download/pr/01f8a4af-9d6c-40ff-b834-a1d73105a9d5/aba0525a8b8cb745ac70ecd671acf0e0/aspnetcore-runtime-6.0.1-linux-arm64.tar.gz"
+      download-sdk: "https://download.visualstudio.microsoft.com/download/pr/a567a07f-af9d-451a-834c-a746ac299e6b/1d9d74b54cf580f93cad71a6bf7b32be/dotnet-sdk-6.0.401-linux-arm64.tar.gz"
+      download-svc: "https://download.visualstudio.microsoft.com/download/pr/2dc40bad-57b6-42ae-b9dd-bd457af4e73e/b95f86d6f9cf49e156227bad231d4aa0/dotnet-runtime-6.0.9-linux-arm64.tar.gz"
+      download-web: "https://download.visualstudio.microsoft.com/download/pr/bff2e771-8180-47eb-b12a-757a67001e21/63a7f79af649efe65c20f2ca56834048/aspnetcore-runtime-6.0.9-linux-arm64.tar.gz"
     secrets:
       registry: ${{ secrets.REGISTRY_DOCKER }}

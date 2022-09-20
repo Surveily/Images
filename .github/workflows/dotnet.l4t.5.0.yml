@@ -16,8 +16,8 @@ jobs:
     uses: Surveily/Images/.github/workflows/dotnet.base.l4t.yml@master
     with:
       dotnet: "5.0"
-      download-sdk: "https://download.visualstudio.microsoft.com/download/pr/91015c72-ce5a-4840-9e87-5bfa4bb80224/b39692ac418d790ff7a2e092eb07de98/dotnet-sdk-5.0.403-linux-arm64.tar.gz"
-      download-svc: "https://download.visualstudio.microsoft.com/download/pr/7c342ad2-2dae-471b-ae46-c0c820321c1f/a480ad8ca0bc826a48c9b1e56efd972b/dotnet-runtime-5.0.12-linux-arm64.tar.gz "
-      download-web: "https://download.visualstudio.microsoft.com/download/pr/bfc8ae06-2830-4082-a09e-63b3c7134096/880a4712d4ba3491c88aa566553c4e8a/aspnetcore-runtime-5.0.12-linux-arm64.tar.gz "
+      download-sdk: "https://download.visualstudio.microsoft.com/download/pr/d4b71fac-a2fd-4516-ac58-100fb09d796a/e79d6c2a8040b59bf49c0d167ae70a7b/dotnet-sdk-5.0.408-linux-arm64.tar.gz"
+      download-svc: "https://download.visualstudio.microsoft.com/download/pr/6690730f-cf10-40f1-9d4d-4c0d002f22d0/e117133858f190c169873200b8d7b9d7/dotnet-runtime-5.0.17-linux-arm64.tar.gz"
+      download-web: "https://download.visualstudio.microsoft.com/download/pr/6eb8aee2-cbea-4c4f-9bb9-ea6229ec229b/d6c438e5071c359ad995134f0a33e731/aspnetcore-runtime-5.0.17-linux-arm64.tar.gz"
     secrets:
       registry: ${{ secrets.REGISTRY_DOCKER }}
