@@ -10,6 +10,9 @@ if [ `whoami` != root ]; then
     exit 1
 fi
 
+# Wait for network
+raspi-config nonint do_boot_wait 0
+
 # Enable SSH
 systemctl enable ssh
 systemctl start ssh
