@@ -25,12 +25,10 @@ systemctl stop k3s
 wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/config.toml.tmpl
 wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/config.yaml
 wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/ingress-nginx.yaml
-wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/multipath.conf
 
 mv config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd
 mv config.yaml /etc/rancher/k3s
 mv ingress-nginx.yaml /var/lib/rancher/k3s/server/manifests
-mv multipath.conf /etc/multipath.conf
 
 # Make sure to `vim /etc/rancher/k3s/config.yaml` and `systemctl start k3s` after this script!
 printf "Make sure to: ${TXT_YELLOW}'vim /etc/rancher/k3s/config.yaml'${TXT_NORMAL}\nand start k3s with: ${TXT_YELLOW}'systemctl start k3s'${TXT_NORMAL} after this script!${TXT_NORMAL}\n"
