@@ -18,10 +18,12 @@ ENV PATH=/root/.yarn/bin:/home/vscode/.dotnet/tools:$PATH
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    # Init PPAs
+    add-apt-repository ppa:git-core/ppa && \
     # Upgrade
     apt-get update && apt-get upgrade -y && \
     # Install Dependencies
-    apt-get install -y ssh apt-transport-https ca-certificates gnupg2 gnupg-agent vim build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common default-jre-headless && \
+    apt-get install -y ssh apt-transport-https ca-certificates gnupg2 gnupg-agent vim build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common default-jre-headless git && \
     # Add Sources
     curl https://baltocdn.com/helm/signing.asc | apt-key add - && \
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
