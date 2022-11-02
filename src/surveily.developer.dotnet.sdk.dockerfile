@@ -19,7 +19,7 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     # Init PPAs
-    add-apt-repository ppa:git-core/ppa && \
+    add-apt-repository ppa:git-core/ppa -y && \
     # Upgrade
     apt-get update && apt-get upgrade -y && \
     # Install Dependencies
