@@ -15,7 +15,7 @@ fi
 chmod 600 /etc/wireguard/wg0.conf
 systemctl enable wg-quick@wg0.service
 systemctl daemon-reload
-systemctl start wg-quick@wg0
+#systemctl start wg-quick@wg0
 #systemctl status wg-quick@wg0
 
 # Setup DNS reresolver
