@@ -31,4 +31,4 @@ mv config.yaml /etc/rancher/k3s
 mv ingress-nginx.yaml /var/lib/rancher/k3s/server/manifests
 
 # Make sure to `vim /etc/rancher/k3s/config.yaml` and `systemctl start k3s` after this script!
-printf "Make sure to: ${TXT_YELLOW}'vim /etc/rancher/k3s/config.yaml'${TXT_NORMAL}\nand start k3s with: ${TXT_YELLOW}'systemctl start k3s'${TXT_NORMAL} after this script!${TXT_NORMAL}\n"
+printf "Make sure to: ${TXT_YELLOW}'sudo vim /etc/rancher/k3s/config.yaml'${TXT_NORMAL}\nand start k3s with: ${TXT_YELLOW}'sudo systemctl start k3s'${TXT_NORMAL} after this script!${TXT_NORMAL}\n"
