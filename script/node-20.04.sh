@@ -34,6 +34,10 @@ apt-get -y install --no-install-recommends cuda-drivers-470
 apt-get install -y nvidia-docker2
 systemctl restart docker
 
+# Install Mainline
+add-apt-repository ppa:cappelikan/ppa
+apt-get install -y mainline
+
 # Install QEMU
 #apt-get install -y qemu binfmt-support qemu-user-static
 #docker run --rm --privileged multiarch/qemu-user-static --reset -p yes -c yes
