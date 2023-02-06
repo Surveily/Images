@@ -19,9 +19,15 @@ sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab
 
 # Install K3S
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.23.16+k3s1" sh -s server --cluster-init --disable local-storage --token "surveily"
-systemctl stop k3s
+
+# Install local path provisioner
+git clone https://github.com/rancher/local-path-provisioner.git
+helm install local-path-provisioner/deploy/chart/local-path-provisioner/ --name local-path-storage --namespace local-path-storage --create-namespace
+rm -rf local-path-provisioner/
 
 # Configure K3S
+systemctl stop k3s
+
 wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/config.yaml
 wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/multipath.conf
 
