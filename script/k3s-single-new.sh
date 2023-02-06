@@ -22,11 +22,9 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.23.16+k3s1" sh -s server 
 systemctl stop k3s
 
 # Configure K3S
-wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/config.toml.tmpl
 wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/config.yaml
 wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/multipath.conf
 
-mv config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd
 mv config.yaml /etc/rancher/k3s
 mv multipath.conf /etc/multipath.conf
 
