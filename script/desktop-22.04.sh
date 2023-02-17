@@ -11,7 +11,7 @@ if [ `whoami` != root ]; then
 fi
 
 # Local name
-echo "127.0.0.1 local.surveily.com" >> /etc/hosts
+echo "$(hostname -I | awk '{print $1}') local.surveily.com" >> /etc/hosts
 
 # Register Nvidia
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
