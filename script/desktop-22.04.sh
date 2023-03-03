@@ -34,7 +34,7 @@ wget -qO ~/.ssh/authorized_keys https://github.com/turowicz.keys
 curl https://get.docker.com | sh && systemctl --now enable docker
 
 # Install Driver
-apt-get -y install nvidia-driver-510
+apt-get -y install nvidia-driver-525
 
 # Install Nvidia-Docker
 apt-get install -y nvidia-docker2
