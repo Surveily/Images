@@ -9,11 +9,15 @@ spec:
     - name: s-pilot-registry
     - name: s-pilot-registry-hq
   containers:
-  - name: aravisboxbox
-    image: registry.surveily.com/tools.aravis:latest
-    imagePullPolicy: IfNotPresent
-    securityContext:
-      privileged: true
-    args:
-    - sleep
-    - "1000000"
+    - name: aravis-box
+      image: registry.surveily.com/tools.aravis:latest
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        privileged: true
+      args:
+        - sleep
+        - "1000000"
+      resources:
+        limits:
+          memory: 128Mb
+          cpu: "1"
