@@ -7,6 +7,9 @@ ARG image=core/sdk
 FROM mcr.microsoft.com/vscode/devcontainers/dotnet:${version}-${system}
 
 ARG powershell
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=${USER_UID}
 
 # Settings
 ENV TZ=Etc/UTC
@@ -14,24 +17,31 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 ENV PATH=/root/.yarn/bin:/home/vscode/.dotnet/tools:$PATH
 
-# Installation
-RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
+RUN groupadd -f --gid ${USER_GID} ${USERNAME} && \
+    useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} || true && \
+    # Installation
+    sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    # Add GPG keys
+    mkdir -m 0755 -p /etc/apt/keyrings && \
+    curl https://baltocdn.com/helm/signing.asc | apt-key add - && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+    # Setup repositories
+    echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list && \
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     # Upgrade
     apt-get update && apt-get upgrade -y && apt-get install -y software-properties-common && \
     # Init PPAs
     add-apt-repository ppa:git-core/ppa -y && \
     # Install Dependencies
     apt-get update && apt-get install -y ssh apt-transport-https ca-certificates gnupg2 gnupg-agent vim build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common default-jre-headless git && \
-    # Add Sources
-    curl https://baltocdn.com/helm/signing.asc | apt-key add - && \
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list && \
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
-    apt-get update && \
     # Install Docker
     apt-get install -y docker-ce docker-ce-cli containerd.io && \
     # Install Kubectl
