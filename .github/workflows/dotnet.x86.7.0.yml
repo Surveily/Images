@@ -16,5 +16,6 @@ jobs:
     uses: Surveily/Images/.github/workflows/dotnet.base.x86.yml@master
     with:
       dotnet: "7.0"
+      system: "jammy"
     secrets:
       registry: ${{ secrets.REGISTRY_DOCKER }}
