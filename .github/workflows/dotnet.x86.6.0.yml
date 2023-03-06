@@ -6,7 +6,7 @@ name: Build and Publish Dotnet 6.0 x86 Images
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -16,5 +16,6 @@ jobs:
     uses: Surveily/Images/.github/workflows/dotnet.base.x86.yml@master
     with:
       dotnet: "6.0"
+      system: "focal"
     secrets:
       registry: ${{ secrets.REGISTRY_DOCKER }}
