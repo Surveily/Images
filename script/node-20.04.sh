@@ -18,6 +18,9 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
 # Upgrade dependencies
 apt-get update && apt-get upgrade -y && apt-get install -y wireguard resolvconf nvme-cli nfs-common smartmontools iperf inetutils-traceroute lm-sensors net-tools software-properties-common vim rsync
 
+# Uninstall unattended upgrades to prevent from unexpected updates
+apt-get remove -y unattended-upgrades
+
 # Install Docker
 curl https://get.docker.com | sh && systemctl --now enable docker
 
