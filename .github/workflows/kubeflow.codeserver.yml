@@ -34,9 +34,6 @@ jobs:
         with:
           cosign-release: "v1.4.0"
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -59,10 +56,10 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: src/surveily.developer.kubeflow.codeserver/
-          platforms: linux/arm64,linux/amd64
+          platforms: linux/amd64
           file: src/surveily.developer.kubeflow.codeserver/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ${{ env.IMAGE_NAME }}:pyTorch-2.0
-            ${{ env.IMAGE_NAME }}:pyTorch-2.0-${{ steps.date.outputs.date }}.${{ github.run_number }}
+            ${{ env.IMAGE_NAME }}:pytorch-2.0
+            ${{ env.IMAGE_NAME }}:pytorch-2.0-${{ steps.date.outputs.date }}.${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}

@@ -94,7 +94,7 @@ RUN apt-get -yq update \
     # Allow sudo to jovyan to install additional packages
     && echo "${NB_USER} ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${NB_USER} \
     # Add local bin to PATH
-    && export PATH="$HOME/.local/bin:$PATH"
+    && export PATH="${HOME}/.local/bin:${PATH}"
 
 COPY --chown=jovyan:users s6/ /etc
 
