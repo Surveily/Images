@@ -15,6 +15,8 @@ ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 
+ENV PATH="${PATH}:${HOME}/.local/bin"
+
 ARG KUBECTL_ARCH="amd64"
 ARG KUBECTL_VERSION=v1.21.0
 ARG S6_ARCH="amd64"
@@ -80,6 +82,15 @@ RUN apt-get -yq update \
     && curl -sL "https://github.com/cdr/code-server/releases/download/${CODESERVER_VERSION}/code-server_${CODESERVER_VERSION/v/}_amd64.deb" -o /tmp/code-server.deb \
     && dpkg -i /tmp/code-server.deb \
     && rm -f /tmp/code-server.deb \
+    # Install code-server extensions
+    code-server --install-extension \
+    ms-python.isort \
+    ms-toolsai.jupyter \
+    ms-toolsai.jupyter-renderers \
+    ms-python.vscode-pylance \
+    ms-python.python \
+    ms-azuretools.vscode-docker \
+    streetsidesoftware.code-spell-checker \
     # create user and set required ownership
     && useradd -M -s /bin/bash -N -u ${NB_UID} ${NB_USER} \
     && usermod -aG sudo ${NB_USER} \
@@ -92,9 +103,7 @@ RUN apt-get -yq update \
     && cp -r ${HOME} /tmp_home \
     && chown -R ${NB_USER}:users /tmp_home \
     # Allow sudo to jovyan to install additional packages
-    && echo "${NB_USER} ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${NB_USER} \
-    # Add local bin to PATH
-    && export PATH="${HOME}/.local/bin:${PATH}"
+    && echo "${NB_USER} ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${NB_USER}
 
 COPY --chown=jovyan:users s6/ /etc
 
@@ -102,7 +111,7 @@ USER $NB_UID
 
 # Install Python packages
 RUN python3 -m pip install -U pip && \
-    python3 -m pip install --quiet --no-cache-dir \
+    python3 -m pip install --user --quiet --no-cache-dir \
     # Install pyTorch 2.0
     torch==2.0.0 \
     torchvision==0.15.1 \
