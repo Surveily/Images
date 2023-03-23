@@ -130,7 +130,7 @@ RUN python3 -m pip install -U pip && \
     scikit-learn \
     opencv-python \
     albumentations \
-    dependency-injector \
+    dependency-injector
 
 EXPOSE 8888
 
