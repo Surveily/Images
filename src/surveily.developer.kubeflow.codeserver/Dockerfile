@@ -129,9 +129,8 @@ RUN python3 -m pip install -U pip && \
     scikit-image \
     scikit-learn \
     opencv-python \
+    albumentations \
     dependency-injector \
-    # Install albumentations
-    && python3 -m pip install --quiet albumentations --no-binary qudida,albumentations
 
 EXPOSE 8888
 
