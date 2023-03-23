@@ -83,7 +83,7 @@ RUN apt-get -yq update \
     && dpkg -i /tmp/code-server.deb \
     && rm -f /tmp/code-server.deb \
     # Install code-server extensions
-    code-server --install-extension \
+    && code-server --install-extension \
     ms-python.isort \
     ms-toolsai.jupyter \
     ms-toolsai.jupyter-renderers \
