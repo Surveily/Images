@@ -66,9 +66,10 @@ apt install --fix-broken
 set -e
 
 # Install Lens
-curl -fsSL https://downloads.k8slens.dev/keys/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/lens-archive-keyring.gpg > /dev/null
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/lens-archive-keyring.gpg] https://downloads.k8slens.dev/apt/debian stable main" | sudo tee /etc/apt/sources.list.d/lens.list > /dev/null
-apt-get && apt-get -y install lens
+LATEST_DEB_DOWNLOAD_URL=$(curl https://api.github.com/repos/MuhammedKalkan/OpenLens/releases/latest | jq -r '.assets[]| select(.name | test("^OpenLens-\\d+\\.\\d+\\.\\d+.amd64.deb$")) | .browser_download_url')
+curl -L $LATEST_DEB_DOWNLOAD_URL > openlens.amd64.deb
+dpkg -i openlens.amd64.deb
+rm openlens.amd64.deb
 
 # Install Mainline
 add-apt-repository ppa:cappelikan/ppa
