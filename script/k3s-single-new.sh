@@ -18,7 +18,7 @@ swapoff -a
 sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab
 
 # Install K3S --disable local-storage --cluster-init --token "surveily"
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.26.1+k3s1" sh -s server
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.26.3+k3s1" sh -s server
 
 # Configure K3S
 systemctl stop k3s
