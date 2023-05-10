@@ -49,7 +49,7 @@ RUN groupadd -f --gid ${USER_GID} ${USERNAME} && \
     # Install Helm
     apt-get install -y helm && \
     # Install Node
-    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     # Install Yarn
     curl -o- -L https://yarnpkg.com/install.sh | bash && \

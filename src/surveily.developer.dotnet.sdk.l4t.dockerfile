@@ -1,6 +1,6 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
 
-ARG download=https://download.visualstudio.microsoft.com/download/pr/27840e8b-d61c-472d-8e11-c16784d40091/ae9780ccda4499405cf6f0924f6f036a/dotnet-sdk-5.0.100-linux-arm64.tar.gz 
+ARG download=https://download.visualstudio.microsoft.com/download/pr/27840e8b-d61c-472d-8e11-c16784d40091/ae9780ccda4499405cf6f0924f6f036a/dotnet-sdk-5.0.100-linux-arm64.tar.gz
 FROM nvcr.io/nvidia/l4t-base:r35.1.0
 
 ARG download
@@ -13,7 +13,7 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Update
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
-    apt-get update && apt-get upgrade -y && \ 
+    apt-get update && apt-get upgrade -y && \
     apt-get install -y apt-transport-https ca-certificates && \
     # Apply Timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
@@ -31,7 +31,7 @@ RUN wget -O dotnet.tar.gz $download && \
 # Install Dependencies
 RUN apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi libpng* libpng-dev gcc make autoconf libtool pkg-config nasm software-properties-common curl && \
     # Install Node
-    curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     # Install Yarn
     curl -o- -L https://yarnpkg.com/install.sh | bash
