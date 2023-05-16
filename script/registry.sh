@@ -9,11 +9,15 @@ PASSWORD=$1
 
 declare -a frequent=(
     "build"
+    "platform"
+    "platform.init"
+    "platform.security.api"    
     "surveily.init"
     "surveily.backend.graph"
     "surveily.cognition.service"
     "surveily.data.api"
     "surveily.data.web"
+    "developer.dotnet"
 )
 
 for t in ${frequent[@]}; do
