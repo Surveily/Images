@@ -50,13 +50,15 @@ if [ -z "$AZP_AGENTPACKAGE_URL" -o "$AZP_AGENTPACKAGE_URL" == "null" ]; then
   echo 1>&2 "Setup - Could not determine a matching Azure Pipelines agent. Check that account '$AZP_URL' is correct and the token is valid for that account"
   exit 1
 fi
+
+#tmp override
+AZP_AGENTPACKAGE_URL=https://vstsagentpackage.azureedge.net/agent/3.220.1/vsts-agent-linux-x64-3.220.1.tar.gz
+export AZP_AGENT_DOWNGRADE_DISABLED=true
+
 echo "Setup - Latest agent package will be downloaded from $AZP_AGENTPACKAGE_URL"
 echo "Setup - Downloading and unpacking Azure Pipelines agent..."
 curl -LsS $AZP_AGENTPACKAGE_URL | tar -xz & wait $!
 echo "Setup - Completed download and unpack"
-
-
-
 
 export AGENT_ALLOW_RUNASROOT="1"
 
