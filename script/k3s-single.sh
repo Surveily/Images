@@ -17,8 +17,11 @@ fi
 swapoff -a
 sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab
 
-# Install K3S --disable local-storage --cluster-init --token "surveily"
+# Install K3S
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.27.1+k3s1" sh -s server
+
+# Configure NVIDIA
+k3s kubectl apply -f https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/nvidia.yaml
 
 # Configure K3S
 systemctl stop k3s
@@ -30,4 +33,5 @@ mv config.yaml /etc/rancher/k3s
 mv multipath.conf /etc/multipath.conf
 
 # Make sure to `vim /etc/rancher/k3s/config.yaml` and `systemctl start k3s` after this script!
-printf "Make sure to: ${TXT_YELLOW}'vim /etc/rancher/k3s/config.yaml'${TXT_NORMAL}\nand start k3s with: ${TXT_YELLOW}'systemctl start k3s'${TXT_NORMAL} after this script!${TXT_NORMAL}\n"
+vim /etc/rancher/k3s/config.yaml
+systemctl start k3s
