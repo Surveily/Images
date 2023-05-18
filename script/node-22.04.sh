@@ -11,7 +11,7 @@ if [ `whoami` != root ]; then
 fi
 
 arch=$(arch)
-$distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID$)
 
 # Register NVIDIA Container Toolkit
 curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | apt-key add -
