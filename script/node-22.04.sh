@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/node-22.04.sh | sudo sh
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/node-22.04.sh | sudo bash
 
 set -e
 
@@ -10,15 +10,15 @@ if [ `whoami` != root ]; then
     exit 1
 fi
 
-arch=$(arch)
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID$)
+ARCH=$(arch)
+DISTRIBUTION=$(. /etc/os-release;echo $ID$VERSION_ID)
 
 # Register NVIDIA Container Toolkit
 curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | apt-key add -
-curl -s -L https://nvidia.github.io/libnvidia-container/${distribution}/libnvidia-container.list | tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+curl -s -L https://nvidia.github.io/libnvidia-container/${DISTRIBUTION}/libnvidia-container.list | tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
 # Register NVIDIA Cuda
-wget https://developer.download.nvidia.com/compute/cuda/repos/${distribution/./""}/${arch}/cuda-keyring_1.0-1_all.deb
+wget https://developer.download.nvidia.com/compute/cuda/repos/${DISTRIBUTION/./""}/${ARCH}/cuda-keyring_1.0-1_all.deb
 dpkg -i cuda-keyring_1.0-1_all.deb && rm cuda-keyring_1.0-1_all.deb
 
 # Upgrade dependencies
