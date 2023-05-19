@@ -51,10 +51,6 @@ if [ -z "$AZP_AGENTPACKAGE_URL" -o "$AZP_AGENTPACKAGE_URL" == "null" ]; then
   exit 1
 fi
 
-#tmp override
-AZP_AGENTPACKAGE_URL=https://vstsagentpackage.azureedge.net/agent/3.220.1/vsts-agent-linux-x64-3.220.1.tar.gz
-export AZP_AGENT_DOWNGRADE_DISABLED=true
-
 echo "Setup - Latest agent package will be downloaded from $AZP_AGENTPACKAGE_URL"
 echo "Setup - Downloading and unpacking Azure Pipelines agent..."
 curl -LsS $AZP_AGENTPACKAGE_URL | tar -xz & wait $!
