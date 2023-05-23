@@ -3,6 +3,7 @@ kind: Pod
 metadata:
  name: cuda8-vector-add-runtime
 spec:
+ runtimeClassName: nvidia
  restartPolicy: OnFailure
  containers:
    - name: cuda-vector-add
