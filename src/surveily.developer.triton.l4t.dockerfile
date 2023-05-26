@@ -1,8 +1,7 @@
 # Copyright (c) Surveily sp. z o.o. All rights reserved.
-ARG tag=r35.1.0
-ARG jetpack=5.0.2
-ARG triton=2.24.0
-FROM nvcr.io/nvidia/l4t-tensorrt:r8.4.1-runtime
+ARG jetpack=5.1
+ARG triton=2.33.0
+FROM nvcr.io/nvidia/l4t-tensorrt:r8.5.2-runtime
 
 ARG triton
 ARG jetpack
