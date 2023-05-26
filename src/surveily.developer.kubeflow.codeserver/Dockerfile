@@ -120,9 +120,12 @@ RUN python3 -m pip install -U pip && \
     scipy \
     numpy \
     pandas \
+    pytest \
     seaborn \
     xmltodict \
+    openpyxl \
     ipykernel \
+    pytest-cov \
     ipywidgets \
     matplotlib \
     tensorboard \
