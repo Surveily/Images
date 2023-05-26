@@ -126,6 +126,7 @@ RUN python3 -m pip install -U pip && \
     xmltodict \
     openpyxl \
     ipykernel \
+    nbconvert \
     pytest-cov \
     ipywidgets \
     matplotlib \
