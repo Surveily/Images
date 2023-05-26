@@ -52,6 +52,7 @@ RUN apt-get -yq update \
     lsb-release \
     iputils-ping \
     python3-opencv \
+    openssh-client \
     ca-certificates \
     build-essential \
     apt-transport-https \
