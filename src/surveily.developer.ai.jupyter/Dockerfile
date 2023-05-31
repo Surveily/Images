@@ -83,3 +83,7 @@ RUN python3 -m pip install -U pip && \
     opencv-python \
     albumentations \
     dependency-injector
+
+COPY start-notebook-frozen.sh /usr/local/bin/
+
+CMD [ "start-notebook-frozen.sh" ]
