@@ -82,7 +82,9 @@ RUN python3 -m pip install -U pip && \
     scikit-learn \
     opencv-python \
     albumentations \
-    dependency-injector
+    dependency-injector \
+    # Install ultralytics
+    ultralytics==8.0.114
 
 COPY start-notebook-frozen.sh /usr/local/bin/
 
