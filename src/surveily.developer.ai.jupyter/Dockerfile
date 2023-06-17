@@ -1,13 +1,4 @@
-FROM jupyter/base-notebook:notebook-6.5.4
-
-ENV DEBIAN_FRONTEND noninteract
-
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
-ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
-
-ENV NB_UID 1000
-ENV NB_USER jovyan
+FROM ghcr.io/ulfsoft-harbour/jupyter:base-py3.11
 
 USER root
 
@@ -45,7 +36,6 @@ RUN apt-get -yq update \
     software-properties-common \
     # Set default python3 version to point python3.11
     && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 2 \
-    && conda install -yq python=3.11 \
     # Clean up
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
@@ -85,7 +75,3 @@ RUN python3 -m pip install -U pip && \
     dependency-injector \
     # Install ultralytics
     ultralytics==8.0.114
-
-COPY start-notebook-frozen.sh /usr/local/bin/
-
-CMD [ "start-notebook-frozen.sh" ]
