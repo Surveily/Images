@@ -57,16 +57,8 @@ snap install kubectl --classic
 snap install helm --classic
 snap install vlc
 
-# Install Discord
-set +e
-wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb"
-dpkg -i discord.deb
-rm discord.deb
-apt install --fix-broken
-set -e
-
 # Install Lens
-LATEST_DEB_DOWNLOAD_URL=$(curl https://api.github.com/repos/MuhammedKalkan/OpenLens/releases/latest | jq -r '.assets[]| select(.name | test("^OpenLens-\\d+\\.\\d+\\.\\d+.amd64.deb$")) | .browser_download_url')
+LATEST_DEB_DOWNLOAD_URL=$(curl https://api.github.com/repos/MuhammedKalkan/OpenLens/releases/latest | jq -r '.assets[]| select(.name | test("^OpenLens-\\d+\\.\\d+\\.\\d+-\\d+.amd64.deb$")) | .browser_download_url')
 curl -L $LATEST_DEB_DOWNLOAD_URL > openlens.amd64.deb
 dpkg -i openlens.amd64.deb
 rm openlens.amd64.deb
@@ -80,10 +72,6 @@ echo 'code --install-extension ms-vscode-remote.remote-containers' >> /home/$1/.
 
 # Configure xhost
 echo 'xhost +"local:docker@"' >> /home/$1/.profile
-
-# Configure wg0
-systemctl enable wg-quick@wg0.service
-systemctl daemon-reload
 
 # Configure .NET
 echo fs.inotify.max_user_instances=524288 | tee -a /etc/sysctl.conf && sysctl -p
