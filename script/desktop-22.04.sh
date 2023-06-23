@@ -56,6 +56,7 @@ snap install code --classic
 snap install kubectl --classic
 snap install helm --classic
 snap install vlc
+snap install remmina
 
 # Install Lens
 LATEST_DEB_DOWNLOAD_URL=$(curl https://api.github.com/repos/MuhammedKalkan/OpenLens/releases/latest | jq -r '.assets[]| select(.name | test("^OpenLens-\\d+\\.\\d+\\.\\d+-\\d+.amd64.deb$")) | .browser_download_url')
