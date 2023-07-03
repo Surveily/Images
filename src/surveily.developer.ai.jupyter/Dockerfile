@@ -74,4 +74,5 @@ RUN python3 -m pip install -U pip && \
     albumentations \
     dependency-injector \
     # Install ultralytics
-    ultralytics==8.0.114
+    ultralytics \
+    huggingface_hub
