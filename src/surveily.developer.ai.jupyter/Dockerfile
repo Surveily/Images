@@ -73,6 +73,7 @@ RUN python3 -m pip install -U pip && \
     opencv-python \
     albumentations \
     dependency-injector \
+    cvat-sdk==2.4.4 \
     # Install ultralytics
     ultralytics \
     huggingface_hub
