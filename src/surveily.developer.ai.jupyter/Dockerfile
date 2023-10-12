@@ -74,6 +74,7 @@ RUN python3 -m pip install -U pip && \
     albumentations \
     dependency-injector \
     cvat-sdk==2.4.4 \
+    pydantic \
     # Install ultralytics
     ultralytics \
     huggingface_hub
