@@ -75,6 +75,13 @@ RUN python3 -m pip install -U pip && \
     dependency-injector \
     cvat-sdk==2.4.4 \
     pydantic \
+    streamlit \
+    shapely \
+    pytest-mock \
+    mypy \
+    types-Pillow \
+    types-tqdm \
+    types-xmltodict \
     # Install ultralytics
     ultralytics \
     huggingface_hub
