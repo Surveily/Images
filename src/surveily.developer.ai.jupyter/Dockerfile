@@ -78,6 +78,7 @@ RUN python3 -m pip install -U pip && \
     streamlit \
     shapely \
     pytest-mock \
+    mkinit\
     mypy \
     types-Pillow \
     types-tqdm \
