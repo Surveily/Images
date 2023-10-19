@@ -55,34 +55,36 @@ RUN python3 -m pip install -U pip && \
     torchvision==0.15.1 \
     # Install basic python libraries
     tqdm \
+    mypy \
     scipy \
     numpy \
+    mkinit\
     pandas \
     pytest \
     seaborn \
-    xmltodict \
+    shapely \
+    pydantic \
     openpyxl \
     ipykernel \
     nbconvert \
+    xmltodict \
+    autoflake \
+    streamlit \
     pytest-cov \
     ipywidgets \
+    pre-commit \
     matplotlib \
+    types-tqdm \
     tensorboard \
+    pytest-mock \
     scikit-image \
+    types-Pillow \
     scikit-learn \
     opencv-python \
     albumentations \
-    dependency-injector \
     cvat-sdk==2.4.4 \
-    pydantic \
-    streamlit \
-    shapely \
-    pytest-mock \
-    mkinit\
-    mypy \
-    types-Pillow \
-    types-tqdm \
     types-xmltodict \
+    dependency-injector \
     # Install ultralytics
     ultralytics \
     huggingface_hub
