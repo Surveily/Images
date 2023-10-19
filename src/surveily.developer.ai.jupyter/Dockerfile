@@ -53,36 +53,41 @@ RUN python3 -m pip install -U pip && \
     # Install pyTorch 2.0
     torch==2.0.0 \
     torchvision==0.15.1 \
-    # Install basic python libraries
+    # Install ultralytics
+    ultralytics==8.0.191 \
+    huggingface_hub==0.18.0
+
+# Install basic python libraries
+RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
+    mypy \
+    black \
     scipy \
     numpy \
+    mkinit\
     pandas \
     pytest \
     seaborn \
-    xmltodict \
+    shapely \
+    pydantic \
     openpyxl \
     ipykernel \
     nbconvert \
+    xmltodict \
+    autoflake \
+    streamlit \
     pytest-cov \
     ipywidgets \
+    pre-commit \
     matplotlib \
+    types-tqdm \
     tensorboard \
+    pytest-mock \
     scikit-image \
+    types-Pillow \
     scikit-learn \
     opencv-python \
     albumentations \
-    dependency-injector \
     cvat-sdk==2.4.4 \
-    pydantic \
-    streamlit \
-    shapely \
-    pytest-mock \
-    mkinit\
-    mypy \
-    types-Pillow \
-    types-tqdm \
     types-xmltodict \
-    # Install ultralytics
-    ultralytics \
-    huggingface_hub
+    dependency-injector
