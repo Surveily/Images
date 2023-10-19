@@ -53,9 +53,15 @@ RUN python3 -m pip install -U pip && \
     # Install pyTorch 2.0
     torch==2.0.0 \
     torchvision==0.15.1 \
-    # Install basic python libraries
+    # Install ultralytics
+    ultralytics==8.0.191 \
+    huggingface_hub==0.18.0
+
+# Install basic python libraries
+RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
     mypy \
+    black \
     scipy \
     numpy \
     mkinit\
@@ -84,7 +90,4 @@ RUN python3 -m pip install -U pip && \
     albumentations \
     cvat-sdk==2.4.4 \
     types-xmltodict \
-    dependency-injector \
-    # Install ultralytics
-    ultralytics \
-    huggingface_hub
+    dependency-injector
