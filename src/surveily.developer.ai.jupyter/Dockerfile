@@ -66,6 +66,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     numpy \
     mkinit\
     pandas \
+    pandas-stubs \
     pytest \
     seaborn \
     shapely \
