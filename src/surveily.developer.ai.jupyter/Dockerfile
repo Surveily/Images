@@ -88,6 +88,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     types-Pillow \
     scikit-learn \
     opencv-python \
+    types-requests \
     albumentations \
     cvat-sdk==2.4.4 \
     types-xmltodict \
