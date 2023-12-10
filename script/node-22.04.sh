@@ -10,6 +10,8 @@ if [ `whoami` != root ]; then
     exit 1
 fi
 
+export DEBIAN_FRONTEND=noninteractive
+
 ARCH=$(arch)
 DISTRIBUTION=$(. /etc/os-release;echo $ID$VERSION_ID)
 
