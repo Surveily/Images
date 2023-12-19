@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/join-ad.sh | sudo sh -s -- <ad-username>
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/join-ad.sh | sudo bash -s -- <ad-username>
 
 set -e
 
