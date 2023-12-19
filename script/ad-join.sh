@@ -28,3 +28,6 @@ pam-auth-update --enable mkhomedir
 
 # Enable kerberos client
 apt install -y krb5-user
+
+# Add to sudoers
+usermod -aG sudo $1@$DOMAIN
