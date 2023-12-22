@@ -41,9 +41,11 @@ OPTIONS="credentials=$FILE,uid=$USERID,gid=$USERID,file_mode=0600,_netdev"
 # Test before mounting permanently
 mount -o $OPTIONS $NASPATH/.ssh /home/$USER/.ssh
 mount -o $OPTIONS $NASPATH/.kube /home/$USER/.kube
+mount -o $OPTIONS $NASPATH/Documents /home/$USER/Documents
 #mount -o $OPTIONS $NASPATH/.gitconfig /home/$USER/.gitconfig
 
 # Mount permanently
 echo "$NASPATH/.ssh  /home/$USER/.ssh   cifs    $OPTIONS" >> /etc/fstab
 echo "$NASPATH/.kube  /home/$USER/.kube   cifs    $OPTIONS" >> /etc/fstab
+echo "$NASPATH/Documents  /home/$USER/Documents   cifs    $OPTIONS" >> /etc/fstab
 #echo "$NASPATH/.gitconfig  /home/$USER/.gitconfig   cifs    $OPTIONS" >> /etc/fstab
