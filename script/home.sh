@@ -36,33 +36,28 @@ chown $USER:$USER /home/$USER/.nas-credentials
 chmod 600 /home/$USER/.nas-credentials
 
 # Mount shares
+declare -a FOLDERS=(".ssh" ".kube" "Documents") #.gitconfig
 OPTIONS="credentials=$FILE,uid=$USERID,gid=$USERID,file_mode=0600,_netdev"
 
 # Prepare Home
 mkdir -p /home/$USER/.tmp-home
 mount -o $OPTIONS $NASPATH /home/$USER/.tmp-home
 
-if ! [ -d "/home/$USER/.tmp-home/.ssh" ]; then
-    mkdir -p /home/$USER/.tmp-home/.ssh
-fi
-if ! [ -d "/home/$USER/.tmp-home/.kube" ]; then
-    mkdir -p /home/$USER/.tmp-home/.kube
-fi
-if ! [ -d "/home/$USER/.tmp-home/Documents" ]; then
-    mkdir -p /home/$USER/.tmp-home/Documents
-fi
+for dir in ${FOLDERS[@]}; do
+    if ! [ -d "/home/$USER/.tmp-home/$dir" ]; then
+        mkdir -p /home/$USER/.tmp-home/$dir
+    fi
+done
 
 umount /home/$USER/.tmp-home
 rm -rf /home/$USER/.tmp-home
 
 # Test before mounting permanently
-mount -o $OPTIONS $NASPATH/.ssh /home/$USER/.ssh
-mount -o $OPTIONS $NASPATH/.kube /home/$USER/.kube
-mount -o $OPTIONS $NASPATH/Documents /home/$USER/Documents
-#mount -o $OPTIONS $NASPATH/.gitconfig /home/$USER/.gitconfig
+for dir in ${FOLDERS[@]}; do
+    mount -o $OPTIONS $NASPATH/$dir /home/$USER/$dir
+done
 
 # Mount permanently
-echo "$NASPATH/.ssh  /home/$USER/.ssh   cifs    $OPTIONS" >> /etc/fstab
-echo "$NASPATH/.kube  /home/$USER/.kube   cifs    $OPTIONS" >> /etc/fstab
-echo "$NASPATH/Documents  /home/$USER/Documents   cifs    $OPTIONS" >> /etc/fstab
-#echo "$NASPATH/.gitconfig  /home/$USER/.gitconfig   cifs    $OPTIONS" >> /etc/fstab
+for dir in ${FOLDERS[@]}; do
+    echo "$NASPATH/$dir  /home/$USER/$dir   cifs    $OPTIONS" >> /etc/fstab
+done
