@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/home.sh | sudo bash -s -- $USER <nas-username> <nas-path>
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/home.sh | sudo bash -s -- $USER <nas-username>
 
 set -e
 
@@ -12,7 +12,7 @@ fi
 
 USER=$1
 NASUSER=$2
-NASPATH=$3
+NASPATH=//192.168.100.100/home
 
 echo "Mapping $NASPATH for user $NASUSER in directory /home/$USER"
 read -sp "NAS Password: " NASPASS
@@ -37,6 +37,23 @@ chmod 600 /home/$USER/.nas-credentials
 
 # Mount shares
 OPTIONS="credentials=$FILE,uid=$USERID,gid=$USERID,file_mode=0600,_netdev"
+
+# Prepare Home
+mkdir -p /home/$USER/.tmp-home
+mount -o $OPTIONS $NASPATH /home/$USER/.tmp-home
+
+if ! [ -d "/home/$USER/.tmp-home/.ssh" ]; then
+    mkdir -p /home/$USER/.tmp-home/.ssh
+fi
+if ! [ -d "/home/$USER/.tmp-home/.kube" ]; then
+    mkdir -p /home/$USER/.tmp-home/.kube
+fi
+if ! [ -d "/home/$USER/.tmp-home/Documents" ]; then
+    mkdir -p /home/$USER/.tmp-home/Documents
+fi
+
+umount /home/$USER/.tmp-home
+rm -rf /home/$USER/.tmp-home
 
 # Test before mounting permanently
 mount -o $OPTIONS $NASPATH/.ssh /home/$USER/.ssh
