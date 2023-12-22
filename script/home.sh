@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: sudo apt install curl && curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/home.sh | sudo bash -s -- $USER <nas-username> <nas-path>
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/home.sh | sudo bash -s -- $USER <nas-username> <nas-path>
 
 set -e
 
