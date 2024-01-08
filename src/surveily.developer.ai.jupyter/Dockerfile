@@ -53,13 +53,20 @@ RUN python3 -m pip install -U pip && \
     # Install pyTorch 2.0
     torch==2.0.0 \
     torchvision==0.15.1 \
-    # Install basic python libraries
+    # Install ultralytics
+    ultralytics==8.0.191 \
+    huggingface_hub==0.18.0
+
+# Install basic python libraries
+RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
     mypy \
+    black \
     scipy \
     numpy \
     mkinit\
     pandas \
+    pandas-stubs \
     pytest \
     seaborn \
     shapely \
@@ -81,10 +88,12 @@ RUN python3 -m pip install -U pip && \
     types-Pillow \
     scikit-learn \
     opencv-python \
+    types-requests \
     albumentations \
     cvat-sdk==2.4.4 \
     types-xmltodict \
     tensorrt \
+    tritonclient[all] \
     dependency-injector \
     # Install ultralytics
     ultralytics \
