@@ -84,6 +84,7 @@ RUN python3 -m pip install -U pip && \
     albumentations \
     cvat-sdk==2.4.4 \
     types-xmltodict \
+    tensorrt \
     dependency-injector \
     # Install ultralytics
     ultralytics \
