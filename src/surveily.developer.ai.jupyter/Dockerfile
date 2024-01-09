@@ -95,6 +95,3 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     tensorrt \
     tritonclient[all] \
     dependency-injector \
-    # Install ultralytics
-    ultralytics \
-    huggingface_hub
