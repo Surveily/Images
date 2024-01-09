@@ -92,4 +92,6 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     albumentations \
     cvat-sdk==2.4.4 \
     types-xmltodict \
-    dependency-injector
+    tensorrt==8.6.1.post1 \
+    tritonclient[all]==2.41.1 \
+    dependency-injector \
