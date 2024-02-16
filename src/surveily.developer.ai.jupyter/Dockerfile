@@ -95,3 +95,4 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     tensorrt==8.6.1.post1 \
     tritonclient[all]==2.41.1 \
     dependency-injector \
+    types-PyYaml \
