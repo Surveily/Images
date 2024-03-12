@@ -90,8 +90,9 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     opencv-python \
     types-requests \
     albumentations \
-    cvat-sdk==2.9.2 \
+    cvat-sdk==2.11.0 \
     types-xmltodict \
+    fiftyone \
     tensorrt==8.6.1.post1 \
     tritonclient[all]==2.41.1 \
     dependency-injector \
