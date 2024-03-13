@@ -84,6 +84,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     types-tqdm \
     tensorboard \
     pytest-mock \
+    p_tqdm \
     scikit-image \
     types-Pillow \
     scikit-learn \
