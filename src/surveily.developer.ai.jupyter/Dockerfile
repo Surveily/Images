@@ -66,14 +66,15 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     numpy \
     mkinit\
     pandas \
-    distinctipy \
-    pandas-stubs \
+    p_tqdm \
     pytest \
     seaborn \
     shapely \
     pydantic \
+    fiftyone \
     openpyxl \
     ipykernel \
+    papermill \
     nbconvert \
     xmltodict \
     autoflake \
@@ -85,17 +86,17 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     types-tqdm \
     tensorboard \
     pytest-mock \
-    p_tqdm \
+    distinctipy \
+    pandas-stubs \
     scikit-image \
+    types-PyYaml \
     types-Pillow \
     scikit-learn \
     opencv-python \
     types-requests \
     albumentations \
-    cvat-sdk==2.11.0 \
     types-xmltodict \
-    fiftyone \
+    cvat-sdk==2.11.0 \
+    dependency-injector \
     tensorrt==8.6.1.post1 \
     tritonclient[all]==2.41.1 \
-    dependency-injector \
-    types-PyYaml \
