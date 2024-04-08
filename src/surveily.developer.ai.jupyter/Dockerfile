@@ -100,3 +100,4 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     dependency-injector \
     tensorrt==8.6.1.post1 \
     tritonclient[all]==2.41.1 \
+    lightning
