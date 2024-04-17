@@ -34,7 +34,7 @@ wget -qO ~/.ssh/authorized_keys https://github.com/turowicz.keys
 curl https://get.docker.com | sh && systemctl --now enable docker
 
 # Install Driver
-apt-get -y install nvidia-driver-525
+apt-get -y install nvidia-driver-545
 
 # Install Nvidia-Docker
 apt-get install -y nvidia-docker2
@@ -69,7 +69,7 @@ add-apt-repository ppa:cappelikan/ppa
 apt-get update && apt-get install -y mainline
 
 # Configure VS Code
-echo 'code --install-extension ms-vscode-remote.remote-containers' >> /home/$1/.profile
+# echo 'code --install-extension ms-vscode-remote.remote-containers' >> /home/$1/.profile
 
 # Configure xhost
 echo 'xhost +"local:docker@"' >> /home/$1/.profile
