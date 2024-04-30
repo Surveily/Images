@@ -120,7 +120,7 @@ jobs:
         with:
           context: src/surveily.developer.ai.jupyter/torch
           platforms: linux/amd64
-          file: src/surveily.developer.ai.jupyter/torch.Dockerfile
+          file: src/surveily.developer.ai.jupyter/torch/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ env.IMAGE_NAME }}:py3.11-torch2.0
