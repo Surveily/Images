@@ -1,4 +1,4 @@
-FROM ghcr.io/ulfsoft-harbour/jupyter:base-py3.11
+FROM surveily/surveily.developer.ai.jupyter:py3.11
 
 USER root
 
