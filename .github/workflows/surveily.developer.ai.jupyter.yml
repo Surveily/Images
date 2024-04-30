@@ -18,7 +18,7 @@ jobs:
   paths-filter:
     runs-on: ubuntu-latest
     outputs:
-      base-updated: ${{ steps.filter.outputs.workflows }}
+      base-updated: ${{ steps.filter.outputs.base-updated }}
     steps:
     - uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
