@@ -28,6 +28,7 @@ jobs:
               - 'src/surveily.developer.ai.jupyter/base/**'
 
   build-base:
+    name: Build base image
     needs: paths-filter
     if: ${{ needs.paths-filter.outputs.base-updated == 'true' }}
     runs-on: ubuntu-latest
@@ -77,6 +78,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   build-torch:
+    name: Build PyTorch image version
     needs: build-base
     if: always()
     runs-on: ubuntu-latest
@@ -112,13 +114,13 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and Push Development Jupyter Image
+      - name: Build and Push Development Jupyter Torch Image
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: src/surveily.developer.ai.jupyter/
+          context: src/surveily.developer.ai.jupyter/torch
           platforms: linux/amd64
-          file: src/surveily.developer.ai.jupyter/Dockerfile
+          file: src/surveily.developer.ai.jupyter/torch.Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ env.IMAGE_NAME }}:py3.11-torch2.0
