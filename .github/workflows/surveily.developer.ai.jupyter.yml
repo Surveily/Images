@@ -1,4 +1,3 @@
-
 name: Build and Publish Development Jupyter Image
 
 on:
@@ -20,13 +19,13 @@ jobs:
     outputs:
       base-updated: ${{ steps.filter.outputs.base-updated }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: dorny/paths-filter@v3
-      id: filter
-      with:
-        filters: |
-          base-updated:
-            - 'src/surveily.developer.ai.jupyter/base/**'
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            base-updated:
+              - 'src/surveily.developer.ai.jupyter/base/**'
 
   build-base:
     needs: paths-filter
@@ -79,7 +78,7 @@ jobs:
 
   build-torch:
     needs: build-base
-    if: ${{ needs.paths-filter.outputs.base-updated != 'true' }}
+    if: always()
     runs-on: ubuntu-latest
     permissions:
       contents: read
