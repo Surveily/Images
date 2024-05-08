@@ -24,7 +24,7 @@ env:
 
 jobs:
   build:
-    runs-on: s-ops-arc
+    runs-on: s-ops-arc-runner
     permissions:
       contents: read
       packages: write
