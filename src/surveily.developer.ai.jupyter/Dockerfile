@@ -82,7 +82,6 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     pytest-cov \
     ipywidgets \
     pre-commit \
-    matplotlib \
     types-tqdm \
     tensorboard \
     pytest-mock \
@@ -97,6 +96,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     albumentations \
     types-xmltodict \
     cvat-sdk==2.11.0 \
+    matplotlib==3.4.2 \
     dependency-injector \
     tensorrt==8.6.1.post1 \
     tritonclient[all]==2.41.1 \
