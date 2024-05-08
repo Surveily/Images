@@ -42,6 +42,11 @@ docker network create development
 # Add user to Docker
 usermod -aG docker $1
 
+# Install Brave
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+apt-get update && apt-get install -y brave-browser
+
 # Configure Snap
 snap remove firefox
 snap install code --classic
@@ -49,7 +54,6 @@ snap install kubectl --classic
 snap install helm --classic
 snap install vlc
 snap install remmina
-snap install brave
 
 # Install Lens
 LATEST_DEB_DOWNLOAD_URL=$(curl https://api.github.com/repos/MuhammedKalkan/OpenLens/releases/latest | jq -r '.assets[]| select(.name | test("^OpenLens-\\d+\\.\\d+\\.\\d+-\\d+.amd64.deb$")) | .browser_download_url')
