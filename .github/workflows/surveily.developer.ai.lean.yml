@@ -114,15 +114,15 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and Push Development Lean Torch Image
-        id: build-and-push
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: src/surveily.developer.ai.lean/torch
-          platforms: linux/amd64
-          file: src/surveily.developer.ai.lean/torch/Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            ${{ env.IMAGE_NAME }}:py3.11-torch2.0
-            ${{ env.IMAGE_NAME }}:py3.11-torch2.0-${{ steps.date.outputs.date }}.${{ github.run_number }}
-          labels: ${{ steps.meta.outputs.labels }}
+      # - name: Build and Push Development Lean Torch Image
+      #   id: build-and-push
+      #   uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      #   with:
+      #     context: src/surveily.developer.ai.lean/torch
+      #     platforms: linux/amd64
+      #     file: src/surveily.developer.ai.lean/torch/Dockerfile
+      #     push: ${{ github.event_name != 'pull_request' }}
+      #     tags: |
+      #       ${{ env.IMAGE_NAME }}:py3.11-torch2.0
+      #       ${{ env.IMAGE_NAME }}:py3.11-torch2.0-${{ steps.date.outputs.date }}.${{ github.run_number }}
+      #     labels: ${{ steps.meta.outputs.labels }}
