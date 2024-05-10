@@ -24,8 +24,6 @@ RUN apt-get -yq update \
     locales \
     libxext6 \
     libc-dev \
-    python3.11 \
-    python3-pip \
     lsb-release \
     iputils-ping \
     python3-opencv \
@@ -34,8 +32,6 @@ RUN apt-get -yq update \
     build-essential \
     apt-transport-https \
     software-properties-common \
-    # Set default python3 version to point python3.11
-    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 2 \
     # Clean up
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
