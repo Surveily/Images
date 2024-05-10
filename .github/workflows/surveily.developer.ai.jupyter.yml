@@ -1,17 +1,17 @@
-name: Build and Publish Development Jupyter Image
+name: Build and Publish Development Lean Image
 
 on:
   push:
     branches: [master]
     paths:
-      - "src/surveily.developer.ai.jupyter/**"
+      - "src/surveily.developer.ai.lean/**"
 
   workflow_dispatch:
 
 env:
   REGISTRY: docker.io
   LOGIN: turowicz
-  IMAGE_NAME: surveily/surveily.developer.ai.jupyter
+  IMAGE_NAME: surveily/surveily.developer.ai.lean
 
 jobs:
   paths-filter:
@@ -25,7 +25,7 @@ jobs:
         with:
           filters: |
             base-updated:
-              - 'src/surveily.developer.ai.jupyter/base/**'
+              - 'src/surveily.developer.ai.lean/base/**'
 
   build-base:
     name: Build base image
@@ -64,13 +64,13 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and Push Development Jupyter Image
+      - name: Build and Push Development Lean Image
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: src/surveily.developer.ai.jupyter/base
+          context: src/surveily.developer.ai.lean/base
           platforms: linux/amd64
-          file: src/surveily.developer.ai.jupyter/base/Dockerfile
+          file: src/surveily.developer.ai.lean/base/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ env.IMAGE_NAME }}:py3.11
@@ -114,13 +114,13 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and Push Development Jupyter Torch Image
+      - name: Build and Push Development Lean Torch Image
         id: build-and-push
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: src/surveily.developer.ai.jupyter/torch
+          context: src/surveily.developer.ai.lean/torch
           platforms: linux/amd64
-          file: src/surveily.developer.ai.jupyter/torch/Dockerfile
+          file: src/surveily.developer.ai.lean/torch/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ env.IMAGE_NAME }}:py3.11-torch2.0
