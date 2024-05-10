@@ -1,4 +1,4 @@
-FROM ghcr.io/ulfsoft-harbour/jupyter:base-py3.11
+FROM python:3.11-bullseye
 
 USER root
 
@@ -34,19 +34,15 @@ RUN apt-get -yq update \
     build-essential \
     apt-transport-https \
     software-properties-common \
-    # Set default python3 version to point python3.11
+    # Set default python3 version to point python 3.11
     && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 2 \
     # Clean up
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen \
-    && export GNUPGHOME=/tmp/ \
-    # Allow sudo to jovyan to install additional packages
-    && echo "${NB_USER} ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${NB_USER}
-
-USER ${NB_UID}
-
+    && export GNUPGHOME=/tmp/
+    
 # Install Python packages
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --user --quiet --no-cache-dir \
@@ -61,6 +57,7 @@ RUN python3 -m pip install -U pip && \
 RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
     mypy \
+    minio \
     black \
     scipy \
     numpy \
@@ -69,6 +66,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     p_tqdm \
     pytest \
     seaborn \
+    airflow \
     shapely \
     pydantic \
     fiftyone \
@@ -84,6 +82,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     pre-commit \
     matplotlib \
     types-tqdm \
+    kubernetes \
     tensorboard \
     pytest-mock \
     distinctipy \
@@ -100,3 +99,4 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     dependency-injector \
     tensorrt==8.6.1.post1 \
     tritonclient[all]==2.41.1 \
+    apache-airflow-providers-cncf-kubernetes
