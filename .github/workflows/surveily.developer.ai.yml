@@ -1,0 +1,78 @@
+name: Build and Publish Development AI Image
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "src/surveily.developer.ai/**"
+
+  workflow_dispatch:
+
+env:
+  REGISTRY: docker.io
+  LOGIN: turowicz
+  IMAGE_NAME: surveily/surveily.developer.ai
+
+jobs:
+  paths-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      base-updated: ${{ steps.filter.outputs.base-updated }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            base-updated:
+              - 'src/surveily.developer.ai/base/**'
+
+  build-base:
+    name: Build base image
+    needs: paths-filter
+    if: ${{ needs.paths-filter.outputs.base-updated == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.3.1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ env.LOGIN }}
+          password: ${{ secrets.REGISTRY_DOCKER }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and Push Development AI Image
+        id: build-and-push
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: src/surveily.developer.ai/base
+          platforms: linux/amd64
+          file: src/surveily.developer.ai/base/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:py3.11
+            ${{ env.IMAGE_NAME }}:py3.11-${{ steps.date.outputs.date }}.${{ github.run_number }}
+          labels: ${{ steps.meta.outputs.labels }}
