@@ -3,6 +3,11 @@ FROM mcr.microsoft.com/devcontainers/python:${PY_VERSION}
 
 USER root
 
+RUN usermod -u 1001 vscode && \
+    groupmod -g 1001 vscode
+
+USER vscode
+
 RUN apt-get -yq update \
     && apt-get -yq install --no-install-recommends \
     gcc \
@@ -42,17 +47,18 @@ RUN apt-get -yq update \
 
 USER vscode
 
-# Install Python packages
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --user --quiet --no-cache-dir \
-    # Install pyTorch 2.0
     torch==2.0.0 \
     torchvision==0.15.1 \
-    # Install ultralytics
     ultralytics==8.0.191 \
     huggingface_hub==0.18.0
 
-# Install basic python libraries
+RUN python3 -m pip install --user --quiet --no-cache-dir \
+    minio \
+    airflow \
+    airflow.providers.cncf.kubernetes
+
 RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
     mypy \
@@ -73,6 +79,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     nbconvert \
     xmltodict \
     autoflake \
+    lightning \
     streamlit \
     pytest-cov \
     ipywidgets \
@@ -94,5 +101,4 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     matplotlib==3.4.2 \
     dependency-injector \
     tensorrt==8.6.1.post1 \
-    tritonclient[all]==2.41.1 \
-    lightning
+    tritonclient[all]==2.41.1
