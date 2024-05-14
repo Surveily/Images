@@ -6,8 +6,6 @@ USER root
 RUN usermod -u 1001 vscode && \
     groupmod -g 1001 vscode
 
-USER vscode
-
 RUN apt-get -yq update \
     && apt-get -yq install --no-install-recommends \
     gcc \
@@ -57,7 +55,7 @@ RUN python3 -m pip install -U pip && \
 RUN python3 -m pip install --user --quiet --no-cache-dir \
     minio \
     airflow \
-    airflow.providers.cncf.kubernetes
+    apache-airflow-providers-cncf-kubernetes
 
 RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
