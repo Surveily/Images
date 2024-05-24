@@ -54,6 +54,7 @@ RUN python3 -m pip install -U pip && \
 
 RUN python3 -m pip install --user --quiet --no-cache-dir \
     minio \
+    mlflow \
     apache-airflow \
     apache-airflow-providers-cncf-kubernetes
 
