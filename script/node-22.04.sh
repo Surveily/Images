@@ -32,7 +32,7 @@ apt-get remove -y unattended-upgrades
 # Install Docker
 curl https://get.docker.com | sh && systemctl --now enable docker
 
-# Install Cuda
+# Install Drivers
 apt-get -y install --no-install-recommends cuda-drivers-535
 
 # Install Nvidia-Docker
