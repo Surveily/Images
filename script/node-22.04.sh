@@ -25,6 +25,7 @@ dpkg -i cuda-keyring_1.0-1_all.deb && rm cuda-keyring_1.0-1_all.deb
 
 # Upgrade dependencies
 apt-get update && apt-get upgrade -y && apt-get install -y lsof \
+                                                           iotop \
                                                            wireguard \
                                                            resolvconf \
                                                            nvme-cli \
