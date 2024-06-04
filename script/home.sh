@@ -39,19 +39,6 @@ chmod 600 /home/$USER/.nas-credentials
 declare -a FOLDERS=(".ssh" "Documents") #.gitconfig
 OPTIONS="credentials=$FILE,uid=$USERID,gid=$USERID,file_mode=0600,_netdev"
 
-# Prepare Home
-mkdir -p /home/$USER/.tmp-home
-mount -o $OPTIONS $NASPATH /home/$USER/.tmp-home
-
-for dir in ${FOLDERS[@]}; do
-    if ! [ -d "/home/$USER/.tmp-home/$dir" ]; then
-        mkdir -p /home/$USER/.tmp-home/$dir
-    fi
-done
-
-umount /home/$USER/.tmp-home
-rm -rf /home/$USER/.tmp-home
-
 # Test before mounting permanently
 for dir in ${FOLDERS[@]}; do
     mount -o $OPTIONS $NASPATH/$dir /home/$USER/$dir
