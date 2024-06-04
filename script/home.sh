@@ -36,7 +36,7 @@ chown $USER:$USER /home/$USER/.nas-credentials
 chmod 600 /home/$USER/.nas-credentials
 
 # Mount shares
-declare -a FOLDERS=(".ssh" ".kube" "Documents") #.gitconfig
+declare -a FOLDERS=(".ssh" "Documents") #.gitconfig
 OPTIONS="credentials=$FILE,uid=$USERID,gid=$USERID,file_mode=0600,_netdev"
 
 # Prepare Home
