@@ -24,7 +24,22 @@ wget https://developer.download.nvidia.com/compute/cuda/repos/${DISTRIBUTION/./"
 dpkg -i cuda-keyring_1.0-1_all.deb && rm cuda-keyring_1.0-1_all.deb
 
 # Upgrade dependencies
-apt-get update && apt-get upgrade -y && apt-get install -y lsof wireguard resolvconf nvme-cli nfs-common smartmontools iperf iputils-ping inetutils-traceroute lm-sensors net-tools software-properties-common vim rsync htop
+apt-get update && apt-get upgrade -y && apt-get install -y lsof \
+                                                           iotop \
+                                                           wireguard \
+                                                           resolvconf \
+                                                           nvme-cli \
+                                                           nfs-common \
+                                                           smartmontools \
+                                                           iperf \
+                                                           iputils-ping \
+                                                           inetutils-traceroute \
+                                                           lm-sensors \
+                                                           net-tools \
+                                                           software-properties-common \
+                                                           vim \
+                                                           rsync \
+                                                           htop
 
 # Uninstall unattended upgrades to prevent from unexpected updates
 apt-get remove -y unattended-upgrades
@@ -32,20 +47,20 @@ apt-get remove -y unattended-upgrades
 # Install Docker
 curl https://get.docker.com | sh && systemctl --now enable docker
 
-# Install Cuda
-apt-get -y install --no-install-recommends cuda-drivers-525
+# Install Drivers
+apt-get -y install --no-install-recommends cuda-drivers-535
 
 # Install Nvidia-Docker
 apt-get install -y nvidia-container-toolkit
 nvidia-ctk runtime configure --runtime=docker
 systemctl restart docker
 
-# Install Mainline
-add-apt-repository -y ppa:cappelikan/ppa
-apt-get install -y mainline
+# # Install Mainline
+# add-apt-repository -y ppa:cappelikan/ppa
+# apt-get install -y mainline
 
-# Install QEMU
-#apt-get install -y qemu binfmt-support qemu-user-static
-#docker run --rm --privileged multiarch/qemu-user-static --reset -p yes -c yes
-#cat /proc/sys/fs/binfmt_misc/status
-#cat /proc/sys/fs/binfmt_misc/qemu-aarch64
+# # Install QEMU
+# apt-get install -y qemu binfmt-support qemu-user-static
+# docker run --rm --privileged multiarch/qemu-user-static --reset -p yes -c yes
+# cat /proc/sys/fs/binfmt_misc/status
+# cat /proc/sys/fs/binfmt_misc/qemu-aarch64
