@@ -66,6 +66,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     numpy \
     mkinit\
     pandas \
+    pynvml \
     p_tqdm \
     pytest \
     seaborn \
