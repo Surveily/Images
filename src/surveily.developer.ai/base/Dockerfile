@@ -55,7 +55,7 @@ RUN python3 -m pip install -U pip && \
     python3 -m pip install --user --quiet --no-cache-dir \
     torch==2.0.0 \
     torchvision==0.15.1 \
-    ultralytics==8.0.202 \
+    ultralytics==8.2.28 \
     huggingface_hub==0.18.0
 
 RUN python3 -m pip install --user --quiet --no-cache-dir \
