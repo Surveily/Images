@@ -45,11 +45,17 @@ RUN apt-get -yq update \
 
 USER vscode
 
+# WARNING!
+# Change ultralytics version with great care, due
+# to different problems:
+# - DDP
+# - DDP logging callbacks
+# - Runtime parameters
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --user --quiet --no-cache-dir \
     torch==2.0.0 \
     torchvision==0.15.1 \
-    ultralytics==8.2.19 \
+    ultralytics==8.0.202 \
     huggingface_hub==0.18.0
 
 RUN python3 -m pip install --user --quiet --no-cache-dir \
