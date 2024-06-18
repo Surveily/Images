@@ -16,12 +16,14 @@ ARCH=$(arch)
 DISTRIBUTION=$(. /etc/os-release;echo $ID$VERSION_ID)
 
 # Register NVIDIA Container Toolkit
-curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | apt-key add -
-curl -s -L https://nvidia.github.io/libnvidia-container/${DISTRIBUTION}/libnvidia-container.list | tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
 # Register NVIDIA Cuda
-wget https://developer.download.nvidia.com/compute/cuda/repos/${DISTRIBUTION/./""}/${ARCH}/cuda-keyring_1.0-1_all.deb
-dpkg -i cuda-keyring_1.0-1_all.deb && rm cuda-keyring_1.0-1_all.deb
+wget https://developer.download.nvidia.com/compute/cuda/repos/${DISTRIBUTION/./""}/${ARCH}/cuda-keyring_1.1-1_all.deb
+dpkg -i cuda-keyring_1.1-1_all.deb && rm cuda-keyring_1.1-1_all.deb
 
 # Upgrade dependencies
 apt-get update && apt-get upgrade -y && apt-get install -y lsof \
@@ -60,7 +62,7 @@ systemctl restart docker
 # apt-get install -y mainline
 
 # # Install QEMU
-# apt-get install -y qemu binfmt-support qemu-user-static
-# docker run --rm --privileged multiarch/qemu-user-static --reset -p yes -c yes
-# cat /proc/sys/fs/binfmt_misc/status
-# cat /proc/sys/fs/binfmt_misc/qemu-aarch64
+apt-get install -y qemu binfmt-support qemu-user-static
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes -c yes
+cat /proc/sys/fs/binfmt_misc/status
+cat /proc/sys/fs/binfmt_misc/qemu-aarch64
