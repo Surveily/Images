@@ -107,4 +107,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     matplotlib==3.4.2 \
     dependency-injector \
     tensorrt==8.6.1.post1 \
-    tritonclient[all]==2.41.1
+    tritonclient[all]==2.41.1 \
+    aiofile==3.8.8 \
+    aiofiles==23.2.1 \
+    aiobotocore==2.13.0 \
