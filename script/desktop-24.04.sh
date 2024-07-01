@@ -47,9 +47,13 @@ curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 apt-get update && apt-get install -y brave-browser
 
+# Install Code
+wget -O code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+dpkg -i code.deb
+rm code.deb
+
 # Configure Snap
 snap remove firefox
-snap install code --classic
 snap install kubectl --classic
 snap install helm --classic
 snap install vlc
@@ -62,8 +66,8 @@ dpkg -i openlens.amd64.deb
 rm openlens.amd64.deb
 
 # Install Mainline
-add-apt-repository ppa:cappelikan/ppa
-apt-get update && apt-get install -y mainline
+# add-apt-repository ppa:cappelikan/ppa
+# apt-get update && apt-get install -y mainline
 
 # Configure VS Code
 # echo 'code --install-extension ms-vscode-remote.remote-containers' >> /home/$1/.profile
