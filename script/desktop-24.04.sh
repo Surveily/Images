@@ -24,9 +24,12 @@ apt-get update
 apt-get upgrade -y
 apt-get install -y wireguard resolvconf vim net-tools apt-transport-https openssh-server git iperf mpv simplescreenrecorder
 
+# Configure SSH
+echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
+
 # Install Keys
-mkdir -p ~/.ssh
-wget -qO ~/.ssh/authorized_keys https://github.com/turowicz.keys
+mkdir -p /home/$1/.ssh
+wget -qO /home/$1/.ssh/authorized_keys https://github.com/turowicz.keys
 
 # Install Docker
 curl https://get.docker.com | sh && systemctl --now enable docker
