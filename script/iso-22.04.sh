@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/node-22.04.sh | sudo bash
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/iso-22.04.sh | sudo bash
 
 set -e
 
