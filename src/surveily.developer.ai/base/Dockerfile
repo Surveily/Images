@@ -78,7 +78,6 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     seaborn \
     shapely \
     pydantic \
-    fiftyone \
     openpyxl \
     ipykernel \
     papermill \
