@@ -77,7 +77,6 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     pytest \
     seaborn \
     shapely \
-    pydantic \
     openpyxl \
     ipykernel \
     papermill \
@@ -102,6 +101,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     types-requests \
     albumentations \
     types-xmltodict \
+    pydantic==2.6.0 \
     cvat-sdk==2.11.0 \
     matplotlib==3.4.2 \
     dependency-injector \
