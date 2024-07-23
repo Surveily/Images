@@ -41,7 +41,8 @@ apt-get update && apt-get upgrade -y && apt-get install -y lsof \
                                                            software-properties-common \
                                                            vim \
                                                            rsync \
-                                                           htop
+                                                           htop \
+                                                           jq
 
 # Uninstall unattended upgrades to prevent from unexpected updates
 apt-get remove -y unattended-upgrades
