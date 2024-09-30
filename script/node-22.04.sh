@@ -32,6 +32,7 @@ apt-get update && apt-get upgrade -y && apt-get install -y lsof \
                                                            resolvconf \
                                                            nvme-cli \
                                                            nfs-common \
+                                                           cifs-utils \
                                                            smartmontools \
                                                            iperf \
                                                            iputils-ping \
