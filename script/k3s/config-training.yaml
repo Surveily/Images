@@ -1,4 +1,4 @@
 node-label:
   - "surveily/purpose=training"
-  - "surveily/environment=surveily"
+  - "surveily/environment=cloud"
 kubelet-arg: "max-pods=200"
