@@ -22,6 +22,6 @@ FILE=/surveily-k3s
 if [ -f $FILE ]; then
    echo "File $FILE exists."
 else
-   curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-multi-agent.sh | sudo sh -s -- 10.100.1.10
+   curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-multi-agent.sh | sh -s -- 10.100.1.10
    touch $FILE
 fi
