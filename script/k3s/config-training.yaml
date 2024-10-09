@@ -1,0 +1,4 @@
+node-label:
+  - "surveily/purpose=training"
+  - "surveily/environment=surveily"
+kubelet-arg: "max-pods=200"
