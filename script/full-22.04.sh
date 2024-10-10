@@ -9,11 +9,11 @@ if [ -f $FILE ]; then
 else
    echo "File $FILE not exists."
    curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/node-22.04.sh | bash
-   apt install -y openvpn
-   wget -O /etc/openvpn/dc.conf https://raw.githubusercontent.com/Surveily/Images/refs/heads/master/script/ovpn/dc.ovpn
-   echo 'AUTOSTART="dc"' >> /etc/default/openvpn
-   systemctl daemon-reload
-   systemctl restart openvpn
+   #apt install -y openvpn
+   #wget -O /etc/openvpn/dc.conf https://raw.githubusercontent.com/Surveily/Images/refs/heads/master/script/ovpn/dc.ovpn
+   #echo 'AUTOSTART="dc"' >> /etc/default/openvpn
+   #systemctl daemon-reload
+   #systemctl restart openvpn
    touch $FILE
    reboot
 fi
