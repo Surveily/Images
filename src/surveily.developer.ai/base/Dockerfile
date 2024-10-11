@@ -66,6 +66,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
 
 RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
+    ruff \
     mypy \
     black \
     scipy \
