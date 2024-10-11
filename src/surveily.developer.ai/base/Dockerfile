@@ -75,6 +75,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     pynvml \
     p_tqdm \
     pytest \
+    plotly \
     seaborn \
     shapely \
     openpyxl \
@@ -89,6 +90,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     ipywidgets \
     pre-commit \
     types-tqdm \
+    hydra-core \
     tensorboard \
     pytest-mock \
     distinctipy \
