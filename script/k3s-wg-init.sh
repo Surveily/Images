@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-wg-init.sh | sudo sh -- <ip>
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-wg-init.sh | sudo sh -s -- <ip>
 
 TXT_YELLOW=`tput setaf 3`
 TXT_NORMAL=`tput sgr0`
