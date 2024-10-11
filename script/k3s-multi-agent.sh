@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-single.sh | sudo sh
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-multi-agent.sh | sudo sh -s -- <ip>
 
 TXT_YELLOW=`tput setaf 3`
 TXT_NORMAL=`tput sgr0`
@@ -23,12 +23,4 @@ wget -O /etc/rancher/k3s/config.yaml https://raw.githubusercontent.com/Surveily/
 wget -O /etc/multipath.conf https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/multipath.conf
 
 # Install K3S
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.27.1+k3s1" sh -s server
-
-# Configure NVIDIA
-k3s kubectl apply -f https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/nvidia.yaml
-
-# Make sure to `vim /etc/rancher/k3s/config.yaml` and `systemctl start k3s` after this script!
-systemctl stop k3s
-vim /etc/rancher/k3s/config.yaml
-systemctl start k3s
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.27.1+k3s1" K3S_TOKEN="surveily" sh -s agent --server https://$1:6443

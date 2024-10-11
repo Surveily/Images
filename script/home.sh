@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/home.sh | sudo bash -s -- $USER <nas-username>
+# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/home.sh && chmod +x home.sh && sudo bash $USER <nas-username>
 
 set -e
 
@@ -12,7 +12,7 @@ fi
 
 USER=$1
 NASUSER=$2
-NASPATH=//192.168.100.100/home
+NASPATH=//nas.surveily.com/home
 
 echo "Mapping $NASPATH for user $NASUSER in directory /home/$USER"
 read -sp "NAS Password: " NASPASS

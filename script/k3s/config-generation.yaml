@@ -1,0 +1,4 @@
+node-label:
+  - "surveily/purpose=generation"
+  - "surveily/environment=cloud"
+kubelet-arg: "max-pods=200"

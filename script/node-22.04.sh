@@ -32,6 +32,7 @@ apt-get update && apt-get upgrade -y && apt-get install -y lsof \
                                                            resolvconf \
                                                            nvme-cli \
                                                            nfs-common \
+                                                           cifs-utils \
                                                            smartmontools \
                                                            iperf \
                                                            iputils-ping \
@@ -41,7 +42,8 @@ apt-get update && apt-get upgrade -y && apt-get install -y lsof \
                                                            software-properties-common \
                                                            vim \
                                                            rsync \
-                                                           htop
+                                                           htop \
+                                                           jq
 
 # Uninstall unattended upgrades to prevent from unexpected updates
 apt-get remove -y unattended-upgrades
