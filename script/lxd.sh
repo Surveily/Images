@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/lxd.sh | sudo bash
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/lxd.sh | sudo bash -s -- <interface>
 
 set -e
 
@@ -12,4 +12,4 @@ fi
 
 iptables -I DOCKER-USER -i lxdbr0 -j ACCEPT
 iptables -I DOCKER-USER -o lxdbr0 -j ACCEPT
-iptables -I DOCKER-USER -i lxdbr0 -o wlp3s0 -j ACCEPT
+iptables -I DOCKER-USER -i lxdbr0 -o $1 -j ACCEPT
