@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/lxd.sh | sudo bash
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/lxd.sh | sudo bash
 
 set -e
 
