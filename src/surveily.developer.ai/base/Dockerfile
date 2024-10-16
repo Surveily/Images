@@ -65,6 +65,11 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     apache-airflow-providers-cncf-kubernetes
 
 RUN python3 -m pip install --user --quiet --no-cache-dir \
+    flytekit \
+    flytekitplugins-pod \
+    flytekitplugins-omegaconf
+
+RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
     ruff \
     mypy \
