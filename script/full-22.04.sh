@@ -26,5 +26,5 @@ else
    #echo "File $FILE not exists."
    curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-multi-agent.sh | sh -s -- 10.100.1.10
    touch $FILE
-   #reboot
+   reboot
 fi
