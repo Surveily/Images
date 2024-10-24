@@ -55,9 +55,9 @@ curl https://get.docker.com | sh && systemctl --now enable docker
 apt-get -y install --no-install-recommends cuda-drivers-535
 
 # Install Nvidia-Docker
-#apt-get install -y nvidia-container-toolkit
-#nvidia-ctk runtime configure --runtime=docker
-#systemctl restart docker
+apt-get install -y nvidia-container-toolkit
+nvidia-ctk runtime configure --runtime=docker
+systemctl restart docker
 
 # # Install Mainline
 # add-apt-repository -y ppa:cappelikan/ppa
