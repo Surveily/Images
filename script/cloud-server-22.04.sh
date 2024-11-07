@@ -19,7 +19,7 @@ if [ -f $FILE ]; then
    echo "File $FILE exists."
 else
    echo "File $FILE not exists."
-   curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-wg-join-server.sh | sh -s -- $(hostname -I) cluster.surveily.com
+   curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-wg-join-server.sh | sh -s -- $(hostname -i) cluster.surveily.com
    touch $FILE
    reboot
 fi
