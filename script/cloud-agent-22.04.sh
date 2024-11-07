@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/full-22.04.sh | bash
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/cloud-agent-22.04.sh | bash
 
 FILE=/surveily-init
 
