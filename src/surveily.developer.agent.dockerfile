@@ -20,6 +20,7 @@ RUN apt-get update && apt-get upgrade -y \
   zip \
   unzip \
   ssh \
+  sshpass \
   smbclient \
   && rm -rf /var/lib/apt/lists/*
 
