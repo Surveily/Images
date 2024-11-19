@@ -92,6 +92,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     types-PyYaml \
     types-Pillow \
     scikit-learn \
+    python-dotenv \
     opencv-python \
     types-requests \
     albumentations \

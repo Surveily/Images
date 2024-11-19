@@ -69,7 +69,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     flytekitplugins-pod \
     flytekitplugins-omegaconf
 
-RUN python3 -m pip install --user --quiet --no-cache-dir \
+    RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
     ruff \
     mypy \
@@ -105,6 +105,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     types-PyYaml \
     types-Pillow \
     scikit-learn \
+    python-dotenv \
     opencv-python \
     types-requests \
     albumentations \
