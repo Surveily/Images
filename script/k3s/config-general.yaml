@@ -1,5 +1,5 @@
 node-label:
-  - "surveily/purpose=training"
+  - "surveily/purpose=general"
   - "surveily/environment=cloud"
   - "topology.kubernetes.io/zone=cloud"
 kubelet-arg: "max-pods=200"

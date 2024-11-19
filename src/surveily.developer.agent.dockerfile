@@ -19,7 +19,9 @@ RUN apt-get update && apt-get upgrade -y \
   libssl1.0 \
   zip \
   unzip \
-  ssh\
+  ssh \
+  sshpass \
+  smbclient \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir ~/.ssh && \
