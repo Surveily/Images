@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/node-22.04.sh | sudo bash
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/node-24.04.sh | sudo bash
 
 set -e
 
@@ -53,7 +53,7 @@ apt-get remove -y unattended-upgrades
 curl https://get.docker.com | sh && systemctl --now enable docker
 
 # Install Drivers
-apt-get -y install --no-install-recommends cuda-drivers-535
+apt-get -y install --no-install-recommends cuda-drivers-550
 
 # Install Nvidia-Docker
 apt-get install -y nvidia-container-toolkit
