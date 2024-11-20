@@ -77,7 +77,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     nbconvert \
     xmltodict \
     autoflake \
-    lightning \
+    lightning==2.3.3 \
     streamlit \
     pytest-cov \
     ipywidgets \
