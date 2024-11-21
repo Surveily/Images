@@ -40,9 +40,9 @@ RUN apt-get -yq update \
 
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --user --quiet --no-cache-dir \
-    torch==2.0.0 \
-    torchvision==0.15.1 \
-    ultralytics==8.2.28 \
+    torch==2.5.1 \
+    torchvision==0.20.1 \
+    ultralytics==8.3.34 \
     huggingface_hub==0.18.0
 
 RUN python3 -m pip install --user --quiet --no-cache-dir \
@@ -56,7 +56,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     flytekitplugins-pod \
     flytekitplugins-omegaconf
 
-RUN python3 -m pip install --user --quiet --no-cache-dir \
+    RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
     ruff \
     mypy \
@@ -77,7 +77,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     nbconvert \
     xmltodict \
     autoflake \
-    lightning==2.3.3 \
+    lightning==2.4.0 \
     streamlit \
     pytest-cov \
     ipywidgets \
