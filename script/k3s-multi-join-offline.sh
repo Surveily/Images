@@ -18,7 +18,7 @@ swapoff -a
 sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab
 
 # Install K3S
- INSTALL_K3S_VERSION="v1.27.1+k3s1" K3S_TOKEN="surveily" INSTALL_K3S_SKIP_DOWNLOAD=true ./install.sh -s server --disable local-storage --server https://$1:6443
+INSTALL_K3S_VERSION="v1.27.1+k3s1" K3S_TOKEN="surveily" INSTALL_K3S_SKIP_DOWNLOAD=true ./install.sh -s server --disable local-storage --server https://$1:6443
 
 # Configure K3S
 systemctl stop k3s
