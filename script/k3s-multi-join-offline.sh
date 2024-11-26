@@ -23,9 +23,6 @@ INSTALL_K3S_VERSION="v1.27.1+k3s1" K3S_TOKEN="surveily" INSTALL_K3S_SKIP_DOWNLOA
 # Configure K3S
 systemctl stop k3s
 
-wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/config.yaml
-wget https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/multipath.conf
-
 mv config.yaml /etc/rancher/k3s
 mv multipath.conf /etc/multipath.conf
 
