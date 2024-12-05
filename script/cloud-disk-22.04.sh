@@ -15,3 +15,4 @@ parted -a opt /dev/$1 mkpart primary ext4 0% 100%
 mkfs.ext4 -L datapartition /dev/$1
 mkdir -p $2
 echo "/dev/$1 $2 ext4 defaults 0 2" >> /etc/fstab
+mount -a
