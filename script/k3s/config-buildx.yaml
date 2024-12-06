@@ -1,5 +1,5 @@
 node-label:
-  - "surveily/purpose=buildx"
+  - "surveily/purpose=build"
   - "surveily/environment=cloud"
   - "topology.kubernetes.io/zone=cloud"
 kubelet-arg: "max-pods=200"
