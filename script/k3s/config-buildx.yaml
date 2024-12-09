@@ -1,4 +1,5 @@
 node-label:
+  - "surveily/all=all"
   - "surveily/purpose=build"
   - "surveily/environment=cloud"
   - "topology.kubernetes.io/zone=cloud"
