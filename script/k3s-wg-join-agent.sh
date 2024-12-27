@@ -19,7 +19,7 @@ sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab
 
 # Configure K3S
 mkdir -p /etc/rancher/k3s
-#wget -O /etc/rancher/k3s/config.yaml https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/config.yaml
+wget -O /etc/rancher/k3s/config.yaml https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/config.yaml
 wget -O /etc/multipath.conf https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/multipath.conf
 
 # Install K3S
