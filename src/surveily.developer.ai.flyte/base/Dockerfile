@@ -79,6 +79,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     autoflake \
     lightning==2.4.0 \
     streamlit \
+    imagehash \
     pytest-cov \
     ipywidgets \
     pre-commit \
