@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/entra-join.sh | sudo bash -s -- <ad-username>
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/entra-join.sh | sudo bash
 
 set -e
 
@@ -10,17 +10,22 @@ if [ `whoami` != root ]; then
     exit 1
 fi
 
-DOMAIN=surveily.com
+# Add Tmp Repository
+add-apt-repository ppa:ubuntu-enterprise-desktop/authd
+apt update
 
-# Install required packages
-apt install -y libpam-aad libnss-aad
+# Install Packages
+apt install authd gnome-shell yaru-theme-gnome-shell
+snap install authd-msentraid
 
-# Enable home dir creation
-pam-auth-update --enable mkhomedir
+# Configure Entra ID
+mkdir -p /etc/authd/brokers.d/
+cp /snap/authd-msentraid/current/conf/authd/msentraid.conf /etc/authd/brokers.d/
 
-# Setup AD
-wget https://raw.githubusercontent.com/Surveily/Images/master/script/entra/aad.conf
-mv aad.conf /etc/
+# Configure Entra ID Provider
+rm /var/snap/authd-msentraid/current/broker.conf
+wget -O /var/snap/authd-msentraid/current/broker.conf https://raw.githubusercontent.com/Surveily/Images/master/script/entra/aad.conf
 
-# Add to sudoers
-usermod -aG sudo $1@$DOMAIN
+# Restart Services
+systemctl restart authd
+snap restart authd-msentraid
