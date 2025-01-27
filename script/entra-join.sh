@@ -15,7 +15,7 @@ add-apt-repository ppa:ubuntu-enterprise-desktop/authd
 apt update
 
 # Install Packages
-apt install authd gnome-shell yaru-theme-gnome-shell
+apt install -y authd gnome-shell yaru-theme-gnome-shell
 snap install authd-msentraid
 
 # Configure Entra ID
