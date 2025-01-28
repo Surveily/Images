@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-wg-init-offline.sh | sudo sh -s -- <ip>
+# Run: sudo ./k3s-wg-join-server-offline.sh <local-ip> <cluster-ip>
 
 TXT_YELLOW=`tput setaf 3`
 TXT_NORMAL=`tput sgr0`
@@ -23,4 +23,4 @@ cp config.yaml /etc/rancher/k3s/config.yaml
 cp multipath.conf /etc/multipath.conf
 
 # Install K3S
-INSTALL_K3S_VERSION="v1.27.1+k3s1" INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='server --disable local-storage --flannel-backend=wireguard-native --flannel-external-ip --node-external-ip=$1 --cluster-init --token=surveily' ./install.sh
+INSTALL_K3S_VERSION="v1.27.1+k3s1" K3S_TOKEN="surveily" K3S_URL=https://$1:6443 INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='server --disable local-storage --flannel-backend=wireguard-native --flannel-external-ip  --node-external-ip=$1 --server https://$2:6443' ./install.sh
