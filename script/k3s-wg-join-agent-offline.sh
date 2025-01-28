@@ -23,4 +23,4 @@ cp config.yaml /etc/rancher/k3s/config.yaml
 cp multipath.conf /etc/multipath.conf
 
 # Install K3S
-INSTALL_K3S_VERSION="v1.27.1+k3s1" K3S_TOKEN="surveily" K3S_URL=https://$1:6443 INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC='agent --node-external-ip=$1 --server https://$2:6443' ./install.sh
+INSTALL_K3S_VERSION="v1.27.1+k3s1" K3S_TOKEN="surveily" K3S_URL=https://$1:6443 INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC="agent --node-external-ip=$1 --server https://$2:6443" ./install.sh
