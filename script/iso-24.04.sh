@@ -12,9 +12,6 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-ARCH=$(arch)
-DISTRIBUTION=$(. /etc/os-release;echo $ID$VERSION_ID)
-
 # Register NVIDIA Container Toolkit
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
   && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
@@ -22,8 +19,8 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dear
     sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
 # Register NVIDIA Cuda
-wget https://developer.download.nvidia.com/compute/cuda/repos/${DISTRIBUTION/./""}/${ARCH}/cuda-keyring_1.1-1_all.deb
-dpkg -i cuda-keyring_1.1-1_all.deb && rm cuda-keyring_1.1-1_all.deb
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-keyring_1.1-1_all.deb
+dpkg -i cuda-keyring_1.1-1_all.deb
 
 # Upgrade dependencies
 apt-get update && apt-get upgrade -y && apt-get install -y lsof \
@@ -41,7 +38,9 @@ apt-get update && apt-get upgrade -y && apt-get install -y lsof \
                                                            software-properties-common \
                                                            vim \
                                                            rsync \
-                                                           htop
+                                                           htop \
+                                                           cuda-drivers-570 \
+                                                           nvidia-container-toolkit
 
 # Uninstall unattended upgrades to prevent from unexpected updates
 apt-get remove -y unattended-upgrades
@@ -49,11 +48,7 @@ apt-get remove -y unattended-upgrades
 # Install Docker
 # curl https://get.docker.com | sh && systemctl --now enable docker
 
-# Install Drivers
-apt-get -y install --no-install-recommends cuda-drivers-570
-
 # Install Nvidia-Docker
-apt-get install -y nvidia-container-toolkit
 #nvidia-ctk runtime configure --runtime=docker
 #systemctl restart docker
 
