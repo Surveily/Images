@@ -11,12 +11,5 @@ USERID=$(id -u $USER)
 FILE=/home/$USER/.nas-credentials
 
 if test -f "$FILE"; then
-    # Mount shares
-    OPTIONS="credentials=$FILE,uid=$USERID,gid=$USERID,file_mode=0600,_netdev"
-
-    # Test before syncing
-    mkdir -p /home/$USER/.surveily/sync/$FOLDER
-    mount -o $OPTIONS $NASPATH/$FOLDER /home/$USER/.surveily/sync/$FOLDER
-
     cp -r /home/$USER/$FOLDER /home/$USER/.surveily/sync/$FOLDER
 fi
