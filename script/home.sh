@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/home.sh && chmod +x home.sh && sudo bash $USER <nas-username>
+# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/home.sh && chmod +x home.sh && sudo ./home.sh $USER <nas-username>
 
 set -e
 

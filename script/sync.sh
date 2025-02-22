@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/sync.sh && chmod +x sync.sh && sudo bash $USER <nas-username>
+# Run: wget https://raw.githubusercontent.com/Surveily/Images/master/script/sync.sh && chmod +x sync.sh && sudo ./sync.sh $USER <nas-username>
 
 set -e
 
@@ -47,7 +47,7 @@ for dir in ${FOLDERS[@]}; do
     mount -o $OPTIONS $NASPATH/$dir /home/$USER/.surveily/sync/$dir
 done
 
-# Enable services
+# Create services
 wget -O /home/$USER/.surveily/sync/stop.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/stop.sh
 wget -O /home/$USER/.surveily/sync/start.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/start.sh
 
@@ -55,7 +55,11 @@ for dir in ${FOLDERS[@]}; do
     wget -O /etc/systemd/system/surveily-sync-$dir.service https://raw.githubusercontent.com/Surveily/Images/master/script/sync/sync.service
     sed -i -e "s/##user##/$USER/g" /etc/systemd/system/surveily-sync-$dir.service
     sed -i -e "s/##folder##/$dir/g" /etc/systemd/system/surveily-sync-$dir.service
+done
 
-    systemctl start surveily-sync-$dir.service    
-    systemctl enable surveily-sync-$dir.service
+# Start services
+for dir in ${FOLDERS[@]}; do
+    wget -O /etc/systemd/system/surveily-sync-$dir.service https://raw.githubusercontent.com/Surveily/Images/master/script/sync/sync.service
+    sed -i -e "s/##user##/$USER/g" /etc/systemd/system/surveily-sync-$dir.service
+    sed -i -e "s/##folder##/$dir/g" /etc/systemd/system/surveily-sync-$dir.service
 done
