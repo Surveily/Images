@@ -11,5 +11,5 @@ USERID=$(id -u $USER)
 FILE=/home/$USER/.nas-credentials
 
 if test -f "$FILE"; then
-    cp -r /home/$USER/$FOLDER /home/$USER/.surveily/sync/$FOLDER
+    cp -r /home/$USER/$FOLDER /home/$USER/.surveily/sync/
 fi
