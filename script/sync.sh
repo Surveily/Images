@@ -39,10 +39,23 @@ chmod 600 /home/$USER/.nas-credentials
 declare -a FOLDERS=(".ssh" "Documents") #.gitconfig
 OPTIONS="credentials=$FILE,uid=$USERID,gid=$USERID,file_mode=0600,_netdev"
 
-# Test before mounting permanently
+# Test
+mkdir -p /home/$USER/.surveily/sync
+
 for dir in ${FOLDERS[@]}; do
-    mkdir -p /mnt/sync/$dir
-    mount -o $OPTIONS $NASPATH/$dir /mnt/sync/$dir
-    cp -r /home/$USER/$dir/* /mnt/sync/$dir/
-    umount /mnt/sync/$dir
+    mkdir -p /home/$USER/.surveily/sync/$dir
+    mount -o $OPTIONS $NASPATH/$dir /home/$USER/.surveily/sync/$dir
+done
+
+# Enable services
+wget -O /home/$USER/.surveily/sync/stop.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/stop.sh
+wget -O /home/$USER/.surveily/sync/start.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/start.sh
+
+for dir in ${FOLDERS[@]}; do
+    wget -O /etc/systemd/system/surveily-sync-$dir.service https://raw.githubusercontent.com/Surveily/Images/master/script/sync/sync.service
+    sed -i -e "s/##user##/$USER/g" /etc/systemd/system/surveily-sync-$dir.service
+    sed -i -e "s/##folder##/$dir/g" /etc/systemd/system/surveily-sync-$dir.service
+
+    systemctl start surveily-sync-$dir.service    
+    systemctl enable surveily-sync-$dir.service
 done

@@ -1,0 +1,15 @@
+[Unit]
+Description=Surveily Sync ##folder## Service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=forking
+Restart=always
+RestartSec=1
+User=##user##
+ExecStop=/home/##user##/.surveily/sync/stop.sh ##folder##
+ExecStart=/home/##user##/.surveily/sync/start.sh ##folder## && sleep infinity
+
+[Install]
+WantedBy=multi-user.target
