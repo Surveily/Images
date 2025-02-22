@@ -4,12 +4,8 @@ set -e
 
 USER=$1
 FOLDER=$2
-NASPATH=//nas.surveily.com/home
-
-# Delete existing credentials
-USERID=$(id -u $USER)
 FILE=/home/$USER/.nas-credentials
 
 if test -f "$FILE"; then
-    cp -r /home/$USER/.surveily/sync/$FOLDER /home/$USER/
+    rsync -avPH /home/$USER/.surveily/sync/$FOLDER /home/$USER/
 fi
