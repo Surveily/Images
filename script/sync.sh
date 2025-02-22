@@ -50,6 +50,7 @@ done
 # Create services
 wget -O /home/$USER/.surveily/sync/stop.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/stop.sh
 wget -O /home/$USER/.surveily/sync/start.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/start.sh
+chown $USER:$USER /home/$USER/.surveily/sync/*.sh
 
 for dir in ${FOLDERS[@]}; do
     wget -O /etc/systemd/system/surveily-sync-$dir.service https://raw.githubusercontent.com/Surveily/Images/master/script/sync/sync.service
