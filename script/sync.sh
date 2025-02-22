@@ -56,7 +56,7 @@ done
 rm -rf /home/$USER/.surveily/sync/*.sh
 wget -O /home/$USER/.surveily/sync/stop.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/stop.sh
 wget -O /home/$USER/.surveily/sync/start.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/start.sh
-chmod 600 -R /home/$USER/.surveily
+chmod 700 -R /home/$USER/.surveily
 chown $USER:$USER -R /home/$USER/.surveily
 
 for dir in ${FOLDERS[@]}; do
