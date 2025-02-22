@@ -8,5 +8,5 @@ FILE=/home/$USER/.nas-credentials
 
 if test -f "$FILE"; then
     rsync -avPH /home/$USER/.surveily/sync/$FOLDER /home/$USER/
-    sleep infinity
+    sleep infinity &
 fi
