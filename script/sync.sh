@@ -48,11 +48,14 @@ for dir in ${FOLDERS[@]}; do
 done
 
 # Create services
+rm -rf /home/$USER/.surveily/sync/*.sh
 wget -O /home/$USER/.surveily/sync/stop.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/stop.sh
 wget -O /home/$USER/.surveily/sync/start.sh https://raw.githubusercontent.com/Surveily/Images/master/script/sync/start.sh
+chmod +x /home/$USER/.surveily/sync/*.sh
 chown $USER:$USER /home/$USER/.surveily/sync/*.sh
 
 for dir in ${FOLDERS[@]}; do
+    rm -rf /etc/systemd/system/surveily-sync-$dir.service
     wget -O /etc/systemd/system/surveily-sync-$dir.service https://raw.githubusercontent.com/Surveily/Images/master/script/sync/sync.service
     sed -i -e "s/##user##/$USER/g" /etc/systemd/system/surveily-sync-$dir.service
     sed -i -e "s/##folder##/$dir/g" /etc/systemd/system/surveily-sync-$dir.service
@@ -60,7 +63,6 @@ done
 
 # Start services
 for dir in ${FOLDERS[@]}; do
-    wget -O /etc/systemd/system/surveily-sync-$dir.service https://raw.githubusercontent.com/Surveily/Images/master/script/sync/sync.service
-    sed -i -e "s/##user##/$USER/g" /etc/systemd/system/surveily-sync-$dir.service
-    sed -i -e "s/##folder##/$dir/g" /etc/systemd/system/surveily-sync-$dir.service
+    systemctl start surveily-sync-$dir.service    
+    systemctl enable surveily-sync-$dir.service
 done
