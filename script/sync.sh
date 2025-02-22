@@ -66,6 +66,8 @@ for dir in ${FOLDERS[@]}; do
     sed -i -e "s/##folder##/$dir/g" /etc/systemd/system/surveily-sync-$dir.service
 done
 
+systemctl daemon-reload
+
 # Start services
 for dir in ${FOLDERS[@]}; do
     systemctl start surveily-sync-$dir.service    
