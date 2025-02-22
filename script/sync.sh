@@ -39,12 +39,17 @@ chmod 600 /home/$USER/.nas-credentials
 declare -a FOLDERS=(".ssh" "Documents") #.gitconfig
 OPTIONS="credentials=$FILE,uid=$USERID,gid=$USERID,file_mode=0600,_netdev"
 
-# Test
+# Test before mounting
 mkdir -p /home/$USER/.surveily/sync
 
 for dir in ${FOLDERS[@]}; do
     mkdir -p /home/$USER/.surveily/sync/$dir
     mount -o $OPTIONS $NASPATH/$dir /home/$USER/.surveily/sync/$dir
+done
+
+# Mount permanently
+for dir in ${FOLDERS[@]}; do
+    echo "$NASPATH/$dir  /home/$USER/.surveily/sync/$dir   cifs    $OPTIONS" >> /etc/fstab
 done
 
 # Create services
