@@ -1,7 +1,7 @@
 [Unit]
 Description=Surveily Sync ##folder## Service
-After=network.target
-Requires=network-online.target
+After=network-online.target ##mounts##
+Requires=network-online.target ##mounts##
 StartLimitIntervalSec=0
 
 [Service]

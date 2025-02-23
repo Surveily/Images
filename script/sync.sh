@@ -68,6 +68,14 @@ done
 
 systemctl daemon-reload
 
+# Set wait for mounts
+mounts=$(systemctl list-units --type=mount | grep .surveily | sed 's/|/ /' | awk '{print $1, $8}'  | { tr -d '\n'; echo; })
+for dir in ${FOLDERS[@]}; do
+    sed -i -e "s/##mounts##/$mounts/g" /etc/systemd/system/surveily-sync-$dir.service
+done
+
+systemctl daemon-reload
+
 # Start services
 for dir in ${FOLDERS[@]}; do
     systemctl start surveily-sync-$dir.service    
