@@ -112,7 +112,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     albumentations \
     types-xmltodict \
     pydantic==2.6.0 \
-    cvat-sdk==2.11.0 \
+    cvat-sdk==2.21 \
     matplotlib==3.9.2 \
     dependency-injector \
     tensorrt==8.6.1.post1 \
