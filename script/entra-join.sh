@@ -12,7 +12,7 @@ fi
 
 # Add Tmp Repository
 add-apt-repository ppa:ubuntu-enterprise-desktop/authd
-apt update
+apt update && apt upgrade -y
 
 # Install Packages
 apt install -y authd gnome-shell yaru-theme-gnome-shell
