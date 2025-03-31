@@ -10,6 +10,8 @@ if [ `whoami` != root ]; then
     exit 1
 fi
 
+export DEBIAN_FRONTEND=noninteractive
+
 # Local name
 echo "$(hostname -I | awk '{print $1}') local.surveily.com" >> /etc/hosts
 
