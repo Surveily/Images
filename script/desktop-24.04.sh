@@ -37,7 +37,7 @@ wget -qO /home/$1/.ssh/authorized_keys https://github.com/turowicz.keys
 curl https://get.docker.com | sh && systemctl --now enable docker
 
 # Install Driver
-apt-get -y install nvidia-driver-565-server
+apt-get -y install nvidia-driver-550
 
 # Install NVIDIA Container Toolkit
 apt-get install -y nvidia-container-toolkit
