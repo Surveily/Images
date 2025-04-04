@@ -44,7 +44,8 @@ apt-get update && apt-get upgrade -y && apt-get install -y lsof \
                                                            rsync \
                                                            htop \
                                                            jq \
-                                                           unzip
+                                                           unzip \
+                                                           apt-offline
 
 # Uninstall unattended upgrades to prevent from unexpected updates
 apt-get remove -y unattended-upgrades
