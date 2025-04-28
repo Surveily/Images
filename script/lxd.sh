@@ -9,7 +9,7 @@ if [ `whoami` != root ]; then
     echo "sudo $0 $*"
     exit 1
 fi
-
+echo $1
 iptables -I DOCKER-USER -i lxdbr0 -j ACCEPT
 iptables -I DOCKER-USER -o lxdbr0 -j ACCEPT
 iptables -I DOCKER-USER -i lxdbr0 -o $1 -j ACCEPT
