@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-multi-agent.sh | sudo sh
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/k3s-single-offline.sh | sudo sh
 
 TXT_YELLOW=`tput setaf 3`
 TXT_NORMAL=`tput sgr0`
