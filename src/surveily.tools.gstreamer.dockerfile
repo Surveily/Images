@@ -25,5 +25,4 @@ RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install tqdm
-RUN pip3 install requests
+RUN pip3 install tqdm requests dataclasses
