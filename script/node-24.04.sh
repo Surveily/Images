@@ -34,6 +34,7 @@ apt-get update && apt-get upgrade -y && apt-get install -y lsof \
                                                            nfs-common \
                                                            cifs-utils \
                                                            smartmontools \
+                                                           ethtool \
                                                            iperf \
                                                            iputils-ping \
                                                            inetutils-traceroute \
