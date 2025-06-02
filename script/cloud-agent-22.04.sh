@@ -8,7 +8,7 @@ if [ -f $FILE ]; then
    echo "File $FILE exists."
 else
    echo "File $FILE not exists."
-   curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/node-22.04.sh | bash
+   curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/cloud-22.04.sh | bash
    touch $FILE
    reboot
 fi
