@@ -16,6 +16,7 @@ export DEBIAN_FRONTEND=noninteractive
 echo "$(hostname -I | awk '{print $1}') local.surveily.com" >> /etc/hosts
 
 # Register NVIDIA
+add-apt-repository -y ppa:graphics-drivers/ppa
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
   && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
     sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
@@ -37,7 +38,7 @@ wget -qO /home/$1/.ssh/authorized_keys https://github.com/turowicz.keys
 curl https://get.docker.com | sh && systemctl --now enable docker
 
 # Install Driver
-apt-get -y install nvidia-driver-550
+apt-get -y install nvidia-driver-575
 
 # Install NVIDIA Container Toolkit
 apt-get install -y nvidia-container-toolkit
