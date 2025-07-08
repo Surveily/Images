@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run: sudo ./k3s-prep.sh
+# Run: sudo ./k3s-offline-set.sh
 
 TXT_YELLOW=`tput setaf 3`
 TXT_NORMAL=`tput sgr0`
