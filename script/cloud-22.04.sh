@@ -55,6 +55,10 @@ curl https://get.docker.com | sh && systemctl --now enable docker
 # Install Drivers
 # apt-get -y install --no-install-recommends cuda-drivers-550
 
+# GCP NVIDIA
+NVIDIA_DRIVER_VERSION=$(sudo apt-cache search 'linux-modules-nvidia-[0-9]+-gcp$' | awk '{print $1}' | sort | tail -n 1 | head -n 1 | awk -F"-" '{print $4}')
+apt -y install linux-modules-nvidia-${NVIDIA_DRIVER_VERSION}-gcp nvidia-driver-${NVIDIA_DRIVER_VERSION} libvulkan1
+ 
 # Install Nvidia-Docker
 apt-get install -y nvidia-container-toolkit
 nvidia-ctk runtime configure --runtime=docker
