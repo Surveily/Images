@@ -69,7 +69,7 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     flytekitplugins-pod \
     flytekitplugins-omegaconf
 
-    RUN python3 -m pip install --user --quiet --no-cache-dir \
+RUN python3 -m pip install --user --quiet --no-cache-dir \
     tqdm \
     ruff \
     mypy \
@@ -120,4 +120,12 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     aiofile==3.8.8 \
     aiofiles==23.2.1 \
     aiobotocore==2.13.0 \
-    numba==0.61.0 \
+    numba==0.61.0
+
+# Install Kubernetes CLI
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+ && chmod +x kubectl \
+ && mv kubectl /usr/local/bin/
+
+# Install Helm
+RUN curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
