@@ -123,7 +123,8 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     numba==0.61.0
 
 # Install Kubernetes CLI
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+RUN kubectl_version=$(curl -L -s https://dl.k8s.io/release/stable.txt) \
+ && curl -LO "https://dl.k8s.io/release/$kubectl_version/bin/linux/amd64/kubectl" \
  && chmod +x kubectl \
  && mv kubectl /usr/local/bin/
 
