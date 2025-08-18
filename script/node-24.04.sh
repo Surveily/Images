@@ -26,27 +26,12 @@ wget https://developer.download.nvidia.com/compute/cuda/repos/${DISTRIBUTION/./"
 dpkg -i cuda-keyring_1.1-1_all.deb && rm cuda-keyring_1.1-1_all.deb
 
 # Upgrade dependencies
-apt-get update && apt-get upgrade -y && apt-get install -y lsof \
-                                                           iotop \
-                                                           wireguard \
-                                                           resolvconf \
-                                                           nvme-cli \
-                                                           nfs-common \
-                                                           cifs-utils \
-                                                           smartmontools \
-                                                           ethtool \
-                                                           iperf \
-                                                           iputils-ping \
-                                                           inetutils-traceroute \
-                                                           lm-sensors \
-                                                           net-tools \
-                                                           software-properties-common \
-                                                           vim \
-                                                           rsync \
-                                                           htop \
-                                                           jq \
-                                                           unzip \
-                                                           apt-offline
+apt-get update && apt-get upgrade -y && apt-get install -y apt-offline build-essential software-properties-common \
+                                                           ethtool iperf iputils-ping inetutils-traceroute net-tools \
+                                                           lsof iotop lm-sensors nvme-cli smartmontools \
+                                                           wireguard resolvconf \
+                                                           nfs-common cifs-utils \
+                                                           vim rsync htop jq unzip
 
 # Uninstall unattended upgrades to prevent from unexpected updates
 apt-get remove -y unattended-upgrades
