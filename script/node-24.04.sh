@@ -33,6 +33,9 @@ apt-get update && apt-get upgrade -y && apt-get install -y apt-offline build-ess
                                                            nfs-common cifs-utils \
                                                            vim rsync htop jq unzip
 
+# Load module
+modprobe iscsi_tcp
+
 # Uninstall unattended upgrades to prevent from unexpected updates
 apt-get remove -y unattended-upgrades
 
