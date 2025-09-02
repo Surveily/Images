@@ -108,3 +108,4 @@ RUN python3 -m pip install --user --quiet --no-cache-dir \
     aiofiles==23.2.1 \
     aiobotocore==2.13.0 \
     numba==0.61.0 \
+    decord==0.6.0 \
