@@ -21,3 +21,9 @@ systemctl set-default multi-user.target
 
 # # Switch to desktop
 # systemctl set-default graphical.target
+
+# # Create swap file
+# fallocate -l 16G /etc/swap
+# sudo mkswap /etc/swap
+# sudo swapon /etc/swap
+# echo "/etc/swap  none  swap  sw 0  0" | tee -a /etc/fstab
