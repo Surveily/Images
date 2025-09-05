@@ -50,6 +50,9 @@ apt-get install -y nvidia-container-toolkit
 nvidia-ctk runtime configure --runtime=docker
 systemctl restart docker
 
+# Configure .NET
+echo fs.inotify.max_user_instances=524288 | tee -a /etc/sysctl.conf && sysctl -p
+
 # # Install Mainline
 # add-apt-repository -y ppa:cappelikan/ppa
 # apt-get install -y mainline
