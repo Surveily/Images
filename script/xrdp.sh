@@ -11,7 +11,7 @@ if [ `whoami` != root ]; then
 fi
 
 apt update
-apt install -y xrdp ubuntu-desktop
+apt install -y xrdp ubuntu-desktop-minimal
 
 adduser xrdp ssl-cert
 
@@ -19,3 +19,4 @@ echo "gnome-session" | tee ~/.xsession
 echo "export GNOME_SHELL_SESSION_MODE=ubuntu" | tee -a ~/.xsessionrc
 
 systemctl restart xrdp
+systemctl set-default multi-user.target
