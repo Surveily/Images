@@ -15,10 +15,8 @@ apt install -y xrdp ubuntu-desktop-minimal
 
 adduser xrdp ssl-cert
 
-echo "gnome-session" | tee ~/.xsession
 echo "gnome-session" | tee /etc/skel/.xsession
 
-echo "export GNOME_SHELL_SESSION_MODE=ubuntu" | tee -a ~/.xsessionrc
 echo "export GNOME_SHELL_SESSION_MODE=ubuntu" | tee -a /etc/skel/.xsessionrc
 
 systemctl restart xrdp
