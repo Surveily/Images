@@ -25,7 +25,8 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dear
 # Upgrade dependencies
 apt-get update
 apt-get upgrade -y
-apt-get install -y wireguard resolvconf vim net-tools apt-transport-https openssh-server git iperf mpv simplescreenrecorder
+apt-get install -y wireguard resolvconf vim net-tools apt-transport-https openssh-server git iperf mpv vlc
+#simplescreenrecorder
 
 # Configure SSH
 echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
@@ -62,7 +63,7 @@ rm code.deb
 snap remove firefox
 snap install kubectl --classic
 snap install helm --classic
-snap install vlc
+#snap install vlc
 snap install remmina
 
 # Install Lens
