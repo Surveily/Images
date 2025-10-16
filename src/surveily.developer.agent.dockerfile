@@ -13,7 +13,7 @@ RUN apt-get update && apt-get upgrade -y \
   curl \
   jq \
   git \
-  libicu70 \
+  libicu74 \
   iputils-ping \
   libcurl4 \
   libunwind8 \
