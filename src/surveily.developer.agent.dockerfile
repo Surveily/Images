@@ -17,7 +17,6 @@ RUN apt-get update && apt-get upgrade -y \
   iputils-ping \
   libcurl4 \
   libunwind8 \
-  netcat \
   libssl1.0 \
   zip \
   unzip \
