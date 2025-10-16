@@ -1,19 +1,6 @@
 #!/bin/bash
 set -e
 
-ARCHITECTURE="$(arch)"
-PLATFORM=$ARCHITECTURE
-if [[ $PLATFORM == x86_64 ]]; then
-  PLATFORM="linux-x64"
-elif [[ $PLATFORM == arm* ]]; then
-  PLATFORM="linux-arm"
-elif [[ $PLATFORM == aarch64 ]]; then
-  PLATFORM="linux-arm64"
-else 
-  echo 1>&2 "Unsupported architecture"
-  exit 1
-fi
-
 if [ -z "${AZP_URL}" ]; then
   echo 1>&2 "error: missing AZP_URL environment variable"
   exit 1
@@ -86,6 +73,7 @@ if [ -z "${AZP_AGENT_PACKAGE_LATEST_URL}" -o "${AZP_AGENT_PACKAGE_LATEST_URL}" =
 fi
 
 print_header "2. Downloading and extracting Azure Pipelines agent..."
+echo 1>&2 "Downloading: ${AZP_AGENT_PACKAGE_LATEST_URL}"
 
 curl -LsS "${AZP_AGENT_PACKAGE_LATEST_URL}" | tar -xz & wait $!
 
