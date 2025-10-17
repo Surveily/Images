@@ -62,3 +62,6 @@ echo fs.inotify.max_user_instances=524288 | tee -a /etc/sysctl.conf && sysctl -p
 # docker run --rm --privileged multiarch/qemu-user-static --reset -p yes -c yes
 # cat /proc/sys/fs/binfmt_misc/status
 # cat /proc/sys/fs/binfmt_misc/qemu-aarch64
+
+# Boot to console
+systemctl set-default multi-user.target
