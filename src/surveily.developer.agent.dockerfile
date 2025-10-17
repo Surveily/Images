@@ -54,4 +54,4 @@ WORKDIR /azp
 COPY src/surveily.developer.agent.sh .
 RUN chmod +x surveily.developer.agent.sh
 
-CMD ["./surveily.developer.agent.sh"]
+ENTRYPOINT ["./surveily.developer.agent.sh"]
