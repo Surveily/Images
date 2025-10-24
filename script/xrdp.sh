@@ -18,6 +18,11 @@ adduser xrdp ssl-cert
 echo "gnome-session" | tee /etc/skel/.xsession
 
 echo "export GNOME_SHELL_SESSION_MODE=ubuntu" | tee -a /etc/skel/.xsessionrc
+echo "export XDG_CURRENT_DESKTOP=ubuntu:GNOME" | tee -a /etc/skel/.xsessionrc
+
+# Disable Wallpaper Picture
+echo "gsettings set org.gnome.desktop.background picture-uri ''" | tee -a /etc/skel/.profile
+echo "gsettings set org.gnome.desktop.background picture-uri-dark ''" | tee -a /etc/skel/.profile
 
 systemctl restart xrdp
 systemctl set-default multi-user.target
