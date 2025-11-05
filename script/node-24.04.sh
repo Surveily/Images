@@ -58,8 +58,7 @@ echo fs.inotify.max_user_instances=524288 | tee -a /etc/sysctl.conf && sysctl -p
 # apt-get install -y mainline
 
 # # Install QEMU
-# apt-get install -y qemu binfmt-support qemu-user-static
-# docker run --rm --privileged multiarch/qemu-user-static --reset -p yes -c yes
+# docker run --rm --privileged tonistiigi/binfmt --install all
 # cat /proc/sys/fs/binfmt_misc/status
 # cat /proc/sys/fs/binfmt_misc/qemu-aarch64
 
