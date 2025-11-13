@@ -12,7 +12,7 @@ fi
 
 USER=$1
 NASUSER=$2
-NASPATH=//nas.surveily.com/home
+NASPATH=//storage.cluster.surveily.com/Home/$NASUSER
 
 echo "Mapping $NASPATH for user $NASUSER in directory /home/$USER"
 read -sp "NAS Password: " NASPASS
