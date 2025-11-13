@@ -5,12 +5,12 @@ Requires=network-online.target ##mounts##
 StartLimitIntervalSec=0
 
 [Service]
-Type=forking
-Restart=always
-RestartSec=1
+Type=oneshot
+RemainAfterExit=yes
 User=##user##
 ExecStop=/home/##user##/.surveily/sync/stop.sh $USER ##folder##
 ExecStart=/home/##user##/.surveily/sync/start.sh $USER ##folder##
+TimeoutSec=3600
 
 [Install]
 WantedBy=multi-user.target
