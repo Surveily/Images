@@ -4,6 +4,12 @@
 
 set -e
 
+if [ `whoami` != root ]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
 # Get
 apt-offline set offline.sig --install-packages apt-offline build-essential software-properties-common \
                                                ethtool iperf iputils-ping inetutils-traceroute net-tools \
