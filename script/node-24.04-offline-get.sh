@@ -10,7 +10,7 @@ if [ `whoami` != root ]; then
     exit 1
 fi
 
-# Get
+# Get the apt bundle
 apt update
 apt-offline set offline.sig --install-packages apt-offline build-essential software-properties-common \
                                                ethtool iperf iputils-ping inetutils-traceroute net-tools \
