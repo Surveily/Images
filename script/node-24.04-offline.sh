@@ -11,6 +11,7 @@ if [ `whoami` != root ]; then
 fi
 
 # Get
+apt update
 apt-offline set offline.sig --install-packages apt-offline build-essential software-properties-common \
                                                ethtool iperf iputils-ping inetutils-traceroute net-tools \
                                                lsof iotop lm-sensors nvme-cli smartmontools \
