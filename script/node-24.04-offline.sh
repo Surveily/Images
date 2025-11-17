@@ -17,4 +17,5 @@ apt-offline set offline.sig --install-packages apt-offline build-essential softw
                                                lsof iotop lm-sensors nvme-cli smartmontools \
                                                wireguard resolvconf \
                                                nfs-common cifs-utils \
-                                               vim rsync htop jq unzip
+                                               vim rsync htop jq unzip \
+                                               --update
