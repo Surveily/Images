@@ -10,5 +10,7 @@ if [ `whoami` != root ]; then
     exit 1
 fi
 
-# Set
+export DEBIAN_FRONTEND=noninteractive
+
+# Install the apt bundle
 sudo apt-offline install offline-install.zip
