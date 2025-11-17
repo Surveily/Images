@@ -19,3 +19,4 @@ apt-offline set offline.sig --install-packages apt-offline build-essential softw
                                                nfs-common cifs-utils \
                                                vim rsync htop jq unzip \
                                                --update
+apt-offline get offline.sig --bundle offline-install.zip
