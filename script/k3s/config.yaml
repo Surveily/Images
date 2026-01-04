@@ -1,3 +1,4 @@
 node-label:
   - "surveily/environment=release"
 kubelet-arg: "max-pods=200"
+tls-san: example.surveily.com
