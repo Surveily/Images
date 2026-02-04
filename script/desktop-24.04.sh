@@ -25,7 +25,7 @@ curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dear
 # Upgrade dependencies
 apt-get update
 apt-get upgrade -y
-apt-get install -y wireguard resolvconf vim net-tools apt-transport-https openssh-server git iperf mpv vlc jq
+apt-get install -y wireguard resolvconf vim net-tools apt-transport-https openssh-server git iperf mpv vlc jq gnome-shell-extension-manager
 #simplescreenrecorder
 
 # Configure SSH
