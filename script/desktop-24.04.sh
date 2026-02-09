@@ -61,6 +61,7 @@ rm code.deb
 
 # Configure Snap
 snap remove firefox
+snap install htop
 snap install kubectl --classic
 snap install helm --classic
 #snap install vlc
