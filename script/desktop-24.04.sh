@@ -86,5 +86,8 @@ echo 'xhost +"local:docker@"' >> /home/$1/.profile
 # Configure .NET
 echo fs.inotify.max_user_instances=524288 | tee -a /etc/sysctl.conf && sysctl -p
 
+# Register MOK
+update-secureboot-policy --enroll-key
+
 echo "Please Reboot the computer."
 
