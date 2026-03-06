@@ -34,7 +34,7 @@ cat > /etc/surveily/ddns.env <<EOF
 API_KEY=${API_KEY}
 ZONE=${ZONE}
 SUBDOMAIN=${SUBDOMAIN}
-CUSTOM_LOOKUP_CMD=ip route get 1 | awk '{print $7; exit}'
+CUSTOM_LOOKUP_CMD=ip route get 1 | awk '{print \$7; exit}'
 EOF
 
 chown root:root /etc/surveily/ddns.env
