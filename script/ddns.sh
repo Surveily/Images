@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/ddns.sh | sudo sh <TOKEN>
+# Run: curl -s https://raw.githubusercontent.com/Surveily/Images/master/script/ddns.sh | sudo bash -s -- <TOKEN>
 
 set -eu
 
