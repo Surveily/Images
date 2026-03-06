@@ -50,6 +50,7 @@ docker run -d \
   --name ddns \
   --restart always \
   --env-file /etc/surveily/ddns.env \
+  --network host \
   oznu/cloudflare-ddns >/dev/null
 
 echo "DDNS container is running."
