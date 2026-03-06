@@ -23,11 +23,6 @@ if [ "$(id -u)" -ne 0 ]; then
   exit 1
 fi
 
-if ! command -v docker >/dev/null 2>&1; then
-  echo "docker not found. Install/start Docker first." >&2
-  exit 1
-fi
-
 install -d -m 0700 -o root -g root /etc/surveily
 
 cat > /etc/surveily/ddns.env <<EOF
@@ -39,6 +34,11 @@ EOF
 
 chown root:root /etc/surveily/ddns.env
 chmod 0600 /etc/surveily/ddns.env
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "docker not found. Install/start Docker first." >&2
+  exit 1
+fi
 
 # Refresh image
 docker pull oznu/cloudflare-ddns >/dev/null
