@@ -7,11 +7,6 @@ TXT_NORMAL=`tput sgr0`
 
 set -e
 
-if [ `whoami` = root ]; then
-    echo "Please run this script without sudo."
-    exit 1
-fi
-
 mkdir -p .out-k3s
 
 wget -O .out-k3s/install.sh https://get.k3s.io/
