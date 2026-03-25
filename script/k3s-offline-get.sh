@@ -12,6 +12,8 @@ mkdir -p .out-k3s
 wget -O .out-k3s/install.sh https://get.k3s.io/
 wget -O .out-k3s/k3s https://github.com/k3s-io/k3s/releases/download/v1.34.3%2Bk3s1/k3s
 wget -O .out-k3s/set.sh https://raw.githubusercontent.com/Surveily/Images/refs/heads/master/script/k3s-offline-set.sh
+wget -O .out-k3s/config.yaml https://raw.githubusercontent.com/Surveily/Images/refs/heads/master/script/k3s/config.yaml
+wget -O .out-k3s/multipath.conf https://raw.githubusercontent.com/Surveily/Images/refs/heads/master/script/k3s/multipath.conf
 wget -O .out-k3s/k3s-airgap-images-amd64.tar.gz https://github.com/k3s-io/k3s/releases/download/v1.34.3%2Bk3s1/k3s-airgap-images-amd64.tar.gz
 
 chmod +x .out-k3s/k3s
