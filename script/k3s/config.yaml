@@ -1,4 +1,6 @@
 node-label:
+  - "surveily/purpose=general"
   - "surveily/environment=release"
+  - "topology.kubernetes.io/zone=release"
 kubelet-arg: "max-pods=200"
 tls-san: example.surveily.com
