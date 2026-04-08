@@ -29,7 +29,7 @@ cat > /etc/surveily/ddns.env <<EOF
 API_KEY=${API_KEY}
 ZONE=${ZONE}
 SUBDOMAIN=${SUBDOMAIN}
-CUSTOM_LOOKUP_CMD=ip route get 1 | awk '{print \$7; exit}'
+CUSTOM_LOOKUP_CMD=sh -c "vpn_ip=\\\$(ip -o -4 addr show scope global | awk '{split(\\\$4, a, \"/\"); if (a[1] ~ /^172\\.20\\.0\\.[0-9]+$/) { print a[1]; exit }}'); if [ -n \"\\\$vpn_ip\" ]; then echo \"\\\$vpn_ip\"; else ip route get 1 | awk '{for (i = 1; i <= NF; i++) if (\\\$i == \"src\") { print \\\$(i + 1); exit }}'; fi"
 EOF
 
 chown root:root /etc/surveily/ddns.env
