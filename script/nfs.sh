@@ -17,7 +17,7 @@ apt-get install -y nfs-kernel-server nfs-common
 # Configure NFS Server
 mkdir /var/nfs/general -p
 chown nobody:nogroup /var/nfs/general
-echo "/var/nfs/general    127.0.0.1(rw,sync,no_subtree_check)" | tee -a /etc/exports
+echo "/var/nfs/general    10.42.0.0/16(rw,sync,no_subtree_check)" | tee -a /etc/exports
 
 # Restart NFS Server
 systemctl restart nfs-kernel-server
