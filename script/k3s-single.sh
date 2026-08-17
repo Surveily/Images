@@ -23,7 +23,7 @@ wget -O /etc/rancher/k3s/config.yaml https://raw.githubusercontent.com/Surveily/
 wget -O /etc/multipath.conf https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/multipath.conf
 
 # Install K3S
-curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.27.1+k3s1" sh -s server
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.34.3+k3s1" sh -s server
 
 # Configure NVIDIA
 k3s kubectl apply -f https://raw.githubusercontent.com/Surveily/Images/master/script/k3s/nvidia.yaml
