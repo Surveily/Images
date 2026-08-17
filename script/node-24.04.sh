@@ -30,8 +30,8 @@ apt-get update && apt-get upgrade -y && apt-get install -y apt-offline build-ess
                                                            ethtool iperf iputils-ping inetutils-traceroute net-tools \
                                                            lsof iotop lm-sensors nvme-cli smartmontools \
                                                            wireguard resolvconf \
-                                                           nfs-common cifs-utils \
-                                                           vim rsync htop jq unzip
+                                                           nfs-common nfs-kernel-server cifs-utils \
+                                                           vim rsync htop nvtop jq unzip
 
 # Load module
 modprobe iscsi_tcp
