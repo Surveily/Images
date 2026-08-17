@@ -16,7 +16,7 @@ apt-offline set offline.sig --install-packages apt-offline build-essential softw
                                                ethtool iperf iputils-ping inetutils-traceroute net-tools \
                                                lsof iotop lm-sensors nvme-cli smartmontools \
                                                wireguard resolvconf \
-                                               nfs-common cifs-utils \
-                                               vim rsync htop jq unzip \
+                                               nfs-common nfs-kernel-server cifs-utils \
+                                               vim rsync htop nvtop jq unzip \
                                                --update
 apt-offline get offline.sig --bundle offline-install.zip
