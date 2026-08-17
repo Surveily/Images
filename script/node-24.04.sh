@@ -40,7 +40,7 @@ modprobe iscsi_tcp
 apt-get remove -y unattended-upgrades
 
 # Install Docker
-curl https://get.docker.com | sh && systemctl --now enable docker
+#curl https://get.docker.com | sh && systemctl --now enable docker
 
 # Install Drivers
 apt-get -y install --no-install-recommends nvidia-driver-590-open
@@ -48,8 +48,8 @@ apt-get -y install --no-install-recommends nvidia-driver-590-open
 
 # Install Nvidia-Docker
 apt-get install -y nvidia-container-toolkit
-nvidia-ctk runtime configure --runtime=docker
-systemctl restart docker
+#nvidia-ctk runtime configure --runtime=docker
+#systemctl restart docker
 
 # Configure .NET
 echo fs.inotify.max_user_instances=524288 | tee -a /etc/sysctl.conf && sysctl -p
