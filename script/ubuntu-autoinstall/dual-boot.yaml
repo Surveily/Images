@@ -1,0 +1,274 @@
+#cloud-config
+# Ubuntu 26.04 desktop autoinstall
+# - WIPES THE LARGEST DISK ENTIRELY
+# - Ubuntu gets everything except ~250 GiB (ESP + /boot + LUKS2-encrypted root)
+# - The last ~250 GiB is left unallocated for a later Windows install
+# - Root volume unlocks via the TPM (PCR 7) using systemd-cryptenroll
+# - A random per-device recovery key is saved for the first user account (UID 1000):
+#   on its Desktop or in its home folder if they exist at install time, otherwise
+#   in /opt/surveily/. Owned by that user and readable only by it.
+# - GRUB is locked: boot entries can only be edited with the GRUB admin password
+# - Stale firmware boot entries are removed; this Ubuntu is first in the boot order
+# - Default user "surveily"; password entered in the installer (disabled later by setup scripts)
+#
+# The install passphrase "foo" is temporary and is removed automatically
+# at the end of the install. Test in a VM with Secure Boot + a virtual TPM.
+autoinstall:
+  version: 1
+
+  # Default account. Because identity is also listed in interactive-sections,
+  # the installer shows these values pre-filled and the technician can edit them
+  # (set the hostname per laptop). The password is entered in the installer;
+  # our setup scripts disable password login afterwards.
+  interactive-sections:
+    - identity
+  identity:
+    realname: "Surveily sp. z o.o."
+    username: surveily
+    hostname: "surveily-<foo>"   # template: replace <foo> per laptop
+    # Required by the installer's validation even though the wizard asks for
+    # the password anyway; this value is not used. Do not remove.
+    password: "$6$p0mz0J1ZnopPqFXa$VmO5T3CtPu2/BLxOY5bm4RZ8qDE.948f7M7FP5CCmbcDPgu1wyLG.xCaFXS5m6lC86UOC.LCXfl7EZHdJ5w9q0"
+
+  # English interface; Polish formats are set in late-commands
+  locale: en_US.UTF-8
+  keyboard:
+    layout: pl
+  timezone: Europe/Warsaw
+
+  # Works out the root partition size (whole disk minus 250 GiB for Windows,
+  # minus the 1 GiB ESP and 2 GiB /boot) and writes it into the line marked
+  # ROOT_SIZE below. The installer re-reads this file after early-commands run.
+  early-commands:
+    - |
+      DISK=$(lsblk -dbno NAME,SIZE,TYPE | awk '$3=="disk"{print $2" "$1}' | sort -n | tail -n1 | cut -d" " -f2)
+      TOTAL=$(lsblk -dbno SIZE /dev/$DISK)
+      MIB=1048576
+      WINDOWS=$(( 250 * 1024 * MIB ))
+      RESERVED=$(( (3072 + 2) * MIB ))   # ESP + /boot + GPT/alignment slack
+      ROOT=$(( (TOTAL - WINDOWS - RESERVED) / MIB * MIB ))
+      sed -i "s/^\(\s*size: \).*# ROOT_SIZE$/\1${ROOT} # ROOT_SIZE/" /autoinstall.yaml
+
+  storage:
+    config:
+      - type: disk
+        id: disk0
+        match:
+          size: largest
+        ptable: gpt
+        wipe: superblock-recursive
+        preserve: false
+
+      # EFI System Partition (Windows will share it later)
+      - type: partition
+        id: esp
+        device: disk0
+        number: 1
+        size: 1G
+        flag: boot
+        grub_device: true
+        wipe: superblock
+        preserve: false
+      - type: format
+        id: esp-fs
+        volume: esp
+        fstype: fat32
+        preserve: false
+
+      # Unencrypted /boot
+      - type: partition
+        id: boot
+        device: disk0
+        number: 2
+        size: 2G
+        wipe: superblock
+        preserve: false
+      - type: format
+        id: boot-fs
+        volume: boot
+        fstype: ext4
+        preserve: false
+
+      # Encrypted root; size is filled in by early-commands.
+      # The 20G value is only a fallback if the substitution doesn't run.
+      - type: partition
+        id: root-part
+        device: disk0
+        number: 3
+        size: 20G # ROOT_SIZE
+        wipe: superblock
+        preserve: false
+      - type: dm_crypt
+        id: root-crypt
+        volume: root-part
+        dm_name: cryptroot
+        key: "foo"
+        preserve: false
+
+      # LVM inside the encrypted volume: makes it easy to grow later
+      # (e.g. after removing Windows) or add another encrypted PV.
+      - type: lvm_volgroup
+        id: vg0
+        name: ubuntu-vg
+        devices:
+          - root-crypt
+        preserve: false
+      - type: lvm_partition
+        id: root-lv
+        volgroup: vg0
+        name: ubuntu-lv
+        # no size = use all space in the volume group
+        preserve: false
+
+      - type: format
+        id: root-fs
+        volume: root-lv
+        fstype: ext4
+        preserve: false
+
+      - type: mount
+        id: root-mnt
+        device: root-fs
+        path: /
+      - type: mount
+        id: boot-mnt
+        device: boot-fs
+        path: /boot
+      - type: mount
+        id: esp-mnt
+        device: esp-fs
+        path: /boot/efi
+
+  packages:
+    - lvm2
+    - systemd-cryptsetup   # TPM unlock at boot + cryptsetup token plugin
+    - tpm2-tools           # TPM libraries for the boot image, plus diagnostics
+
+  late-commands:
+    # Step 1 (unrelated to encryption): English language,
+    # Polish dates, numbers, currency, paper size and units
+    - |
+      curtin in-target -- sh -c '
+        locale-gen pl_PL.UTF-8
+        update-locale LANG=en_US.UTF-8 \
+          LC_TIME=pl_PL.UTF-8 LC_NUMERIC=pl_PL.UTF-8 LC_MONETARY=pl_PL.UTF-8 \
+          LC_PAPER=pl_PL.UTF-8 LC_MEASUREMENT=pl_PL.UTF-8 LC_ADDRESS=pl_PL.UTF-8 \
+          LC_TELEPHONE=pl_PL.UTF-8 LC_NAME=pl_PL.UTF-8 LC_IDENTIFICATION=pl_PL.UTF-8
+      '
+
+    # Step 2: lock down GRUB. Normal boot needs no password, but editing a
+    # boot entry or opening the GRUB command line requires the GRUB admin
+    # password. Recovery-mode entries are removed.
+    # Hash generated with grub-mkpasswd-pbkdf2 -c 100000; the plain password
+    # is kept in the vault, never in this file.
+    - |
+      set -e
+      cat > /target/etc/grub.d/01_password <<'EOF'
+      #!/bin/sh
+      cat <<'GRUB'
+      set superusers="grubadmin"
+      password_pbkdf2 grubadmin grub.pbkdf2.sha512.100000.789DC55D470D4AA47B9984BF3BE685D3683B72FA53286DC68A853A073846B3DA5A89F73E9168FA0677A5E03E512D3CDF397B6D642543FC636F7312A0ED3E390E.AC8F228941F0ABBE0A02F0E55B11ADEDB5917415C74C20E09E49EC97CCF17E8BC28ACF0C4234ADC14C6F3F080E4433C328F77DCC6385F3E6D7893D9972CCC495
+      GRUB
+      EOF
+      if grep -q 'CHANGE-ME-GRUB' /target/etc/grub.d/01_password; then
+        echo "GRUB password hash was not set in autoinstall.yaml" >&2
+        exit 1
+      fi
+      chmod 755 /target/etc/grub.d/01_password
+      sed -i 's/^CLASS="--class gnu-linux --class gnu --class os"$/CLASS="--class gnu-linux --class gnu --class os --unrestricted"/' /target/etc/grub.d/10_linux
+      grep -q -- '--unrestricted' /target/etc/grub.d/10_linux
+      if grep -q '^#\?GRUB_DISABLE_RECOVERY=' /target/etc/default/grub; then
+        sed -i 's/^#\?GRUB_DISABLE_RECOVERY=.*/GRUB_DISABLE_RECOVERY="true"/' /target/etc/default/grub
+      else
+        echo 'GRUB_DISABLE_RECOVERY="true"' >> /target/etc/default/grub
+      fi
+      curtin in-target -- update-grub
+
+    # Step 2b: clean up firmware boot entries. Removes stale OS entries left
+    # over from earlier installs (old Ubuntu/Windows entries pointing to boot
+    # files on a disk), keeps the entry the installer just created for this
+    # Ubuntu, and puts it first in the boot order. Firmware entries (USB,
+    # network boot, built-in tools) are left alone. If this Ubuntu's entry
+    # can't be identified, nothing is deleted.
+    - |
+      ESP_DEV=$(findmnt -n -o SOURCE /target/boot/efi)
+      ESP_UUID=$(blkid -s PARTUUID -o value "$ESP_DEV" | tr 'A-F' 'a-f')
+      KEEP=$(efibootmgr -v | awk -v u="$ESP_UUID" 'tolower($0) ~ u && tolower($0) ~ /ubuntu/ {print substr($1,5,4); exit}')
+      if [ -z "$ESP_UUID" ] || [ -z "$KEEP" ]; then
+        echo "Boot entry cleanup skipped: this Ubuntu's entry not found" >&2
+        exit 0
+      fi
+      for n in $(efibootmgr -v | awk '/^Boot[0-9A-Fa-f]{4}/ && /HD\(/ && /File\(/ {print substr($1,5,4)}'); do
+        [ "$n" = "$KEEP" ] && continue
+        efibootmgr -q -b "$n" -B || echo "Could not delete Boot$n" >&2
+      done
+      REST=$(efibootmgr | sed -n 's/^BootOrder: //p' | tr ',' '\n' | grep -v -x "$KEEP" | paste -sd, -)
+      efibootmgr -q -o "$KEEP${REST:+,$REST}"
+      efibootmgr
+
+    # Step 3: disk encryption keys. In this order, so we can never lock
+    # ourselves out:
+    #   a) add TPM unlock (PCR 7 = Secure Boot state)
+    #   b) add a random per-device recovery key, saved for the first user
+    #      account (UID 1000, whatever its name) so it can be copied without
+    #      sudo: ~/Desktop or ~ if they already exist, else /opt/surveily/
+    #   c) tell the boot process to use the TPM and rebuild the boot image
+    #   d) check the TPM entry exists and the recovery key works
+    #   e) only then remove the temporary install passphrase "foo"
+    # If any check fails, the install stops and "foo" is left in place.
+    - |
+      cat > /target/tmp/disk-keys.sh <<'EOF'
+      #!/bin/sh
+      set -eu
+      DEV=$(blkid -t TYPE=crypto_LUKS -o device | head -n1)
+      KF=/tmp/install-key
+      # Where to save the recovery key: the first user's Desktop or home folder
+      # if the account already exists, otherwise /opt/surveily as a fallback
+      U=$(getent passwd 1000 | cut -d: -f1)
+      H=""
+      [ -n "$U" ] && H=$(getent passwd "$U" | cut -d: -f6)
+      if [ -n "$H" ] && [ -d "$H" ]; then
+        if [ -d "$H/Desktop" ]; then OUT="$H/Desktop/luks-recovery-key.txt"; else OUT="$H/luks-recovery-key.txt"; fi
+      else
+        install -d -o 1000 -g 1000 -m 700 /opt/surveily
+        OUT=/opt/surveily/luks-recovery-key.txt
+      fi
+      printf '%s' 'foo' > "$KF"
+      chmod 600 "$KF"
+
+      # a) TPM unlock, bound to Secure Boot state
+      systemd-cryptenroll --unlock-key-file="$KF" --tpm2-device=auto --tpm2-pcrs=7 "$DEV"
+
+      # b) per-device recovery key: 20 random characters in groups of 4
+      #    (about 99 bits). Lowercase letters and digits only, without
+      #    look-alikes (i l o 0 1).
+      KEY=$(tr -dc 'abcdefghjkmnpqrstuvwxyz23456789' < /dev/urandom | head -c 20 | sed 's/.\{4\}/&-/g; s/-$//')
+      [ "${#KEY}" -eq 24 ]
+      RK=/tmp/recovery-key
+      ( umask 077; printf '%s' "$KEY" > "$RK"; printf 'LUKS recovery key: %s\n' "$KEY" > "$OUT" )
+      chown 1000:1000 "$OUT"
+      echo "Recovery key saved to $OUT"
+      cryptsetup luksAddKey --key-file="$KF" "$DEV" "$RK"
+      rm -f "$RK"
+
+      # c) unlock via TPM at boot
+      sed -i -E '/^cryptroot[[:space:]]/ s/^(\S+\s+\S+\s+\S+\s+)(\S+)/\1\2,tpm2-device=auto/' /etc/crypttab
+      grep -q '^cryptroot.*tpm2-device=auto' /etc/crypttab
+      printf 'add_dracutmodules+=" tpm2-tss systemd-cryptsetup "\n' > /etc/dracut.conf.d/90-tpm2.conf
+      update-initramfs -u -k all
+
+      # d) checks
+      cryptsetup luksDump "$DEV" | grep -q systemd-tpm2
+      printf '%s' "$KEY" | cryptsetup open --test-passphrase --key-file=- "$DEV"
+
+      # e) remove "foo" and confirm it no longer opens the disk
+      cryptsetup luksRemoveKey "$DEV" "$KF"
+      if cryptsetup open --test-passphrase --key-file="$KF" "$DEV" 2>/dev/null; then
+        echo "install passphrase still works after removal" >&2
+        exit 1
+      fi
+      rm -f "$KF"
+      EOF
+      curtin in-target -- sh /tmp/disk-keys.sh
+      rm -f /target/tmp/disk-keys.sh
+
