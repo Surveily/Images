@@ -35,6 +35,19 @@ autoinstall:
     layout: pl
   timezone: Europe/Warsaw
 
+  # Third-party drivers (e.g. NVIDIA graphics, Wi-Fi), as with the
+  # "install third-party software" option in the interactive installer
+  drivers:
+    install: true
+
+  # Extra media formats (MP3, H.264 etc.), the other half of the interactive
+  # installer's "install third-party software" option
+  codecs:
+    install: true
+
+  # Install all available updates during installation, not only security ones
+  updates: all
+
   # Works out the root partition size (whole disk minus the 1 GiB ESP and
   # 2 GiB /boot) and writes it into the line marked ROOT_SIZE below.
   # The installer re-reads this file after early-commands run.
