@@ -13,7 +13,8 @@
 
   The surveily account is created during installation (Rufus), not by this script.
   The WireGuard config comes from an admin: one per laptop, with its own key and
-  tunnel IP, and PersistentKeepalive = 25 under [Peer].
+  tunnel IP, and PersistentKeepalive = 25 under [Peer]. Put it on surveily's
+  Desktop as vpn.conf before running this script.
 
   Working copy. The main copy lives in a separate repo.
 
@@ -33,6 +34,8 @@ function Invoke-AwxPrep {
     $Key        = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3YBf/6aIy5u/Mf+F6hxoBo4RSGpq8SsXBsb95KBCBG2T7s08nSYRKVTBlWw78qGh8fpXzjI6OsK1fwPGgIalxUSf34zftW1BgDpGOMrd3lYBBP9QgmlvoG8yginb5cfnAcLcGbp9NnWlLWF6vtMt2jzzqcjdwyywx1kpi5VmRUQmDHF/wlU/J2tbTA6OreLBcfAMAQ9W6ScslFeiFCVwoGB8r3ZuRi35PwjSIHr/MkPPswMaWplKjCgwVoq+vaZyO6k/fhkyKsRM28q9m0nIT+Cpvwit5DPCHZGcB33NdVbxc+PuWZzcI+BwZFPG+LH383DNR8vwAsQs7It/naTrslfmWOJaHpiqaxWC7QOBrLGIVrNalsRCtwOj0KZCUfW/3t7Tg000+u8JKRIfKc5CaZEM8nvLXp3XHMKKecYXLSCAzU6ur5kSIqhz6yNa3nU5J/wTo8ORHpux1q0n4ManqtyH0i6PSDWyrwHdt0PDFv161DhpesYpCI+a1zmZvVTPqM4uoaRPFSYMsxdmMb/myblb0sNUN7lhEM2BW5gw6AzVxPSMWio+TU77c3NyJHvFJgx5bVGq8lLjMDhZFal6XfIusHfa3BdP3nA2i9wKPGxV/dSBZU5vHPXY5ebEAFQiuU1GYMKHKbU4+CRNvibPESQFQc29XfUu6ECcHYMEI5w== bartosz.sadecki@surveily.com'
     # The playbook expects this name: service WireGuardTunnel$surveily, adapter "surveily".
     $TunnelName = 'surveily'
+    # This laptop's WireGuard config from the admin, on surveily's Desktop.
+    $WgConfName = 'vpn.conf'
     # Alias for the newest amd64 MSI. It is not in the directory listing, so it
     # may disappear without notice. If the download fails with 404, use
     # wireguard-installer.exe or a versioned MSI from that directory instead.
@@ -121,12 +124,13 @@ function Invoke-AwxPrep {
         Write-Warning 'ssh-keygen not found; skipping key validation.'
     }
 
-    # Asked and checked now, so a wrong file stops the script before anything changes.
+    # Checked now, so a missing or wrong file stops the script before anything
+    # changes. Not needed when the tunnel is already installed.
     $WgConfSource = $null
     if (-not (Get-Service -Name $WgService -ErrorAction SilentlyContinue)) {
-        $WgConfSource = (Read-Host "Path to this laptop's WireGuard .conf from the admin").Trim('"')
+        $WgConfSource = Join-Path $profilePath "Desktop\$WgConfName"
         if (-not (Test-Path $WgConfSource -PathType Leaf)) {
-            throw "WireGuard config not found: $WgConfSource"
+            throw "WireGuard config not found at $WgConfSource. Copy this laptop's config from the admin there, then re-run."
         }
         $confText = [System.IO.File]::ReadAllText($WgConfSource)
         foreach ($needed in '[Interface]', 'PrivateKey', 'Address', '[Peer]', 'Endpoint') {
@@ -246,34 +250,22 @@ function Invoke-AwxPrep {
     if ($WgConfSource) {
         Write-Host '==> Installing WireGuard tunnel'
         # The tunnel service reads its config from the path it was installed
-        # with, so the file must stay. The documented way (wireguard-windows
-        # docs/enterprise.md): copy the .conf into Data\Configurations. The
-        # manager service encrypts it to .conf.dpapi, readable only by SYSTEM,
-        # and deletes the plain copy. The tunnel is installed from that file.
-        if (-not (Get-Service -Name WireGuardManager -ErrorAction SilentlyContinue)) {
-            & $WgExe /installmanagerservice
-            Wait-Until { Get-Service -Name WireGuardManager -ErrorAction SilentlyContinue } 15 `
-                'WireGuard manager service was not created.' | Out-Null
-        }
-
-        # The manager creates this folder with its own permissions. Wait for it
-        # rather than creating it here with looser ones.
-        $confDir = Join-Path $env:ProgramFiles 'WireGuard\Data\Configurations'
-        Wait-Until { Test-Path $confDir } 15 "$confDir was not created by the WireGuard manager." | Out-Null
+        # with (wireguard-windows docs/enterprise.md), so the file must stay.
+        # It is kept in a folder only SYSTEM and Administrators can read, so a
+        # standard user cannot read the private key. No WireGuard manager
+        # service: it is not needed for a tunnel service, and it opens a window
+        # for administrators.
+        $confDir = Join-Path $env:ProgramData 'Surveily\WireGuard'
+        if (-not (Test-Path $confDir)) { New-Item -ItemType Directory -Path $confDir -Force | Out-Null }
+        # Set before the file is copied in, so it is never readable by others.
+        # SIDs, not names: S-1-5-18 is SYSTEM, S-1-5-32-544 is Administrators.
+        & icacls.exe $confDir /inheritance:r /grant '*S-1-5-18:(OI)(CI)F' /grant '*S-1-5-32-544:(OI)(CI)F' | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "Failed to set permissions on $confDir." }
 
         # WireGuard takes the tunnel name from the file name.
-        $plain = Join-Path $confDir "$TunnelName.conf"
-        $dpapi = "$plain.dpapi"
-        Copy-Item $WgConfSource $plain -Force
-        try {
-            Wait-Until { Test-Path $dpapi } 30 "WireGuard did not encrypt $plain within 30 seconds." | Out-Null
-        } catch {
-            # Do not leave the private key in plain text.
-            Remove-Item $plain -Force -ErrorAction SilentlyContinue
-            throw
-        }
-
-        & $WgExe /installtunnelservice $dpapi
+        $conf = Join-Path $confDir "$TunnelName.conf"
+        Copy-Item $WgConfSource $conf -Force
+        & $WgExe /installtunnelservice $conf
         Wait-Until { Get-Service -Name $WgService -ErrorAction SilentlyContinue } 15 `
             "Tunnel service $WgService was not created." | Out-Null
         Write-Host "    installed. Delete the admin's copy at $WgConfSource too: it holds the private key."
@@ -310,3 +302,4 @@ try {
 } catch {
     Write-Host "ERROR: $($_.Exception.Message)" -ForegroundColor Red
 }
+
