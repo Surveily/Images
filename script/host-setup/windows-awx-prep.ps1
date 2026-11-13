@@ -6,6 +6,8 @@
     - makes sure the SSH firewall rule exists (Private networks only)
     - installs the AWX public key in surveily's own authorized_keys
     - installs WireGuard and this laptop's tunnel as a service, marked Private
+    - marks the local network it runs on Private, so the playbook can also run
+      over the LAN. Run it on a trusted network: SSH stays open there.
     - prints the host line for the AWX inventory
 
   Other hardening (password login, firewall profiles, Entra admin access) is
@@ -280,7 +282,26 @@ function Invoke-AwxPrep {
         "Tunnel adapter '$TunnelName' has no network profile after 60 seconds." | Out-Null
     Set-NetConnectionProfile -InterfaceAlias $TunnelName -NetworkCategory Private
 
-    # ---- 7. Summary for the AWX inventory ------------------------------------
+    # ---- 7. Local network ----------------------------------------------------
+    # Lets the playbook run over the local network too, without the tunnel,
+    # for example from a machine on the same LAN. The SSH rule is Private only,
+    # so the network the laptop is on now is marked Private. Windows remembers
+    # that for this network, so SSH stays open on it: run this script on a
+    # trusted network (office, setup bench), not a cafe.
+    # The network is the one Windows would use to reach the internet. The
+    # tunnel does not carry internet traffic, so it is never picked here.
+    $lan = Find-NetRoute -RemoteIPAddress '1.1.1.1' -ErrorAction SilentlyContinue |
+        Where-Object { $_.CimClass.CimClassName -eq 'MSFT_NetIPAddress' } | Select-Object -First 1
+    if ($lan) {
+        Write-Host "==> Marking the local network on '$($lan.InterfaceAlias)' Private"
+        Set-NetConnectionProfile -InterfaceAlias $lan.InterfaceAlias -NetworkCategory Private
+        $lanIp = $lan.IPAddress
+    } else {
+        Write-Warning 'No local network with a route to the internet found. Only the tunnel is set up for SSH.'
+        $lanIp = '<no local network>'
+    }
+
+    # ---- 8. Summary for the AWX inventory ------------------------------------
     # AWX reaches the laptop over the tunnel, so ansible_host is the tunnel IP,
     # which is fixed per laptop. ansible_user, ansible_connection and
     # ansible_shell_type come from the inventory (all: vars, group_vars/windows_laptops.yml).
@@ -292,6 +313,9 @@ function Invoke-AwxPrep {
     Write-Host '============================================'
     Write-Host ' Host ready for AWX. Add it to the windows_laptops group:'
     Write-Host "   $env:COMPUTERNAME ansible_host=$tunnelIp"
+    Write-Host ''
+    Write-Host ' For a run over the local network instead (only from this network):'
+    Write-Host "   $env:COMPUTERNAME ansible_host=$lanIp"
     Write-Host '============================================'
 }
 
@@ -302,4 +326,3 @@ try {
 } catch {
     Write-Host "ERROR: $($_.Exception.Message)" -ForegroundColor Red
 }
-
